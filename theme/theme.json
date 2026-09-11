@@ -18,6 +18,7 @@
     "home/home.css": ["SP"],
     "sp/gamepage.css": ["SP"],
     "sp/contextmenu.css": ["SP"],
+    "sp/dialogs.css": ["SP"],
     "qam/qam.css": ["QuickAccess"],
     "menu/mainmenu.css": ["MainMenu"]
   },

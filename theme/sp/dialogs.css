@@ -1,0 +1,117 @@
+/* Zoe's Deck Theme: pop-up dialogs (confirmations, CSS Loader's colour picker...). They float as
+   a rounded glass sheet over the frosted backdrop (chrome.css), with the title in the serif. */
+
+.gamepaddialog_GamepadDialogContent_3joNk.GenericDialogBase:not(#zdt) {
+  max-width: 600px;
+  padding: 20px 22px;
+  border-radius: var(--zdt-radius-l);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 30%), var(--zdt-sheet-fill);
+  backdrop-filter: var(--zdt-glass-blur);
+  box-shadow: var(--zdt-glass-edge), var(--zdt-glass-shadow);
+}
+
+.gamepaddialog_GamepadDialogContent_3joNk.GenericDialogBase .DialogHeader:not(#zdt) {
+  font-family: var(--zdt-font-serif);
+  font-style: italic;
+  font-weight: 700;
+  font-synthesis: weight;
+  font-size: 26px;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+
+.gamepaddialog_GamepadDialogContent_3joNk.GenericDialogBase .DialogFooter:not(#zdt) {
+  margin-top: 16px;
+}
+
+/* Editable slider values ("75"): small rounded fields instead of square chips. */
+.gamepadslider_FakeEditableValue_1-lyB,
+.gamepadslider_EditableValue_2DXnl {
+  border-radius: var(--zdt-radius-s);
+  color: var(--zdt-label-secondary);
+  background: var(--zdt-glass-fill);
+  font-variant-numeric: tabular-nums;
+}
+
+/* CSS Loader's colour picker (the Accent color option), after iOS's: the title in the serif, the
+   colour in a round well with a rainbow ring, and the four sliders in one rounded group whose
+   thumbs show the colour being made. Its rows are tightened so Confirm and Cancel stay on
+   screen. */
+.ColorPicker_ColorDisplayContainer b {
+  font-family: var(--zdt-font-serif);
+  font-style: italic;
+  font-weight: 700;
+  font-synthesis: weight;
+  font-size: 28px;
+  letter-spacing: 0.01em;
+}
+
+/* The well: Steam-side, it's a 40px square coloured by an inline style. */
+.ColorPicker_ColorDisplayContainer > div:last-child {
+  position: relative;
+  width: 32px !important;
+  height: 32px !important;
+  margin-right: 6px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.ColorPicker_ColorDisplayContainer > div:last-child::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: conic-gradient(from 90deg, #ff453a, #ffd60a, #30d158, #64d2ff, #0a84ff, #bf5af2, #ff375f, #ff453a);
+  mask-image: radial-gradient(closest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px));
+}
+
+/* Its title lives in the body, pulled up over the dialog's empty header; the header goes. */
+.gamepaddialog_GamepadDialogContent_3joNk.GenericDialogBase:has(.ColorPicker_Container) .DialogHeader:not(#zdt) {
+  display: none;
+}
+
+.ColorPicker_ColorDisplayContainer:not(#zdt) {
+  margin-top: 0 !important;
+  margin-bottom: 12px !important;
+}
+
+.ColorPicker_Container {
+  overflow: hidden;
+  border-radius: var(--zdt-radius-m);
+  background: var(--zdt-glass-fill);
+}
+
+.ColorPicker_Container .gamepaddialog_Field_S-_La:not(#zdt) {
+  padding: 6px 16px 9px;
+  border-radius: 0;
+  background: transparent;
+}
+
+.ColorPicker_Container .gamepaddialog_FieldLabelRow_H9WOq,
+.ColorPicker_Container :is(.gamepadslider_FakeEditableValue_1-lyB, .gamepadslider_EditableValue_2DXnl):not(#zdt) {
+  height: 22px;
+  min-height: 0;
+  line-height: 22px;
+}
+
+.ColorPicker_Container .gamepaddialog_FieldChildrenWithIcon_2ZQ9w:not(#zdt) {
+  margin-top: 4px;
+  padding-top: 0;
+}
+
+.gamepaddialog_GamepadDialogContent_3joNk.GenericDialogBase:has(.ColorPicker_Container):not(#zdt) {
+  padding-block: 16px;
+}
+
+.gamepaddialog_GamepadDialogContent_3joNk.GenericDialogBase:has(.ColorPicker_Container) .DialogBodyText:not(#zdt) {
+  margin-bottom: 0;
+}
+
+.ColorPicker_Container .gamepadslider_SliderTrack_Mq25N {
+  height: 8px;
+}
+
+.ColorPicker_Container .gamepadslider_SliderHandle_2yVKj:not(#zdt) {
+  background: hsl(var(--decky-color-picker-hvalue), var(--decky-color-picker-svalue), var(--decky-color-picker-lvalue));
+  box-shadow: 0 0 0 3px #fff, 0 2px 8px rgba(0, 0, 0, 0.45);
+}
