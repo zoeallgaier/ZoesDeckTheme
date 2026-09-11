@@ -1,6 +1,16 @@
 /* Zoe's Deck Theme: main window chrome. The top bar, the bottom bar, and the glass drawn behind
    the Quick Access menu and Steam menu (those menus are separate windows, see qam/ and menu/). */
 
+/* (This file also loads in the Quick Access window, which draws its own top and bottom bars
+   while a game is running; there the top bar sits on the sheet, without Steam's solid band.) */
+.header_Header_1E_SL.header_InQuickAccess_2mRo5:not(#zdt) {
+  background: transparent;
+}
+
+.header_Header_1E_SL.header_InQuickAccess_2mRo5:not(#zdt)::before {
+  display: none;
+}
+
 /* Top bar: the status icons on the left, the clock and your avatar on the right. That's also
    Steam's own order, so the d-pad still moves through them left to right. */
 .header_Header_1E_SL:not(#zdt) {
@@ -266,9 +276,14 @@
   letter-spacing: 0;
 }
 
-/* The backdrop behind the side menus: lighter and softer than Steam's 70% black. */
+/* The backdrop behind the side menus: lighter and softer than Steam's 70% black. Over a running
+   game (the page turns transparent) its blur can't reach the game, so it dims more instead. */
 .backgroundglass_BackgroundGlass_3rsrz.backgroundglass_DrawBackground_2NQoF {
   background: var(--zdt-backdrop-dim);
+}
+
+.gamepadui_MainNavMenuMainSplit_2Y_Mr:has(> .gamepadui_BasicHome_3LYP1.gamepadui_TransparentBackground_3vBmc) > .backgroundglass_BackgroundGlass_3rsrz.backgroundglass_DrawBackground_2NQoF {
+  background: var(--zdt-backdrop-dim-ingame);
 }
 
 .backgroundglass_BackgroundGlass_3rsrz.backgroundglass_Blur_N9sQL {

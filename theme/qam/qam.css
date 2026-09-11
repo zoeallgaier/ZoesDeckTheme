@@ -15,6 +15,12 @@
   overflow: hidden;
 }
 
+/* Over a running game (when Quick Access carries its own top and bottom bars) there's no blur
+   behind it, so the sheet is nearly opaque. */
+.quickaccessmenu_QuickAccessMenu_V0cr-.quickaccessmenu_HeaderAndFooterVisible_2m0zl {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 30%), var(--zdt-sheet-fill-ingame);
+}
+
 /* Steam paints the sticky title solid (background plus a matching box-shadow) to cover content
    scrolling under it, which shows as a dark band on glass. */
 .quickaccessmenu_Title_34nl5 {
@@ -172,4 +178,18 @@ button.DialogButton > div > span + div[style*="height: 24px"]::before {
   border-radius: 50%;
   background: conic-gradient(from 90deg, #ff453a, #ffd60a, #30d158, #64d2ff, #0a84ff, #bf5af2, #ff375f, #ff453a);
   mask-image: radial-gradient(closest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px));
+}
+
+/* The on-screen keyboard button at the foot of the rail (only while a game is running): a
+   rounded tab like the others instead of a square outline, the accent on focus. */
+.quickaccessmenu_Tabs_3Ag1w > .Panel.Focusable:not(.quickaccessmenu_Tab_1S76C, #zdt) {
+  border: none;
+  border-radius: var(--zdt-radius-m);
+  color: var(--zdt-label-secondary);
+  transition: background-color var(--zdt-duration) var(--zdt-ease), color var(--zdt-duration) var(--zdt-ease);
+}
+
+.quickaccessmenu_Tabs_3Ag1w > .Panel.Focusable.gpfocus:not(.quickaccessmenu_Tab_1S76C, #zdt) {
+  background: var(--zdt-accent);
+  color: var(--zdt-on-accent);
 }

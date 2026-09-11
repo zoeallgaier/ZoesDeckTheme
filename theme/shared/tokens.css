@@ -38,6 +38,10 @@
 
   /* Sheets (Quick Access, Steam menu) float over a dimmed, blurred backdrop drawn by the main window */
   --zdt-sheet-fill: rgba(28, 28, 34, 0.66);
+  /* Over a running game nothing can blur what's behind a menu (the game is a separate gamescope
+     layer, out of reach of backdrop-filter), so sheets turn nearly opaque there to stay legible. */
+  --zdt-sheet-fill-ingame: rgba(24, 24, 30, 0.92);
+  --zdt-backdrop-dim-ingame: rgba(0, 0, 0, 0.5);
   --zdt-backdrop-dim: rgba(0, 0, 0, 0.3);
   --zdt-backdrop-blur: blur(20px) saturate(160%);
   /* Behind pop-ups (Options menus, dialogs): a little darker than behind the side menus */

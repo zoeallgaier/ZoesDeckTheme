@@ -48,7 +48,7 @@ ICONS = [
     ("volume-2", ["M14.16 6L5.11 13.4H1V23.27H5"]),
     ("gamepad-2", ["M31.5,9.6c-0.3-0.3-0.7-0.6-1",
                    "sel:.appdetailsplaysection_MenuButton_3qDWQ > svg.SVGIcon_BigPicture"]),
-    ("keyboard", ["M2 9H34V27H2V9ZM5 13H7V15H5V"]),
+    ("keyboard", ["M2 9H34V27H2V9ZM5 13H7V15H5V", "M18 4L23 9H13L18 4ZM2 30V13H"]),
     ("palette", ["M10 36.0498H26C26 33.9281 25"]),
     ("accessibility", ["m600 60c-298.03 0-540 241.97"]),
     ("lock", ["M26 16V10C26 7.87827 25.1571"]),

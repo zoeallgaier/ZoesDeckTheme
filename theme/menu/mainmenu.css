@@ -14,6 +14,12 @@
   box-shadow: var(--zdt-glass-edge);
 }
 
+/* Over a running game (the menu then lists it at the top) there's no blur behind the sheet, so
+   it's nearly opaque. */
+.mainmenu_Container_3vzvO:has(.mainmenu_RunnningAppSeparator_33RkH) .mainmenu_Menu_23IDi {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 30%), var(--zdt-sheet-fill-ingame);
+}
+
 /* Menu items have no readable class names: each is .mainmenu_Menu_23IDi > div > div, with an icon
    div and a label div inside. The current page's item also holds an empty div, Steam's blue bar.
    Steam styles the current page with up to five classes plus :focus, so these rules carry
@@ -58,4 +64,46 @@
 
 .mainmenu_Menu_23IDi:not(#zdt) > div > div.gpfocus > div {
   color: var(--zdt-on-accent);
+}
+
+/* The running game's panel beside the menu (Resume game, Controller settings, Exit game... and
+   its controller layout). Its classes aren't in CSS Loader's map, so it's reached by structure:
+   the container's other child, the one holding the game's capsule. It floats like the menu
+   sheet, on the same nearly opaque glass, with rounded rows that take the accent on focus.
+   (Steam makes it wider than the screen; the layout summary runs off the right edge.) */
+.mainmenu_Container_3vzvO > div:not(.mainmenu_Menu_23IDi):has(.libraryassetimage_Container_1R9r2) {
+  margin: calc(var(--basicui-header-height, 40px) + var(--zdt-gap)) 0 calc(var(--zdt-bar-height) + 2 * var(--zdt-gap)) var(--zdt-gap);
+  overflow: hidden;
+  border-radius: var(--zdt-radius-l) 0 0 var(--zdt-radius-l);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 30%), var(--zdt-sheet-fill-ingame);
+  box-shadow: var(--zdt-glass-edge), var(--zdt-glass-shadow);
+}
+
+.mainmenu_Container_3vzvO > div:not(.mainmenu_Menu_23IDi):has(.libraryassetimage_Container_1R9r2) > .Panel > .Panel:not(#zdt) {
+  background: transparent;
+}
+
+.mainmenu_Container_3vzvO > div:not(.mainmenu_Menu_23IDi):has(.libraryassetimage_Container_1R9r2) > .Panel > .Panel:last-child:not(#zdt) {
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+.mainmenu_Container_3vzvO > div:not(.mainmenu_Menu_23IDi):has(.libraryassetimage_Container_1R9r2) .libraryassetimage_Container_1R9r2:not(#zdt) {
+  margin-top: 12px;
+}
+
+.mainmenu_Container_3vzvO > div:not(.mainmenu_Menu_23IDi) > .Panel > .Panel:first-child > .Panel > .Panel:not(#zdt) {
+  width: auto;
+  margin: 0 12px 0 8px;
+  border-radius: var(--zdt-radius-m);
+  background: transparent;
+  transition: background-color var(--zdt-duration) var(--zdt-ease), color var(--zdt-duration) var(--zdt-ease);
+}
+
+.mainmenu_Container_3vzvO > div:not(.mainmenu_Menu_23IDi) > .Panel > .Panel:first-child > .Panel > .Panel.gpfocus:not(#zdt) {
+  background: var(--zdt-accent);
+  color: var(--zdt-on-accent);
+  /* Steam's focus animation would hold its grey over this, and its 110% zoom overflows the
+     column */
+  animation: none;
+  transform: none;
 }

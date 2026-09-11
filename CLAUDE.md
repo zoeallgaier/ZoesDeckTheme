@@ -217,8 +217,14 @@ theme/
    in, volume pop-up as a glass capsule (`audio_VolumePopin` in SP; trigger it with the audio
    store's `OnVolumeButtonPressed()`, found via `DFL.findModuleChild`), Downloads page
    (`/library/downloads`), account page (`/account`, the avatar's page), a game's controller
-   settings, Settings controller pages, text fields. **Still to do: Quick Access while a game is
-   running** (Zoe says it needs work; launching a non-Steam shortcut with `SteamClient.Apps.RunGame`
-   didn't start it, so ask Zoe to open a game rather than launching one on her Deck).
+   settings, Settings controller pages, text fields. Over a running game (checked with Zoe's
+   game open): nothing can blur the game (separate gamescope layer, no gamescope blur exposed),
+   so the Quick Access and Steam menu sheets switch to `--zdt-sheet-fill-ingame` and the backdrop
+   dims more. In-game signals: Quick Access `HeaderAndFooterVisible`, the Steam menu's
+   `RunnningAppSeparator`, SP's `BasicHome.TransparentBackground`. In-game, Quick Access draws its
+   own top bar, so `sp/chrome.css` also loads in the QuickAccess window; the Steam menu's
+   running-game panel is styled by structure in `menu/mainmenu.css`. `gamescopectl screenshot`
+   only captures the game while one runs: shoot the menu windows with `cef.py shot` and composite.
+   Ask Zoe to open a game rather than launching one on her Deck.
 7. Focus effects and animations polish, plus a "Reduce motion" option.
 8. Screenshot each step with `tools/shot.sh` so Zoe can review from the Mac.
