@@ -35,6 +35,7 @@
 .gamepadhomerecentgames_RecentGamesHeaderLabel_1KKWf,
 .quickaccessmenu_Title_34nl5,
 .friendlist.GamepadMode:not(#zdt) .TabPanelHeader:not(#zdt),
+.appactionbutton_ButtonChild_2AzIX:not(#zdt) .appactionbutton_ButtonText_33cnX,
 .gamepaddialog_GamepadDialogContent_InnerWidth_3Xeyd > .DialogHeader,
 .achievementsheader_Title_3wNyl {
   font-family: var(--zdt-font-serif);
@@ -54,4 +55,10 @@
 .quickaccessmenu_Title_34nl5,
 .friendlist.GamepadMode:not(#zdt) .TabPanelHeader:not(#zdt) {
   font-size: 24px;
+}
+
+/* The game page's main action (Play, Install...) */
+.appactionbutton_ButtonChild_2AzIX:not(#zdt) .appactionbutton_ButtonText_33cnX {
+  font-size: 22px;
+  line-height: 24px;
 }

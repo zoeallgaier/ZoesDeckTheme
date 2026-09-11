@@ -111,8 +111,8 @@ theme/
   qam/qam.css           Quick Access sheet, tab rail (on the right), Friends, Decky bits (done)
   home/home.css         Home: full banner art on top, Steam's row zoomed to fit below   (done)
   home/hide-whats-new.css  "Show What's New on Home" off (default)                       (done)
-  sp/gamepage.css       game pages: banner fade, Play capsule, round buttons, tabs, feed (first pass)
-  sp/contextmenu.css    Options (≡) menus as an iOS-style glass sheet                   (first pass)
+  sp/gamepage.css       game pages: full art, centred logo + Play group, outline icons   (done)
+  sp/contextmenu.css    Options (≡) menus as an iOS-style glass sheet                   (done)
   menu/mainmenu.css     Steam menu sheet and items                                      (done)
   options/reduce-transparency.css                                                       (done)
   sp/library.css  sp/dialogs.css  options/reduce-motion.css
@@ -150,9 +150,11 @@ theme/
    tvOS-style focus = a slight size increase, soft shadow and sheen instead of a glowing border.
 5. **Hiding elements:** add the `REQUIRE_NAV_PATCH` flag when using `display: none` on anything focusable,
    or controller navigation breaks.
-6. **Publishing on DeckThemes:** prefix CSS variables (`--zdt-`), avoid `*` and `!important` unless necessary,
+6. **Rounding images:** `overflow: visible` on an `<img>` turns off its `border-radius` clipping
+   (the avatar was square because of this); use `overflow: clip` on the image itself.
+7. **Publishing on DeckThemes:** prefix CSS variables (`--zdt-`), avoid `*` and `!important` unless necessary,
    stay under 10MB, no bundled third-party themes (use `dependencies`).
-7. The Deck screen is 1280×800 at arm's length, not a TV — scale tvOS sizes down.
+8. The Deck screen is 1280×800 at arm's length, not a TV — scale tvOS sizes down.
 
 ## Suggested next steps
 
@@ -166,9 +168,16 @@ theme/
    She tried square icons and rejected them (logos got cropped), so cards keep Steam's shapes; the
    row is shrunk with CSS `zoom` (not resized) because Steam scrolls it with stock-size maths. Top
    bar: clock on the left, iOS-style Wi-Fi/battery, round avatar with a status dot.
-5. ~~Game pages, then the Options (≡) menus.~~ First pass done (2026-09-10), awaiting Zoe's review.
-   Game pages: only the Activity tab has been looked at; check Your stuff / Community / Game Info
-   and a game that isn't installed (Install button). Open an Options menu from a script by calling
+5. ~~Game pages, then the Options (≡) menus.~~ Done and reviewed with Zoe (2026-09-10). Game
+   pages follow the "Clean Gameview" idea: the first screen is only the art (full width at its own
+   1920×620 ratio, `--zdt-art-height`, fading out like Home's), the logo centred above one centred
+   group of Play + controller + settings, everything else below the fold. Zoe asked for the art
+   never to be stretched or cropped and rejected a blurred fill beside it. The Play label is
+   Instrument Serif with its icon after it. A theme can't choose which artwork size Steam loads.
+   Play/Install/controller/settings and the top bar's search/bell use Lucide outline icons (ISC,
+   data-URI masks in `tokens.css`, matched by each Steam icon's path so other states keep theirs);
+   Wi-Fi and battery stay Steam's because they draw live state. Still to check: Your stuff /
+   Community / Game Info tabs. Open an Options menu from a script by calling
    the focused card's React `onContextMenu` prop (see how it was done in the session: walk
    `__reactFiber` props from `.gpfocus`). Still unstyled: modal dialogs (CSS Loader's theme
    settings dialog is a handy test), Library.

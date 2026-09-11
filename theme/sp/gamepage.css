@@ -3,9 +3,86 @@
    and labels lose Steam's capitals. The tab row further down is shared with other tabbed pages
    (Library, Home's What's New), so its styling here applies there too. */
 
-/* Banner: the sharp art fades into Steam's blurred copy of it below, instead of ending on a line. */
-.sharedappdetailsheader_ImgContainer_3VFZB {
-  mask-image: linear-gradient(to bottom, #000 62%, transparent);
+/* Banner, after the "Clean Gameview" theme (MIT): the first screen is just the art, the game's
+   logo and the Play row, which sits just above the bottom bar; everything else (family library
+   note, Steam Cloud, tabs) starts below the fold. Steam sizes the banner with --header-height
+   and uses its own full-screen height for the launch animation, so only the variable changes.
+   Games without banner art keep Steam's layout. */
+.BasicUI .sharedappdetailsheader_TopCapsule_2meE3 {
+  --header-height: calc(100vh - var(--zdt-bar-height) - 2 * var(--zdt-gap) - 88px);
+}
+
+/* The art keeps its own 1920×620 shape across the full width, never stretched or cropped, and
+   fades into the page exactly like Home's. Steam's stretched copies of it underneath go. */
+.sharedappdetailsheader_ImgContainer_3VFZB:not(#zdt) {
+  height: var(--zdt-art-height);
+  mask-image: linear-gradient(to bottom, #000 45%, rgba(0, 0, 0, 0.55) 78%, transparent);
+}
+
+.sharedappdetailsheader_ImgSrc__dije.sharedappdetailsheader_ImgBlur_3XYFK {
+  display: none;
+}
+
+/* The page body's dark tint fades in rather than starting on a hard line at the Play row. */
+.basicappdetailssectionstyler_AppDetailsRoot_3fp5y:not(#zdt) {
+  background: linear-gradient(to bottom, rgba(14, 20, 27, 0), rgba(14, 20, 27, 0.25) 160px);
+}
+
+/* The logo, centred and sitting just above the Play row whatever position and size the game's
+   page gives it (often a quarter of the width, which leaves logos small). The box is half the
+   width and a fixed height; the logo image fills it and draws the logo centred at its foot, so
+   logos end on the same line (some logo files carry transparent padding, so a few sit a little
+   higher). */
+.sharedappdetailsheader_BoxSizer_30GVp {
+  --zdt-logo-height: 110px;
+  /* Its region ends 16px above the header's foot; this sits the logo 24px above the Play row. */
+  top: calc(100% - var(--zdt-logo-height) + 8px) !important;
+  left: 0 !important;
+  right: 0;
+  width: 50% !important;
+  height: var(--zdt-logo-height) !important;
+  margin-inline: auto;
+}
+
+.sharedappdetailsheader_BoxSizer_30GVp .sharedappdetailsheader_TitleImageContainer_3H5_m:not(#zdt) {
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.sharedappdetailsheader_TitleLogo_38wKH:not(#zdt) {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  object-fit: contain;
+  object-position: 50% 100%;
+}
+
+/* Play row: Play, controller and settings as one centred group. Steam spreads them across the
+   width with the playtime stats in between; the stats move to their own centred line below. */
+.basicappdetailssectionstyler_ActionRow_2Gj21:not(#zdt) {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px 12px;
+}
+
+.basicappdetailssectionstyler_AppButtons_1thLD:not(#zdt) {
+  gap: 12px;
+}
+
+.basicappdetailssectionstyler_AppButtons_1thLD :is(.appdetailsplaysection_MenuButton_3qDWQ, .appdetailsplaysection_MenuButtonContainer_3oddB):not(#zdt) {
+  margin: 0;
+}
+
+.appdetailsplaysection_StatusAndStats_1YbtI:not(#zdt),
+.appdetailsplaysection_StatusAndStats_1YbtI .appdetailsplaysection_StatusNameContainer_zjtAI:not(#zdt) {
+  order: 3;
+  flex: 1 0 100%;
+  justify-content: center;
+}
+
+.appdetailsplaysection_GameStatsSection_1mDAV:not(#zdt) * {
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 /* Main action (Play, Install, Update...): a capsule that turns the accent colour when focused, like
@@ -25,7 +102,17 @@
 
 .appactionbutton_ButtonChild_2AzIX:not(#zdt) .appactionbutton_ButtonText_33cnX {
   color: inherit;
-  font-weight: 700;
+}
+
+/* The label centred with its icon after it ("Play ▶"); the label's serif is in shared/type.css. */
+.appactionbutton_ButtonChild_2AzIX.appactionbutton_PlayButton_3ydig:not(#zdt) {
+  flex-direction: row-reverse;
+  justify-content: center;
+  gap: 10px;
+}
+
+.appactionbutton_ButtonChild_2AzIX.appactionbutton_PlayButton_3ydig:not(#zdt) > svg {
+  margin: 0;
 }
 
 .appactionbutton_ButtonChild_2AzIX.Focusable:focus:not(#zdt),
@@ -58,6 +145,38 @@
 
 .appdetailsplaysection_MenuButton_3qDWQ.Focusable:focus:not(#zdt) svg {
   color: inherit;
+}
+
+/* Icon swap: Steam's solid Play, Install, controller and settings glyphs become rounded outline
+   ones (tokens.css). Each is matched by its own drawing, so other states (Stop, Update, Stream...)
+   keep Steam's icon; the svg's own shapes hide and a mask of the new icon paints in its colour. */
+.appactionbutton_PlayButton_3ydig > svg:is(:has(path[d^="M7.5 32.135"]), :has(path[d^="M29 23V27H7V23H2V32H34V23H29Z"])):not(#zdt),
+.appdetailsplaysection_MenuButton_3qDWQ > svg:is(.SVGIcon_BigPicture, :has(path[d^="M33 20.38"])):not(#zdt) {
+  background: currentColor;
+  mask-position: center;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+}
+
+.appactionbutton_PlayButton_3ydig > svg:has(path[d^="M7.5 32.135"]):not(#zdt) {
+  mask-image: var(--zdt-icon-play);
+}
+
+.appactionbutton_PlayButton_3ydig > svg:has(path[d^="M29 23V27H7V23H2V32H34V23H29Z"]):not(#zdt) {
+  mask-image: var(--zdt-icon-download);
+}
+
+.appdetailsplaysection_MenuButton_3qDWQ > svg.SVGIcon_BigPicture:not(#zdt) {
+  mask-image: var(--zdt-icon-gamepad);
+}
+
+.appdetailsplaysection_MenuButton_3qDWQ > svg:has(path[d^="M33 20.38"]):not(#zdt) {
+  mask-image: var(--zdt-icon-settings);
+}
+
+.appactionbutton_PlayButton_3ydig > svg:is(:has(path[d^="M7.5 32.135"]), :has(path[d^="M29 23V27H7V23H2V32H34V23H29Z"])) > *,
+.appdetailsplaysection_MenuButton_3qDWQ > svg:is(.SVGIcon_BigPicture, :has(path[d^="M33 20.38"])) > * {
+  display: none;
 }
 
 /* "Steam Cloud: up to date" */

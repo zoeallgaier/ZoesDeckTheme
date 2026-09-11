@@ -4,8 +4,6 @@
    beneath it, like tvOS. (What's New is hidden by home/hide-whats-new.css.) */
 
 :root {
-  /* Steam's hero art is 1920×620, so this height shows it edge to edge without cropping. */
-  --zdt-home-art-height: calc(100vw * 620 / 1920);
   /* The row is Steam's, scaled to fit under the full banner (see below). */
   --zdt-home-row-zoom: 0.72;
   --zdt-home-row-unzoom: 1.389;
@@ -16,13 +14,13 @@
    fades it out in an oval instead). */
 .gamepadhomerecentgames_RecentGamesBackgroundContainer_QNkOt {
   bottom: auto;
-  height: var(--zdt-home-art-height);
+  height: var(--zdt-art-height);
   mask-image: linear-gradient(to bottom, #000 45%, rgba(0, 0, 0, 0.55) 78%, transparent);
 }
 
 .gamepadhomerecentgames_RecentGamesBackgroundImages_30D-8 {
   bottom: auto;
-  height: var(--zdt-home-art-height);
+  height: var(--zdt-art-height);
   mask-image: none;
 }
 
@@ -47,7 +45,7 @@
 /* "Recent Games" sits at the bottom-left of the art. Steam shows it at 70% white; here it's full
    white with a shadow for bright banners. */
 .gamepadhomerecentgames_RecentGamesContainer_2_cRk {
-  padding-top: calc(var(--zdt-home-art-height) - 46px);
+  padding-top: calc(var(--zdt-art-height) - 46px);
 }
 
 .gamepadhomerecentgames_RecentGamesHeaderLabel_1KKWf.gamepadhomerecentgames_HeaderEnter_1_JU4:not(#zdt) {
