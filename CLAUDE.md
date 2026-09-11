@@ -16,7 +16,7 @@ should feel so clean it could be an Apple product. Reference: Apple tvOS + Liqui
 
 **Nice to have:** simple animations.
 
-## Status (2026-09-10)
+## Status (2026-09-11)
 
 - Research done (see `docs/RESEARCH.md`).
 - Zoe has **turned off all other installed themes** for a clean start, so nothing else is styling the UI.
@@ -188,13 +188,17 @@ theme/
 3. ~~Radii + glass tokens → header/footer → QAM → Steam menu → Settings.~~ Done. Still to check:
    modal dialogs, Quick Access over a running game, collapsed Steam menu.
 4. ~~Homescreen layout pass.~~ Done to Zoe's mockup (2026-09-10): banner art full width at its
-   own 1920×620 ratio, "Recent Games" on its bottom-left, the stock row below, sitting on a
-   blurred mirror image of the art (the same look as game pages, which Zoe sketched). She tried
-   square icons and rejected them (logos got cropped), so cards keep Steam's shapes; the row is
-   shrunk with CSS `zoom` (0.62, not resized) because Steam scrolls it with stock-size maths, and
-   its inline fixed height is overridden so the full-size name label isn't clipped. Top bar:
-   status icons on the left (search is a magnifier that opens over the row while typing),
-   clock and round avatar on the right; focus grows an item instead of lighting a slab.
+   own 1920×620 ratio, the stock row below, sitting on a blurred mirror image of the art (the
+   same look as game pages, which Zoe sketched). No "Recent Games" heading: the focused game's
+   name hangs above its card in the serif (Steam keeps that label inside the first card's cell
+   and stretches it to the focused card, so it can't be pinned to the left). She tried square
+   icons and rejected them (logos got cropped), so cards keep Steam's shapes; the row is shrunk
+   with CSS `zoom` (0.72, not resized) because Steam scrolls it with stock-size maths, and its
+   inline fixed height is overridden. Top bar: status icons on the left (search is a magnifier
+   that opens over the row while typing), lower-case Oxygen Light clock and an 85% avatar with
+   an accent status dot on the right; focus grows an item instead of lighting a slab. On Home
+   the bar floats lower and further in, gliding up and out on other pages or with a menu open
+   (`:has()` on the RecentSection and on `backgroundglass_Visible`).
 5. ~~Game pages, then the Options (≡) menus.~~ Done and reviewed with Zoe (2026-09-10). Game
    pages follow Zoe's sketch: art cropped to the width at 70% of the screen height (never
    stretched), the logo and one centred group of Play + controller + settings (frosted glass) on
@@ -203,11 +207,18 @@ theme/
    the fold (the stats are absolutely positioned: see rule 5). Pages without art (`NoArt`/`FallbackArt`) keep Steam's layout.
    The Play label is Instrument Serif with its icon after it. A theme can't choose which artwork
    size Steam loads. Play/Install/controller/settings and the top bar's search/bell use Lucide
-   outline icons (ISC, data-URI masks in `tokens.css`, matched by each Steam icon's path so other
-   states keep theirs); Wi-Fi and battery stay Steam's because they draw live state. Still to
-   check: Your stuff / Community / Game Info tabs. Open an Options menu from a script by calling
+   outline icons (now generated into `shared/icons.css`, see Tools); Wi-Fi and battery stay
+   Steam's because they draw live state. Still to check: Your stuff / Community / Game Info tabs
+   (Game Info's link buttons are still square). Open an Options menu from a script by calling
    the focused card's React `onContextMenu` prop (see how it was done in the session: walk
-   `__reactFiber` props from `.gpfocus`). Still unstyled: modal dialogs (CSS Loader's theme
-   settings dialog is a handy test), Library.
-6. Focus effects and animations polish, plus a "Reduce motion" option.
-7. Screenshot each step with `tools/shot.sh` so Zoe can review from the Mac.
+   `__reactFiber` props from `.gpfocus`). Still unstyled: Library.
+6. ~~Round two of Zoe's review (2026-09-11).~~ Done: dialogs + CSS Loader's colour picker
+   (`sp/dialogs.css`), Power menu without red, UI icons everywhere, Better Game Badges/Icons folded
+   in, volume pop-up as a glass capsule (`audio_VolumePopin` in SP; trigger it with the audio
+   store's `OnVolumeButtonPressed()`, found via `DFL.findModuleChild`), Downloads page
+   (`/library/downloads`), account page (`/account`, the avatar's page), a game's controller
+   settings, Settings controller pages, text fields. **Still to do: Quick Access while a game is
+   running** (Zoe says it needs work; launching a non-Steam shortcut with `SteamClient.Apps.RunGame`
+   didn't start it, so ask Zoe to open a game rather than launching one on her Deck).
+7. Focus effects and animations polish, plus a "Reduce motion" option.
+8. Screenshot each step with `tools/shot.sh` so Zoe can review from the Mac.
