@@ -27,8 +27,9 @@
 
   /* Liquid glass, for the controls/navigation layer only, never game art. */
   --zdt-glass-fill: rgba(255, 255, 255, 0.1);
-  /* For glass sitting straight on game art (game page buttons), which a faint fill would lose */
-  --zdt-glass-fill-strong: rgba(255, 255, 255, 0.2);
+  /* For glass sitting straight on game art (game page buttons): a smoky tint under the blur, so
+     white glyphs stay legible on bright art as well as dark */
+  --zdt-glass-fill-strong: rgba(28, 28, 34, 0.3);
   --zdt-glass-fill-clear: rgba(255, 255, 255, 0.04);
   --zdt-glass-dim: rgba(0, 0, 0, 0.35);
   --zdt-glass-blur: blur(24px) saturate(180%);

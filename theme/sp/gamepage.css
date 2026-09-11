@@ -70,16 +70,17 @@
 }
 
 /* The logo, centred just above the Play row whatever position and size the game's page gives it
-   (often a quarter of the width, which leaves logos small). The box is half the width and a
-   fixed height; the logo image fills it and draws the logo centred at its foot, so logos end on
-   the same line (some logo files carry transparent padding, so a few sit a little higher). */
+   (often a quarter of the width, which leaves logos small). The box is about three quarters of
+   the width and as tall as the space under the top bar allows; the logo image fills it and
+   draws the logo centred at its foot, so logos end on the same line (some logo files carry
+   transparent padding, so a few sit a little higher). */
 .sharedappdetailsheader_BoxSizer_30GVp {
-  --zdt-logo-height: 130px;
+  --zdt-logo-height: 200px;
   /* Its region ends 16px above the header's foot; this sits the logo 24px above the Play row. */
   top: calc(100% - var(--zdt-logo-height) + 8px) !important;
   left: 0 !important;
   right: 0;
-  width: 50% !important;
+  width: 76% !important;
   height: var(--zdt-logo-height) !important;
   margin-inline: auto;
 }
@@ -98,16 +99,26 @@
 }
 
 /* Play row: Play, controller and settings as one centred group. Steam spreads them across the
-   width with the playtime stats in between; the stats move to their own centred line, which on
-   pages with art starts just below the fold. */
+   width with the playtime stats in between; the stats move to their own centred line below it,
+   which on pages with art starts just below the fold. The row must not wrap: Steam picks the
+   d-pad behaviour from each panel's CSS, and a wrapping flex row is navigated as a grid, which
+   got stuck on Play. So the stats are positioned out of the row instead, and the row keeps
+   room for them below. */
 .basicappdetailssectionstyler_ActionRow_2Gj21:not(#zdt) {
-  flex-wrap: wrap;
+  --zdt-gp-stats-gap: 24px;
+  position: relative;
   justify-content: center;
-  gap: 40px 12px;
+  gap: 12px;
 }
 
+.basicappdetailssectionstyler_ActionRow_2Gj21:has(.appdetailsplaysection_GameStat_1kiZK):not(#zdt) {
+  margin-bottom: calc(var(--zdt-gp-stats-gap) + 46px);
+}
+
+/* On pages with art, the room is kept even without stats, so the rest starts below the fold. */
 .appdetails_InnerContainer_1Svpj:has(.sharedappdetailsheader_TopCapsule_2meE3:not(.sharedappdetailsheader_NoArt_3ixso, .sharedappdetailsheader_FallbackArt_kgNCR)) .basicappdetailssectionstyler_ActionRow_2Gj21:not(#zdt) {
-  row-gap: calc(100vh - var(--zdt-gp-play-top) - 48px + 16px);
+  --zdt-gp-stats-gap: calc(100vh - var(--zdt-gp-play-top) - 48px + 16px);
+  margin-bottom: calc(var(--zdt-gp-stats-gap) + 46px);
 }
 
 .basicappdetailssectionstyler_AppButtons_1thLD:not(#zdt) {
@@ -118,10 +129,16 @@
   margin: 0;
 }
 
-.appdetailsplaysection_StatusAndStats_1YbtI:not(#zdt),
-.appdetailsplaysection_StatusAndStats_1YbtI .appdetailsplaysection_StatusNameContainer_zjtAI:not(#zdt) {
-  order: 3;
-  flex: 1 0 100%;
+.appdetailsplaysection_StatusAndStats_1YbtI:not(#zdt) {
+  position: absolute;
+  top: calc(100% + var(--zdt-gp-stats-gap));
+  left: 0;
+  right: 0;
+  justify-content: center;
+}
+
+.appdetailsplaysection_StatusAndStats_1YbtI .appdetailsplaysection_StatusNameContainer_zjtAI:not(#zdt),
+.appdetailsplaysection_Row_9EHg9.appdetailsplaysection_SharedLibrary_z8GYw:not(#zdt) {
   justify-content: center;
 }
 

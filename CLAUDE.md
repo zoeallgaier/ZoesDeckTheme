@@ -133,7 +133,8 @@ theme/
 2. **Fonts:** all Steam text uses `"Motiva Sans"`. Plan: redefine that family's `@font-face` to the Oxygen
    files so every weight maps through and Steam's own bold survives. Avoid `* { font-family … !important }`
    and never force one weight globally (Zoe's old preset forced 300, which killed all bold).
-   Instrument Serif has no bold, so serif titles get hierarchy from size. **Verified working in Gaming
+   Instrument Serif has no bold face; Zoe wants the accent titles in its **Italic, bold**, so they use
+   the real italic with `font-synthesis: weight` (Chromium thickens it). **Verified working in Gaming
    Mode (2026-09-10).** Each override mirrors one of Steam's own `@font-face` descriptors exactly so ours
    wins the tie; keep it that way if Steam adds weights.
 3. **Glass:** `backdrop-filter` only blurs content in the *same window*. It works over art in `SP`. The Quick
@@ -150,6 +151,13 @@ theme/
    tvOS-style focus = a slight size increase, soft shadow and sheen instead of a glowing border.
 5. **Hiding elements:** add the `REQUIRE_NAV_PATCH` flag when using `display: none` on anything focusable,
    or controller navigation breaks.
+   **Layout changes navigation too:** Steam picks each panel's d-pad behaviour from its computed CSS
+   (library.js): a flex row is a ROW, but a flex row with `flex-wrap: wrap` is a GRID; `row-reverse`,
+   `column`, `column-reverse` map to their own modes; `display: grid` is a GRID (GEOMETRIC with
+   `grid-template-areas`); anything else is a COLUMN unless its first child floats (ROW) or is
+   inline(-block) (GRID). Wrapping the game page's Play row made right-from-Play do nothing, so
+   never change `display`, `flex-direction` or `flex-wrap` on a focusable panel without testing
+   the d-pad with `tools/key.py`; move things out with `position: absolute` instead.
 6. **Blurred reflections:** `-webkit-box-reflect` draws the mirror as a separate compositor copy.
    Backdrop blur only reached part of it on game pages (it works on Home, whose box is
    `contain: strict`). CSS `blur()` fades an element's edges to transparent and doesn't spill
@@ -175,12 +183,14 @@ theme/
    square icons and rejected them (logos got cropped), so cards keep Steam's shapes; the row is
    shrunk with CSS `zoom` (0.62, not resized) because Steam scrolls it with stock-size maths, and
    its inline fixed height is overridden so the full-size name label isn't clipped. Top bar:
-   clock on the left, iOS-style Wi-Fi/battery, round avatar with a status dot.
+   status icons on the left (search is a magnifier that opens over the row while typing),
+   clock and round avatar on the right; focus grows an item instead of lighting a slab.
 5. ~~Game pages, then the Options (≡) menus.~~ Done and reviewed with Zoe (2026-09-10). Game
    pages follow Zoe's sketch: art cropped to the width at 70% of the screen height (never
    stretched), the logo and one centred group of Play + controller + settings (frosted glass) on
-   it, and below it a blurred mirror image fading out by the bottom bar; stats, Steam Cloud and
-   the tabs start below the fold. Pages without art (`NoArt`/`FallbackArt`) keep Steam's layout.
+   it (logo box 76% wide by 200px, after Zoe asked for logos twice as big), and below it a
+   blurred mirror image fading out by the bottom bar; stats, Steam Cloud and the tabs start below
+   the fold (the stats are absolutely positioned: see rule 5). Pages without art (`NoArt`/`FallbackArt`) keep Steam's layout.
    The Play label is Instrument Serif with its icon after it. A theme can't choose which artwork
    size Steam loads. Play/Install/controller/settings and the top bar's search/bell use Lucide
    outline icons (ISC, data-URI masks in `tokens.css`, matched by each Steam icon's path so other

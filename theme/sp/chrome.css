@@ -1,20 +1,63 @@
 /* Zoe's Deck Theme: main window chrome. The top bar, the bottom bar, and the glass drawn behind
    the Quick Access menu and Steam menu (those menus are separate windows, see qam/ and menu/). */
 
-/* Top bar: status items become capsules, and focus is a white capsule (tvOS) instead of a
-   full-height slab. */
+/* Top bar: the status icons on the left, the clock and your avatar on the right. That's also
+   Steam's own order, so the d-pad still moves through them left to right. */
+.header_Header_1E_SL:not(#zdt) {
+  justify-content: flex-start;
+  padding-inline: 8px;
+}
+
+.header_Header_1E_SL .header_Clock_1HhLU:not(#zdt) {
+  margin-left: auto;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Focus (and touch hover) makes an item grow, tvOS style, instead of lighting a slab behind it.
+   An item holding another item (unread chats) leaves the growing to the inner one. */
 .header_HeaderItem_2HnVd {
   height: 32px;
   align-self: center;
-  border-radius: var(--zdt-radius-pill);
-  transition: background-color var(--zdt-duration) var(--zdt-ease), color var(--zdt-duration) var(--zdt-ease);
+  transition: transform var(--zdt-duration) var(--zdt-ease);
 }
 
-.header_HeaderItem_2HnVd.gpfocus,
-.header_HeaderItem_2HnVd.gpfocuswithin {
-  background: var(--zdt-accent);
-  color: var(--zdt-on-accent);
-  box-shadow: var(--zdt-glass-shadow);
+.header_HeaderItem_2HnVd:is(.gpfocus, .gpfocuswithin, .header_Clickable_8sPcK:hover):not(#zdt) {
+  background: none;
+  color: inherit;
+}
+
+.header_HeaderItem_2HnVd:is(.gpfocus, .gpfocuswithin, .header_Clickable_8sPcK:hover):not(:has(.header_HeaderItem_2HnVd)) {
+  transform: scale(1.22);
+}
+
+/* Search: a magnifier at the start of the row. Steam stretches it across the free space with the
+   icon at the far end; here it's icon-sized, and while you type it opens over the row like an
+   iOS search field instead of pushing the other icons along. */
+.FlexGrowUniversalSearch .searchbar_SearchAndTitleContainer_17M8g.searchbar_ShowingSearch_NMb_F:not(#zdt) {
+  flex: 0 0 38px;
+  padding: 0;
+  background: none;
+}
+
+.FlexGrowUniversalSearch .searchbar_SearchAndTitleContainer_17M8g.searchbar_ShowingSearch_NMb_F:not(#zdt) .searchbar_SearchIconRight_1Ka4T {
+  right: 10px;
+}
+
+.FlexGrowUniversalSearch .searchbar_SearchAndTitleContainer_17M8g.searchbar_ShowingSearch_NMb_F:is(.gpfocuswithin, :focus-within):not(#zdt) {
+  position: absolute;
+  top: 0;
+  left: 8px;
+  z-index: 2;
+  width: min(480px, 100% - 16px);
+  padding-left: 40px;
+}
+
+/* While a menu or dialog is open it's empty, and would still stretch. */
+.FlexGrowUniversalSearch .searchbar_SearchAndTitleContainer_17M8g:not(.searchbar_ShowingSearch_NMb_F, .searchbar_ShowingTitle_P5_Rq):not(#zdt) {
+  flex: 0 0 0;
+  min-width: 0;
+  padding: 0;
 }
 
 /* The top bar's backdrop, which Steam fades in once you scroll or open a menu: a soft
@@ -32,15 +75,6 @@
   bottom: 4px;
   height: auto;
   border-radius: var(--zdt-radius-pill);
-}
-
-/* Status items, arranged like iPadOS: the clock on the left, then search, Wi-Fi, battery and your
-   avatar on the right. */
-.header_Clock_1HhLU {
-  order: -1;
-  margin-left: 6px;
-  font-size: 16px;
-  font-weight: 700;
 }
 
 /* Search and notifications get the theme's rounded outline icons (tokens.css), painted through a

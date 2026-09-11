@@ -30,17 +30,23 @@
 @font-face { font-family: "Instrument Serif"; font-weight: 400; src: url("/themes_custom/ZoesDeckTheme/fonts/InstrumentSerif-Regular.ttf") format("truetype"); }
 @font-face { font-family: "Instrument Serif"; font-weight: 400; font-style: italic; src: url("/themes_custom/ZoesDeckTheme/fonts/InstrumentSerif-Italic.ttf") format("truetype"); }
 
-/* Accent titles in Instrument Serif. Instrument Serif has no bold, so these get their hierarchy
-   from size, and font-synthesis stops Chromium faking a bold. Keep this list short. */
+/* Accent titles in Instrument Serif Italic, bold. Instrument Serif has no bold face, so Chromium
+   thickens the italic (font-synthesis: weight); it never slants the upright face, as the real
+   italic is there. Game titles written out as text (games without a logo image, the game page's
+   pinned bar) count as accent titles too. Keep this list short. */
 .gamepadhomerecentgames_RecentGamesHeaderLabel_1KKWf,
 .quickaccessmenu_Title_34nl5,
 .friendlist.GamepadMode:not(#zdt) .TabPanelHeader:not(#zdt),
 .appactionbutton_ButtonChild_2AzIX:not(#zdt) .appactionbutton_ButtonText_33cnX,
 .gamepaddialog_GamepadDialogContent_InnerWidth_3Xeyd > .DialogHeader,
-.achievementsheader_Title_3wNyl {
+.achievementsheader_Title_3wNyl,
+.sharedappdetailsheader_SVGTitle_2w_Zq,
+.appdetailsplaysection_PlayBarGameName_3rpUk,
+.gamepadcontextmenu_BasicContextMenuHeader_2Jp8B {
   font-family: var(--zdt-font-serif);
-  font-weight: 400;
-  font-synthesis: none;
+  font-style: italic;
+  font-weight: 700;
+  font-synthesis: weight;
   letter-spacing: 0.01em;
   text-transform: none;
 }
@@ -53,7 +59,8 @@
 }
 
 .quickaccessmenu_Title_34nl5,
-.friendlist.GamepadMode:not(#zdt) .TabPanelHeader:not(#zdt) {
+.friendlist.GamepadMode:not(#zdt) .TabPanelHeader:not(#zdt),
+.gamepadcontextmenu_BasicContextMenuHeader_2Jp8B {
   font-size: 24px;
 }
 

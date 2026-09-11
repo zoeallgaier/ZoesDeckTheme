@@ -53,6 +53,17 @@
   color: #fff;
 }
 
+/* ...except in titled menus like Power, where Steam marks nearly every item destructive (Restart,
+   Sign Out, Switch to Desktop...), so the red says nothing. Those look like any other item. */
+.gamepadcontextmenu_BasicContextMenuModal_2xS2_:has(> .gamepadcontextmenu_BasicContextMenuHeader_2Jp8B) .gamepadcontextmenu_contextMenuItem_1sdvo.gamepadcontextmenu_Destructive_3aIFv:not(#zdt):not(#zdt) {
+  color: var(--zdt-label);
+}
+
+.gamepadcontextmenu_BasicContextMenuModal_2xS2_:has(> .gamepadcontextmenu_BasicContextMenuHeader_2Jp8B) .gamepadcontextmenu_contextMenuItem_1sdvo.gamepadcontextmenu_Destructive_3aIFv.gamepadcontextmenu_Focused_X813r:not(#zdt):not(#zdt) {
+  background: var(--zdt-accent);
+  color: var(--zdt-on-accent);
+}
+
 .gamepadcontextmenu_contextMenuItem_1sdvo.disabled:not(#zdt) {
   color: var(--zdt-label-tertiary);
 }
