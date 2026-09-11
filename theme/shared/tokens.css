@@ -27,6 +27,8 @@
 
   /* Liquid glass, for the controls/navigation layer only, never game art. */
   --zdt-glass-fill: rgba(255, 255, 255, 0.1);
+  /* For glass sitting straight on game art (game page buttons), which a faint fill would lose */
+  --zdt-glass-fill-strong: rgba(255, 255, 255, 0.2);
   --zdt-glass-fill-clear: rgba(255, 255, 255, 0.04);
   --zdt-glass-dim: rgba(0, 0, 0, 0.35);
   --zdt-glass-blur: blur(24px) saturate(180%);
@@ -42,6 +44,10 @@
 
   /* Steam's banner art is 1920×620; this height shows it full width without cropping (Home, game pages) */
   --zdt-art-height: calc(100vw * 620 / 1920);
+  /* Under the art (Home, game pages): a blurred mirror image of it, which the art fades into over
+     its last few pixels. Its colours are lifted a little, as blurring greys them. */
+  --zdt-reflect-filter: saturate(150%);
+  --zdt-reflect-ramp: 72px;
 
   /* Layout: floating glass keeps this much air from the screen edges */
   --zdt-gap: 8px;

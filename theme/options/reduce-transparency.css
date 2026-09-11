@@ -3,6 +3,7 @@
 
 :root:root {
   --zdt-glass-fill: rgba(255, 255, 255, 0.14);
+  --zdt-glass-fill-strong: rgb(52, 52, 58);
   --zdt-glass-dim: rgb(24, 24, 28);
   --zdt-glass-blur: none;
   --zdt-sheet-fill: rgb(28, 28, 34);

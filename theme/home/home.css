@@ -1,27 +1,32 @@
-/* Zoe's Deck Theme: Home. The top of the screen shows the selected game's banner art whole,
-   fading into the page at its foot; under it, the recent games sit in one row of rounded cards in Steam's own shapes
-   (the newest one wide, the rest portrait) so no logo is cropped, with the focused game's name
-   beneath it, like tvOS. (What's New is hidden by home/hide-whats-new.css.) */
+/* Zoe's Deck Theme: Home. The top of the screen shows the selected game's banner art whole; its
+   last few pixels turn soft and below it a blurred mirror image of it fills the rest of the
+   screen, like the game pages and the Apple TV app. On that sit the recent games in one row of
+   rounded cards in Steam's own shapes (the newest one wide, the rest portrait) so no logo is
+   cropped, with the focused game's name beneath it, like tvOS. (What's New is hidden by
+   home/hide-whats-new.css.) */
 
 :root {
-  /* The row is Steam's, scaled to fit under the full banner (see below). */
-  --zdt-home-row-zoom: 0.72;
-  --zdt-home-row-unzoom: 1.389;
+  /* The row is Steam's, scaled down to leave room around it (see below). */
+  --zdt-home-row-zoom: 0.62;
+  --zdt-home-row-unzoom: 1.613;
 }
 
-/* Banner art: full brightness, no slow zoom, and only as tall as the art itself. Its lower part
-   fades into the page so "Recent Games" reads clearly and the art meets the row softly (Steam
-   fades it out in an oval instead). */
+/* Banner art: full brightness, no slow zoom, and only as tall as the art itself (Steam fades it
+   out in an oval instead). Its box reaches the bottom of the screen for the mirror image, which
+   it would otherwise clip (it's contain: strict). */
 .gamepadhomerecentgames_RecentGamesBackgroundContainer_QNkOt {
   bottom: auto;
-  height: var(--zdt-art-height);
-  mask-image: linear-gradient(to bottom, #000 45%, rgba(0, 0, 0, 0.55) 78%, transparent);
+  height: 100vh;
+  mask-image: none;
 }
 
+/* The mirror image fades out by the bottom of the screen. */
 .gamepadhomerecentgames_RecentGamesBackgroundImages_30D-8 {
+  --zdt-home-mirror: calc(100vh - var(--zdt-art-height));
   bottom: auto;
   height: var(--zdt-art-height);
   mask-image: none;
+  -webkit-box-reflect: below 0 linear-gradient(to bottom, transparent calc(100% - var(--zdt-home-mirror)), rgba(0, 0, 0, 0.7) calc(100% - var(--zdt-home-mirror) * 0.55), #000);
 }
 
 .gamepadhomerecentgames_RecentGamesBackgroundImage_3Mp8R {
@@ -30,6 +35,24 @@
 
 .gamepadhomerecentgames_RecentGamesBackgroundImages_30D-8 .gamepadhomerecentgames_RecentGamesBackground_1SRox {
   animation: none;
+}
+
+/* Frosted glass over the mirror image, fading in over the art's last few pixels so the art turns
+   gradually from sharp to soft. (Game pages use Steam's ready-blurred copy of the art instead;
+   Home has none. Backdrop blur can see the -webkit-box-reflect mirror here because the box is
+   contain: strict; on game pages it only reached part of it.) */
+.gamepadhomerecentgames_RecentGamesBackgroundContainer_QNkOt::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--zdt-art-height) - var(--zdt-reflect-ramp));
+  bottom: 0;
+  /* Darkens towards the bottom, where the mirror shows the art's sky, for the game's name. */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.3));
+  backdrop-filter: blur(24px) var(--zdt-reflect-filter);
+  mask-image: linear-gradient(to bottom, transparent, #000 var(--zdt-reflect-ramp));
+  pointer-events: none;
 }
 
 /* On Home the top bar sits straight on the art: no dark fade behind it, and a soft shadow on its
@@ -42,10 +65,10 @@
   filter: drop-shadow(0 1px 6px rgba(0, 0, 0, 0.45));
 }
 
-/* "Recent Games" sits at the bottom-left of the art. Steam shows it at 70% white; here it's full
-   white with a shadow for bright banners. */
+/* "Recent Games" sits at the bottom-left of the art, where it softens. Steam shows it at 70%
+   white; here it's full white with a shadow for bright banners. */
 .gamepadhomerecentgames_RecentGamesContainer_2_cRk {
-  padding-top: calc(var(--zdt-art-height) - 46px);
+  padding-top: calc(var(--zdt-art-height) - 70px);
 }
 
 .gamepadhomerecentgames_RecentGamesHeaderLabel_1KKWf.gamepadhomerecentgames_HeaderEnter_1_JU4:not(#zdt) {
@@ -60,19 +83,25 @@
 /* The row: Steam's own layout (card shapes, spacing, scrolling) shrunk with zoom, so the cards
    keep their stock shapes, nothing is cropped, and Steam's scroll maths, which assume stock
    sizes, still line up (resizing the cards themselves made the focused card drift off screen).
-   Stock cards are 201px tall; 0.72 makes them 145. This relies on Chromium's legacy zoom, where
-   scroll offsets stay in the zoomed element's own pixels (CEF is Chrome 126). The name under the
-   focused card is zoomed back to full size. */
+   Stock cards are 201px tall; 0.62 makes them 125, leaving air above the row, between it and the
+   focused game's name, and above the bottom bar. This relies on Chromium's legacy zoom, where
+   scroll offsets stay in the zoomed element's own pixels (CEF is Chrome 126). The name is zoomed
+   back to full size, so it takes up more room than Steam allows for: the row's fixed height
+   (Steam's, inline) gives way to its content plus room for the name. Padding here is in zoomed
+   pixels. */
 .gamepadhome_RecentSection_39tNv .basicgamecarousel_BasicGameCarousel_3MdH5 {
   zoom: var(--zdt-home-row-zoom);
   /* Zoom shrinks the box too, so it's widened back to the full screen (Steam sets the width inline). */
   width: calc(100vw * var(--zdt-home-row-unzoom)) !important;
-  padding: 24px calc(2.8vw * var(--zdt-home-row-unzoom)) 16px;
+  height: auto !important;
+  padding: 36px calc(2.8vw * var(--zdt-home-row-unzoom)) 56px;
   scroll-padding: 0 calc(2.8vw * var(--zdt-home-row-unzoom));
 }
 
 .gamepadhome_RecentSection_39tNv .basicgamecarousel_CarouselGameLabelWrapper_ZkD6W {
   zoom: var(--zdt-home-row-unzoom);
+  /* A little lower than Steam's (its box has a fixed height, so this moves rather than grows it) */
+  margin-top: 8px;
 }
 
 /* Steam paints a blurred, 42×-stretched copy of the focused card behind the row as a glow. It

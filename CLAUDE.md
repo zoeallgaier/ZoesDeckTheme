@@ -109,9 +109,9 @@ theme/
   sp/chrome.css         top bar, bottom bar, side-menu backdrop + QAM placement         (done)
   sp/settings.css       Settings sidebar and rows                                      (done)
   qam/qam.css           Quick Access sheet, tab rail (on the right), Friends, Decky bits (done)
-  home/home.css         Home: full banner art on top, Steam's row zoomed to fit below   (done)
+  home/home.css         Home: full banner art, blurred mirror, Steam's row zoomed below (done)
   home/hide-whats-new.css  "Show What's New on Home" off (default)                       (done)
-  sp/gamepage.css       game pages: full art, centred logo + Play group, outline icons   (done)
+  sp/gamepage.css       game pages: 70% art + mirror, centred logo/Play, outline icons  (done)
   sp/contextmenu.css    Options (≡) menus as an iOS-style glass sheet                   (done)
   menu/mainmenu.css     Steam menu sheet and items                                      (done)
   options/reduce-transparency.css                                                       (done)
@@ -150,11 +150,17 @@ theme/
    tvOS-style focus = a slight size increase, soft shadow and sheen instead of a glowing border.
 5. **Hiding elements:** add the `REQUIRE_NAV_PATCH` flag when using `display: none` on anything focusable,
    or controller navigation breaks.
-6. **Rounding images:** `overflow: visible` on an `<img>` turns off its `border-radius` clipping
+6. **Blurred reflections:** `-webkit-box-reflect` draws the mirror as a separate compositor copy.
+   Backdrop blur only reached part of it on game pages (it works on Home, whose box is
+   `contain: strict`). CSS `blur()` fades an element's edges to transparent and doesn't spill
+   past them here, so two blurred layers meeting leave a dark line. Game pages therefore use
+   Steam's own `library_hero_blur.jpg` copies (`ImgBlur`, `ImgBlurBackdrop`) with no CSS blur,
+   sized exactly like the art so the mirror lines up.
+7. **Rounding images:** `overflow: visible` on an `<img>` turns off its `border-radius` clipping
    (the avatar was square because of this); use `overflow: clip` on the image itself.
-7. **Publishing on DeckThemes:** prefix CSS variables (`--zdt-`), avoid `*` and `!important` unless necessary,
+8. **Publishing on DeckThemes:** prefix CSS variables (`--zdt-`), avoid `*` and `!important` unless necessary,
    stay under 10MB, no bundled third-party themes (use `dependencies`).
-8. The Deck screen is 1280×800 at arm's length, not a TV — scale tvOS sizes down.
+9. The Deck screen is 1280×800 at arm's length, not a TV — scale tvOS sizes down.
 
 ## Suggested next steps
 
@@ -164,20 +170,22 @@ theme/
 3. ~~Radii + glass tokens → header/footer → QAM → Steam menu → Settings.~~ Done. Still to check:
    modal dialogs, Quick Access over a running game, collapsed Steam menu.
 4. ~~Homescreen layout pass.~~ Done to Zoe's mockup (2026-09-10): banner art full width at its
-   own 1920×620 ratio with nothing over it, "Recent Games" on its bottom-left, the stock row below.
-   She tried square icons and rejected them (logos got cropped), so cards keep Steam's shapes; the
-   row is shrunk with CSS `zoom` (not resized) because Steam scrolls it with stock-size maths. Top
-   bar: clock on the left, iOS-style Wi-Fi/battery, round avatar with a status dot.
+   own 1920×620 ratio, "Recent Games" on its bottom-left, the stock row below, sitting on a
+   blurred mirror image of the art (the same look as game pages, which Zoe sketched). She tried
+   square icons and rejected them (logos got cropped), so cards keep Steam's shapes; the row is
+   shrunk with CSS `zoom` (0.62, not resized) because Steam scrolls it with stock-size maths, and
+   its inline fixed height is overridden so the full-size name label isn't clipped. Top bar:
+   clock on the left, iOS-style Wi-Fi/battery, round avatar with a status dot.
 5. ~~Game pages, then the Options (≡) menus.~~ Done and reviewed with Zoe (2026-09-10). Game
-   pages follow the "Clean Gameview" idea: the first screen is only the art (full width at its own
-   1920×620 ratio, `--zdt-art-height`, fading out like Home's), the logo centred above one centred
-   group of Play + controller + settings, everything else below the fold. Zoe asked for the art
-   never to be stretched or cropped and rejected a blurred fill beside it. The Play label is
-   Instrument Serif with its icon after it. A theme can't choose which artwork size Steam loads.
-   Play/Install/controller/settings and the top bar's search/bell use Lucide outline icons (ISC,
-   data-URI masks in `tokens.css`, matched by each Steam icon's path so other states keep theirs);
-   Wi-Fi and battery stay Steam's because they draw live state. Still to check: Your stuff /
-   Community / Game Info tabs. Open an Options menu from a script by calling
+   pages follow Zoe's sketch: art cropped to the width at 70% of the screen height (never
+   stretched), the logo and one centred group of Play + controller + settings (frosted glass) on
+   it, and below it a blurred mirror image fading out by the bottom bar; stats, Steam Cloud and
+   the tabs start below the fold. Pages without art (`NoArt`/`FallbackArt`) keep Steam's layout.
+   The Play label is Instrument Serif with its icon after it. A theme can't choose which artwork
+   size Steam loads. Play/Install/controller/settings and the top bar's search/bell use Lucide
+   outline icons (ISC, data-URI masks in `tokens.css`, matched by each Steam icon's path so other
+   states keep theirs); Wi-Fi and battery stay Steam's because they draw live state. Still to
+   check: Your stuff / Community / Game Info tabs. Open an Options menu from a script by calling
    the focused card's React `onContextMenu` prop (see how it was done in the session: walk
    `__reactFiber` props from `.gpfocus`). Still unstyled: modal dialogs (CSS Loader's theme
    settings dialog is a handy test), Library.
