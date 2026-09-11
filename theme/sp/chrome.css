@@ -34,6 +34,96 @@
   border-radius: var(--zdt-radius-pill);
 }
 
+/* Status items, arranged like iPadOS: the clock on the left, then search, Wi-Fi, battery and your
+   avatar on the right. */
+.header_Clock_1HhLU {
+  order: -1;
+  margin-left: 6px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Wi-Fi: Steam's glyph is four quarter-arcs spreading from the bottom-left corner, with the
+   signal level in each arc's fill-opacity. Turned 45° around that corner (and re-centred) it's
+   the upward fan iOS uses, still showing the live signal level. */
+.header_WirelessIcon_3alLb svg {
+  transform-origin: 8.33% 91.67%;
+  transform: translate(41.67%, -6.25%) rotate(-45deg) scale(0.85);
+}
+
+/* Battery, iOS style: a thin rounded outline with a nub around Steam's own fill bar (its width is
+   the charge level). White normally, red when low, green while charging. The outline is drawn
+   with pseudo-elements placed over Steam's 34×24 icon, whose square outline path is hidden. */
+.header_BatteryIcon_1_6kL .header_Percentage_1_RjA {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.header_BatteryIconVerticalStack_3XySI > div {
+  position: relative;
+}
+
+.header_BatteryIconVerticalStack_3XySI svg > path[fill-rule="evenodd"] {
+  display: none;
+}
+
+.header_BatteryIconVerticalStack_3XySI > div::before,
+.header_BatteryIconVerticalStack_3XySI > div::after {
+  content: "";
+  position: absolute;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.header_BatteryIconVerticalStack_3XySI > div::before {
+  left: 2.25px;
+  top: 6.5px;
+  width: 23px;
+  height: 12.5px;
+  box-sizing: border-box;
+  border: 1.2px solid rgba(255, 255, 255, 0.45);
+  border-radius: 4px;
+  background: none;
+}
+
+.header_BatteryIconVerticalStack_3XySI > div::after {
+  left: 26px;
+  top: 10.5px;
+  width: 1.6px;
+  height: 4.5px;
+  border-radius: 0 1px 1px 0;
+}
+
+.header_BatteryIconVerticalStack_3XySI rect {
+  rx: 2px;
+  fill: var(--zdt-label);
+}
+
+.header_BatteryIconVerticalStack_3XySI rect[fill="#E01D79"] {
+  fill: rgb(255, 69, 58);
+}
+
+.header_BatteryIconVerticalStack_3XySI svg:has(> path[d^="M16 20"]) rect {
+  fill: rgb(48, 209, 88);
+}
+
+/* Avatar: a circle, with your online status as a small dot on its corner instead of a bar. */
+.header_Avatar_7-G5Y:not(#zdt),
+.header_Avatar_7-G5Y:not(#zdt) img {
+  border-radius: 50%;
+  overflow: visible;
+}
+
+.header_Avatar_7-G5Y .avatarStatus:not(#zdt) {
+  top: auto;
+  right: -1px;
+  bottom: -1px;
+  left: auto;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--zdt-page);
+}
+
 /* Bottom bar: a floating glass capsule instead of an edge-to-edge strip. The keyboard and
    in-flow variants keep Steam's layout. */
 .footer_BasicFooter_3T1iF:not(.footer_WithKeyboard_1fMXT, .footer_Relative_1u4NT) {

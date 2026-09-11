@@ -83,7 +83,10 @@ Navigate from a script with Decky's helpers in the shared context, e.g.
 `python3 tools/cef.py eval SharedJSContext 'DFL.Navigation.Navigate("/settings/display"), 1'`
 (also `OpenQuickAccessMenu(tab)`, `OpenMainMenu()`, `CloseSideMenus()`; go back with
 `Navigate("/library/home")`). To preview a focus style without a controller, add the `gpfocus` class
-to an element with `eval`, screenshot, then remove it.
+to an element with `eval`, screenshot, then remove it. For real focus moves use `tools/key.py SP
+ArrowRight ArrowLeft Escape ...`: it sends key presses through the debugger, and Steam treats arrow
+keys like the d-pad (Escape = B). Don't call `element.focus()` from `eval`: Steam's navigation
+doesn't see it and the page ends up with nothing focused.
 
 ## Repo layout
 
@@ -105,10 +108,12 @@ theme/
   shared/controls.css   buttons, toggles, sliders, dropdowns, row focus (all windows)  (done)
   sp/chrome.css         top bar, bottom bar, side-menu backdrop + QAM placement         (done)
   sp/settings.css       Settings sidebar and rows                                      (done)
-  qam/qam.css           Quick Access sheet and tab rail                                 (done)
+  qam/qam.css           Quick Access sheet, tab rail (on the right), Friends, Decky bits (done)
+  home/home.css         Home: full banner art on top, Steam's row zoomed to fit below   (done)
+  home/hide-whats-new.css  "Show What's New on Home" off (default)                       (done)
   menu/mainmenu.css     Steam menu sheet and items                                      (done)
   options/reduce-transparency.css                                                       (done)
-  sp/home.css  sp/library.css  sp/gamepage.css  sp/dialogs.css  options/reduce-motion.css
+  sp/library.css  sp/gamepage.css  sp/dialogs.css  sp/contextmenu.css  options/reduce-motion.css
 ```
 
 ## Rules that matter (details in RESEARCH.md)
@@ -154,5 +159,12 @@ theme/
    accent titles (Home "Recent Games", Quick Access title, settings title) are the right ones.
 3. ~~Radii + glass tokens → header/footer → QAM → Steam menu → Settings.~~ Done. Still to check:
    modal dialogs, Quick Access over a running game, collapsed Steam menu.
-4. **In progress:** homescreen layout pass, then focus effects and animations (add "Reduce motion").
-5. Screenshot each step with `tools/shot.sh` so Zoe can review from the Mac.
+4. ~~Homescreen layout pass.~~ Done to Zoe's mockup (2026-09-10): banner art full width at its
+   own 1920×620 ratio with nothing over it, "Recent Games" on its bottom-left, the stock row below.
+   She tried square icons and rejected them (logos got cropped), so cards keep Steam's shapes; the
+   row is shrunk with CSS `zoom` (not resized) because Steam scrolls it with stock-size maths. Top
+   bar: clock on the left, iOS-style Wi-Fi/battery, round avatar with a status dot.
+5. **Next (Zoe's order):** game pages, then the menus that open from the Options (≡) button. Also
+   unstyled so far: modal dialogs (e.g. CSS Loader's theme settings dialog), Library.
+6. Focus effects and animations polish, plus a "Reduce motion" option.
+7. Screenshot each step with `tools/shot.sh` so Zoe can review from the Mac.

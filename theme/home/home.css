@@ -1,0 +1,126 @@
+/* Zoe's Deck Theme: Home. The top of the screen shows the selected game's banner art whole and
+   untouched; under it, the recent games sit in one row of rounded cards in Steam's own shapes
+   (the newest one wide, the rest portrait) so no logo is cropped, with the focused game's name
+   beneath it, like tvOS. (What's New is hidden by home/hide-whats-new.css.) */
+
+:root {
+  /* Steam's hero art is 1920×620, so this height shows it edge to edge without cropping. */
+  --zdt-home-art-height: calc(100vw * 620 / 1920);
+  /* The row is Steam's, scaled to fit under the full banner (see below). */
+  --zdt-home-row-zoom: 0.72;
+  --zdt-home-row-unzoom: 1.389;
+}
+
+/* Banner art: full brightness, no fade, no slow zoom, and only as tall as the art itself. */
+.gamepadhomerecentgames_RecentGamesBackgroundContainer_QNkOt,
+.gamepadhomerecentgames_RecentGamesBackgroundImages_30D-8 {
+  bottom: auto;
+  height: var(--zdt-home-art-height);
+  mask-image: none;
+}
+
+.gamepadhomerecentgames_RecentGamesBackgroundImage_3Mp8R {
+  filter: none;
+}
+
+.gamepadhomerecentgames_RecentGamesBackgroundImages_30D-8 .gamepadhomerecentgames_RecentGamesBackground_1SRox {
+  animation: none;
+}
+
+/* On Home the top bar sits straight on the art: no dark fade behind it, and a soft shadow on its
+   icons and text instead so they stay readable on bright banners. */
+.BasicUI:has(.gamepadhome_RecentSection_39tNv) .header_Header_1E_SL::before {
+  opacity: 0;
+}
+
+.BasicUI:has(.gamepadhome_RecentSection_39tNv) .header_Header_1E_SL {
+  filter: drop-shadow(0 1px 6px rgba(0, 0, 0, 0.45));
+}
+
+/* "Recent Games" sits at the bottom-left of the art. Steam shows it at 70% white; here it's full
+   white with a shadow for bright banners. */
+.gamepadhomerecentgames_RecentGamesContainer_2_cRk {
+  padding-top: calc(var(--zdt-home-art-height) - 46px);
+}
+
+.gamepadhomerecentgames_RecentGamesHeaderLabel_1KKWf.gamepadhomerecentgames_HeaderEnter_1_JU4:not(#zdt) {
+  opacity: 1;
+}
+
+.gamepadhomerecentgames_RecentGamesHeaderLabel_1KKWf,
+.basicgamecarousel_CarouselGameLabel_3CKji {
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.5);
+}
+
+/* The row: Steam's own layout (card shapes, spacing, scrolling) shrunk with zoom, so the cards
+   keep their stock shapes, nothing is cropped, and Steam's scroll maths, which assume stock
+   sizes, still line up (resizing the cards themselves made the focused card drift off screen).
+   Stock cards are 201px tall; 0.72 makes them 145. This relies on Chromium's legacy zoom, where
+   scroll offsets stay in the zoomed element's own pixels (CEF is Chrome 126). The name under the
+   focused card is zoomed back to full size. */
+.gamepadhome_RecentSection_39tNv .basicgamecarousel_BasicGameCarousel_3MdH5 {
+  zoom: var(--zdt-home-row-zoom);
+  /* Zoom shrinks the box too, so it's widened back to the full screen (Steam sets the width inline). */
+  width: calc(100vw * var(--zdt-home-row-unzoom)) !important;
+  padding: 24px calc(2.8vw * var(--zdt-home-row-unzoom)) 16px;
+  scroll-padding: 0 calc(2.8vw * var(--zdt-home-row-unzoom));
+}
+
+.gamepadhome_RecentSection_39tNv .basicgamecarousel_CarouselGameLabelWrapper_ZkD6W {
+  zoom: var(--zdt-home-row-unzoom);
+}
+
+/* Steam paints a blurred, 42×-stretched copy of the focused card behind the row as a glow. It
+   shows as a haze under the art and around the label. */
+.gamepadhome_RecentSection_39tNv .basicgamecarousel_CarouselCapsuleBackgroundGlow_1H3Kf:not(#zdt) {
+  display: none;
+}
+
+/* No "New to library" banners on the shelf. */
+.gamepadhome_RecentSection_39tNv .appportrait_AppPortraitBannerContainer_2jj5T {
+  display: none;
+}
+
+/* Cards everywhere (Home, Library, collections): rounded, with the focus sheen clipped to match. */
+.appportrait_LibraryItemBox_WYgDg:not(#zdt) {
+  border-radius: var(--zdt-radius-m);
+  overflow: hidden;
+  transition: transform var(--zdt-duration) var(--zdt-ease), box-shadow var(--zdt-duration) var(--zdt-ease);
+}
+
+/* Focus, tvOS style: the card grows a little and casts a deeper shadow. Steam's version is a white
+   outline that blinks up to 20 times. Its one-off sheen sweep stays. */
+.appportrait_LibraryItemBox_WYgDg.Focusable:focus:not(#zdt) {
+  outline: none;
+  animation: none;
+  transform: scale(var(--zdt-focus-scale));
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.55);
+}
+
+/* Wide cards grow by the same amount in pixels rather than percent, so they don't cover the
+   next card. */
+.appportrait_LibraryItemBox_WYgDg.appportrait_Landscape_3VOR2.Focusable:focus:not(#zdt) {
+  transform: scale(1.025);
+}
+
+/* The name under the focused icon: title in Oxygen Bold, the status line quiet (sentence case,
+   secondary grey, no green). */
+.basicgamecarousel_CarouselGameLabel_3CKji .appportrait_PortraitMessage_3gwMk.appportrait_Message_3CRLA:not(#zdt) {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.basicgamecarousel_CarouselGameLabel_3CKji .appportrait_PortraitMessage_3gwMk.appportrait_SubMessage_3DR9f:not(#zdt) {
+  margin-top: 2px;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--zdt-label-secondary);
+}
+
+.basicgamecarousel_CarouselGameLabel_3CKji .basicgamecarousel_SubMessage_1BtXg:not(.basicgamecarousel_FriendsInGame_3z5U1),
+.basicgamecarousel_CarouselGameLabel_3CKji .basicgamecarousel_Play_12eKc .basicgamecarousel_ActionIcon_25Qbo {
+  color: inherit;
+}

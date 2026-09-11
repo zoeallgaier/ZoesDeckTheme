@@ -1,0 +1,6 @@
+/* Zoe's Deck Theme: "Show What's New on Home" off. Home is just the games: no What's New /
+   Friends / Recommended tabs or news rows under the shelf. The tabs are focusable, which is why
+   theme.json sets REQUIRE_NAV_PATCH. */
+.gamepadhome_TabbedContent_cE1Sa {
+  display: none;
+}

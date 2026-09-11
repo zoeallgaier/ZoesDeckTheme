@@ -46,6 +46,31 @@
   padding-inline: 10px;
 }
 
+/* CSS Loader's show/hide-settings button under an enabled theme: a full-width pill holding only a
+   caret, which CSS Loader shifts up 12px inline, leaving the button 48px tall with the caret
+   near its top. A compact pill with the caret centred instead. */
+.DialogButton:not(#zdt):has(> svg:only-child[style*="translate"]) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  height: 32px;
+  padding: 0;
+}
+
+.DialogButton > svg:only-child[style*="translate"] {
+  transform: none !important;
+}
+
+/* Plugin option labels (CSS Loader's theme options): sentence case at row size, not small caps. */
+.DialogLabel {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--zdt-label);
+}
+
 /* Friends. Opening this tab widens the sheet to two columns (sp/chrome.css keeps the screen-edge
    gap). It's Steam's older chat UI, whose class names aren't scrambled. The list column drops its
    own slate gradient and black edge so it reads as part of the sheet, and its header lines up

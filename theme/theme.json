@@ -6,6 +6,7 @@
   "description": "Apple-clean Gaming Mode: Instrument Serif accent titles, Oxygen everywhere else, rounded corners and liquid glass on the UI layer.",
   "target": "System-Wide",
   "manifest_version": 9,
+  "flags": ["REQUIRE_NAV_PATCH"],
   "tabs": {
     "everywhere": ["SP", "QuickAccess", "MainMenu"]
   },
@@ -14,10 +15,19 @@
     "shared/controls.css": ["everywhere"],
     "sp/chrome.css": ["SP"],
     "sp/settings.css": ["SP"],
+    "home/home.css": ["SP"],
     "qam/qam.css": ["QuickAccess"],
     "menu/mainmenu.css": ["MainMenu"]
   },
   "patches": {
+    "Show What's New on Home": {
+      "type": "checkbox",
+      "default": "No",
+      "values": {
+        "Yes": {},
+        "No": { "home/hide-whats-new.css": ["SP"] }
+      }
+    },
     "Reduce transparency": {
       "type": "checkbox",
       "default": "No",
