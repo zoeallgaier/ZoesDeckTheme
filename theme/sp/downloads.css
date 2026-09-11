@@ -1,0 +1,151 @@
+/* Zoe's Deck Theme: Downloads. The current download at the top (art, speed graph, progress),
+   then Up Next / Scheduled / Completed as rounded rows. Steam's capitals go, labels turn a quiet
+   grey with the figures in bold, section titles are in the serif, and Steam's blue network graph
+   and grey progress bar take the accent. */
+
+/* Current download. Focused, Steam lights its whole right half slate grey and its button white;
+   here it gets a faint glass wash and the button takes the accent. */
+.downloads_Section_3Mbhn.downloads_Active_IbePL:not(#zdt) {
+  background: transparent;
+}
+
+.downloads_SectionItemWrapper_21P7c.gpfocus .downloads_SectionItem_1VNuY.downloads_Active_IbePL:not(#zdt),
+.downloads_SectionItem_1VNuY.downloads_Active_IbePL:not(#zdt) {
+  background-color: rgba(255, 255, 255, 0.05);
+  animation: none;
+}
+
+.downloads_SectionItemWrapper_21P7c.gpfocus .downloads_SectionItem_1VNuY .downloads_Button_3oavR.DialogButton:enabled:not(#zdt) {
+  background-color: var(--zdt-accent);
+  color: var(--zdt-on-accent);
+}
+
+/* Play (finished downloads): the accent instead of Steam's green, without its sheen sweep. */
+.downloads_SectionItemWrapper_21P7c.gpfocus .downloads_SectionItem_1VNuY .downloads_PlayButton_sQZ70:not(#zdt) {
+  background: var(--zdt-accent);
+  color: var(--zdt-on-accent);
+}
+
+.downloads_SectionItem_1VNuY .downloads_PlayButton_sQZ70:not(#zdt)::after {
+  display: none;
+}
+
+.downloads_ContentTypes_1IKba :is(.downloads_ContentType_Rgy-7, .downloads_Text_1nCT-):not(#zdt),
+.downloads_ContentTypes_1IKba:not(#zdt) {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.downloads_ContentTypes_1IKba .downloads_Text_1nCT-:not(#zdt) {
+  font-size: 12px;
+  color: var(--zdt-label-secondary);
+}
+
+.downloadgraph_LegendText_1iulC:not(#zdt) {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--zdt-label-secondary);
+}
+
+.downloadgraph_Stat_5TdA4:not(#zdt) {
+  text-transform: none;
+}
+
+.downloadgraph_Figure_eXF8x:not(#zdt) {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* The graph: network bars in the accent, the disk line in white. */
+.downloadgraph_Network_33jqE svg:not(#zdt) {
+  color: var(--zdt-accent);
+}
+
+.downloadgraph_DownloadGraph_1BxZD g > rect:first-child {
+  fill: var(--zdt-accent);
+  opacity: 0.8;
+}
+
+.downloadgraph_Disk_1QHr4:not(#zdt) {
+  background-color: var(--zdt-label);
+}
+
+.downloadgraph_DownloadGraph_1BxZD .downloadgraph_GraphLine_3H2JW:not(#zdt) {
+  stroke: var(--zdt-label);
+}
+
+/* Status and progress */
+.downloads_SectionItemStatus_1Sygg:not(#zdt),
+.downloads_SectionItemStatus_1Sygg:not(#zdt) * {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.downloads_SectionItemStatus_1Sygg .downloads_InProgress_3Wavc:not(#zdt) {
+  font-size: 13px;
+  color: var(--zdt-label-secondary);
+}
+
+.downloads_SectionItemStatus_1Sygg .downloads_Progress_FuJLs:not(#zdt) {
+  font-size: 13px;
+}
+
+/* Progress bars (here and on game pages): a thicker capsule filled with the accent, dimmed
+   while paused. */
+.appdetailsplaysection_DetailsProgressContainer_25YVD:not(#zdt) {
+  height: 6px;
+  overflow: hidden;
+  border-radius: var(--zdt-radius-pill);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.appdetailsplaysection_DetailsProgressContainer_25YVD .appdetailsplaysection_DetailsProgressBar_1FnTq:not(#zdt) {
+  border-radius: inherit;
+  background: var(--zdt-accent);
+}
+
+.appdetailsplaysection_DetailsProgressContainer_25YVD.downloads_NotActive_2Xedp .appdetailsplaysection_DetailsProgressBar_1FnTq:not(#zdt) {
+  opacity: 0.5;
+}
+
+/* Sections: serif titles with a quiet count, no rule across the page. */
+.downloads_SectionTitle_qq2xI .downloads_Title_TK9wv:not(#zdt) {
+  font-family: var(--zdt-font-serif);
+  font-style: italic;
+  font-weight: 700;
+  font-synthesis: weight;
+  font-size: 26px;
+  letter-spacing: 0.01em;
+}
+
+.downloads_SectionTitle_qq2xI .downloads_Count_1CGnw:not(#zdt) {
+  margin-left: 6px;
+  font-size: 15px;
+  font-weight: 400;
+  text-transform: none;
+  color: var(--zdt-label-secondary);
+}
+
+.downloads_SectionTitle_qq2xI .downloads_Rule_1CTr1:not(#zdt) {
+  visibility: hidden;
+}
+
+.downloads_AutoUpdate_qrwf3 .downloads_AutoUpdateHours_117rQ:not(#zdt) {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--zdt-label-secondary);
+}
+
+/* Rows */
+.downloads_SectionItem_1VNuY:not(.downloads_Active_IbePL, #zdt) {
+  border-radius: var(--zdt-radius-m);
+}
+
+.downloads_SectionItem_1VNuY .downloads_Name_35eOQ:not(#zdt) {
+  font-size: 17px;
+  font-weight: 700;
+}

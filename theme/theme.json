@@ -22,6 +22,7 @@
     "sp/contextmenu.css": ["SP"],
     "sp/dialogs.css": ["SP"],
     "sp/badges.css": ["SP"],
+    "sp/downloads.css": ["SP"],
     "qam/qam.css": ["QuickAccess"],
     "menu/mainmenu.css": ["MainMenu"]
   },
