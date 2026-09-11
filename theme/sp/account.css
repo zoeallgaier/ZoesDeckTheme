@@ -1,0 +1,145 @@
+/* Zoe's Deck Theme: the account page (press your avatar in the top bar), after iOS's Apple
+   Account screen: one centred column; your picture large and round with your name in the serif
+   and your status in the accent under it; then rounded glass rows, and the three big buttons
+   as rounded tiles instead of ovals. */
+
+.accountpanel_AccountPanelPage_2KuyU:not(#zdt) {
+  max-width: 660px;
+  margin-inline: auto;
+  padding-top: 16px;
+}
+
+/* Rows: Steam's slate slabs become rounded glass, a little apart. */
+.accountpanel_AccountPanelPage_2KuyU > .gamepaddialog_Field_S-_La:not(#zdt) {
+  margin-bottom: 8px;
+  border-radius: var(--zdt-radius-m);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.accountpanel_AccountPanelPage_2KuyU > .gamepaddialog_Field_S-_La:not(#zdt)::after {
+  display: none;
+}
+
+/* The header: centred, no box, even while View Profile has focus (the button shows it). */
+.accountpanel_AccountPanelPage_2KuyU > .gamepaddialog_Field_S-_La:first-child:not(#zdt),
+.accountpanel_AccountPanelPage_2KuyU > .gamepaddialog_Field_S-_La:first-child:is(.gpfocus, .gpfocuswithin):not(#zdt) {
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  background: none;
+  animation: none;
+}
+
+.accountpanel_AccountPanelPage_2KuyU > .gamepaddialog_Field_S-_La:first-child > div:not(#zdt) {
+  width: auto;
+  max-width: 100%;
+}
+
+.accountpanel_AccountPanelPage_2KuyU > .gamepaddialog_Field_S-_La:first-child :is(.gamepaddialog_FieldLabelRow_H9WOq, .gamepaddialog_FieldLabel_3b0U-):not(#zdt) {
+  height: auto;
+  justify-content: center;
+}
+
+.accountpanel_AvatarAndLabel_lqhIk:not(#zdt) {
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.accountpanel_AvatarAndLabel_lqhIk .accountpanel_Avatar_3pvJG:not(#zdt) {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.accountpanel_AvatarAndLabel_lqhIk .accountpanel_Avatar_3pvJG img:not(#zdt) {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: clip;
+}
+
+/* Steam's status bar down the picture's side (display is !important there): the status line
+   under the name says it. */
+.accountpanel_AvatarAndLabel_lqhIk .accountpanel_Avatar_3pvJG .avatarStatus:not(#zdt) {
+  visibility: hidden;
+}
+
+.accountpanel_AvatarAndLabel_lqhIk .accountpanel_LabelHolder_2neyM:not(#zdt) {
+  height: auto;
+  margin: 0;
+  padding: 0;
+  transform: none;
+  text-align: center;
+  text-shadow: none;
+}
+
+.accountpanel_LabelHolder_2neyM .personanameandstatus_statusAndName_3n8q8:not(#zdt) {
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.accountpanel_LabelHolder_2neyM .personanameandstatus_playerName_r62qz:not(#zdt) {
+  font-family: var(--zdt-font-serif);
+  font-style: italic;
+  font-weight: 700;
+  font-synthesis: weight;
+  font-size: 34px;
+  line-height: 40px;
+  letter-spacing: 0.01em;
+  color: var(--zdt-label);
+}
+
+.accountpanel_LabelHolder_2neyM .personanameandstatus_richPresenceContainer_2nrSd:not(#zdt) {
+  justify-content: center;
+}
+
+.accountpanel_LabelHolder_2neyM .personanameandstatus_richPresenceLabel_1k82N:not(#zdt) {
+  font-size: 14px;
+  color: var(--zdt-label-secondary);
+}
+
+.accountpanel_LabelHolder_2neyM:is(.online, .ingame, .in-game) .personanameandstatus_richPresenceLabel_1k82N:not(#zdt) {
+  color: var(--zdt-accent);
+}
+
+/* The big buttons: rounded glass tiles with an outline icon, the accent when focused. */
+button.accountpanel_FatButton_TEWms.accountpanel_FatButton_TEWms.DialogButton:not(#zdt) {
+  margin: 0 0 8px;
+  padding: 16px 12px 14px;
+  border-radius: var(--zdt-radius-l);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+button.accountpanel_FatButton_TEWms.accountpanel_FatButton_TEWms.DialogButton:not(#zdt) svg {
+  width: 30px;
+  height: 30px;
+  margin: 4px 0 10px;
+}
+
+button.accountpanel_FatButton_TEWms.accountpanel_FatButton_TEWms.DialogButton:is(.gpfocus, .accountpanel_FatButtonFocus_2rd6k):not(#zdt) {
+  background: var(--zdt-accent);
+}
+
+button.accountpanel_FatButton_TEWms.accountpanel_FatButton_TEWms.DialogButton:is(.gpfocus, .accountpanel_FatButtonFocus_2rd6k):not(#zdt) :is(svg, .accountpanel_Label_3wadw, .accountpanel_Details_3Wb9y) {
+  color: var(--zdt-on-accent);
+}
+
+button.accountpanel_FatButton_TEWms .accountpanel_Label_3wadw:not(#zdt) {
+  font-weight: 700;
+}
+
+/* "Account: name" keeps to one line; its two buttons size to their labels. */
+.accountpanel_AccountPanelPage_2KuyU .gamepaddialog_FieldLabel_3b0U-:not(#zdt) {
+  white-space: nowrap;
+}
+
+button.accountpanel_ChangeAccountButton_1ncuo.DialogButton:not(#zdt) {
+  width: auto;
+  min-width: 0;
+  padding-inline: 22px;
+}

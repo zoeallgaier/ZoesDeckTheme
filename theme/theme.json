@@ -23,6 +23,7 @@
     "sp/dialogs.css": ["SP"],
     "sp/badges.css": ["SP"],
     "sp/downloads.css": ["SP"],
+    "sp/account.css": ["SP"],
     "qam/qam.css": ["QuickAccess"],
     "menu/mainmenu.css": ["MainMenu"]
   },

@@ -40,7 +40,7 @@ ICONS = [
     ("music", ["M31.3191 25.8753C27.1777 33."]),
     ("circle-help", ["M16.48 35.0499V29.3499L16.51"]),
     ("plug", ["M320,32a32,32,0,0,0-64,0v96h"]),
-    ("cpu", ["M0 11C0 9.89543 0.895431 9 2"]),
+    ("cpu", ["sel:.gamepadpagedsettings_PageListItem_Icon_1F_5Q svg:has(path[d^=\"M0 11C0 9.89543 0.895431 9 2\"])"]),
     ("hard-drive", ["M33 19.9286H3L7.35714 6H28.6"]),
     ("bluetooth", ["M29.41 11L16.81 2H14V13.68L8"]),
     ("monitor", ["M34 6H2V28H10.6L9 34H27L25.4"]),
@@ -67,6 +67,11 @@ ICONS = [
               "sel:.gamepadpagedsettings_PageListItem_Icon_1F_5Q svg:has(path[d^=\"M3 33H10.54\"])"]),
     ("plus", ["M16 34V21H3V16H16V3H21V16H34"]),
     ("moon", ["M14.007 4.16666C14.6626 4.05"]),
+    # Account page
+    ("credit-card", ["M2 7H35V11.9846H2V7ZM2 15.47"]),
+    ("eye-off", ["M29.57 11.57L24.82 16.32C24."]),
+    ("user-pen", ["M28.1684 2.16431L23.5793 6.7"]),
+    ("log-out", ["M9.82998 20L13.41 23.59L10.5"]),
     # Game pages, top bar
     ("play", ["M7.5 32.135"]),
     ("search", ["sel:.header_Header_1E_SL :is(.searchbar_SearchIconLeft_2Ya83, .searchbar_SearchIconRight_1Ka4T)"]),

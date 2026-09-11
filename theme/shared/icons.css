@@ -43,6 +43,10 @@
   --zdt-icon-wifi: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 20h.01'/%3E %3Cpath d='M2 8.82a15 15 0 0 1 20 0'/%3E %3Cpath d='M5 12.859a10 10 0 0 1 14 0'/%3E %3Cpath d='M8.5 16.429a5 5 0 0 1 7 0'/%3E%3C/svg%3E");
   --zdt-icon-plus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E %3Cpath d='M12 5v14'/%3E%3C/svg%3E");
   --zdt-icon-moon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z'/%3E%3C/svg%3E");
+  --zdt-icon-credit-card: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='20' height='14' x='2' y='5' rx='2'/%3E %3Cline x1='2' x2='22' y1='10' y2='10'/%3E%3C/svg%3E");
+  --zdt-icon-eye-off: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49'/%3E %3Cpath d='M14.084 14.158a3 3 0 0 1-4.242-4.242'/%3E %3Cpath d='M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143'/%3E %3Cpath d='m2 2 20 20'/%3E%3C/svg%3E");
+  --zdt-icon-user-pen: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11.5 15H7a4 4 0 0 0-4 4v2'/%3E %3Cpath d='M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z'/%3E %3Ccircle cx='10' cy='7' r='4'/%3E%3C/svg%3E");
+  --zdt-icon-log-out: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4'/%3E %3Cpolyline points='16 17 21 12 16 7'/%3E %3Cline x1='21' x2='9' y1='12' y2='12'/%3E%3C/svg%3E");
   --zdt-icon-play: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='6 3 20 12 6 21 6 3'/%3E%3C/svg%3E");
   --zdt-icon-search: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E %3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E");
 }
@@ -64,7 +68,7 @@ svg:has(path[d^="M17.9999 33.0001C26.2841 33."]),
 svg:has(path[d^="M31.3191 25.8753C27.1777 33."]),
 svg:has(path[d^="M16.48 35.0499V29.3499L16.51"]),
 svg:has(path[d^="M320,32a32,32,0,0,0-64,0v96h"]),
-svg:has(path[d^="M0 11C0 9.89543 0.895431 9 2"]),
+.gamepadpagedsettings_PageListItem_Icon_1F_5Q svg:has(path[d^="M0 11C0 9.89543 0.895431 9 2"]),
 svg:has(path[d^="M33 19.9286H3L7.35714 6H28.6"]),
 svg:has(path[d^="M29.41 11L16.81 2H14V13.68L8"]),
 svg:has(path[d^="M34 6H2V28H10.6L9 34H27L25.4"]),
@@ -90,6 +94,10 @@ svg:has(path[d^="M3.55554 28.422C3.56 28.422"]),
 .gamepadpagedsettings_PageListItem_Icon_1F_5Q svg:has(path[d^="M3 33H10.54"]),
 svg:has(path[d^="M16 34V21H3V16H16V3H21V16H34"]),
 svg:has(path[d^="M14.007 4.16666C14.6626 4.05"]),
+svg:has(path[d^="M2 7H35V11.9846H2V7ZM2 15.47"]),
+svg:has(path[d^="M29.57 11.57L24.82 16.32C24."]),
+svg:has(path[d^="M28.1684 2.16431L23.5793 6.7"]),
+svg:has(path[d^="M9.82998 20L13.41 23.59L10.5"]),
 svg:has(path[d^="M7.5 32.135"]),
 .header_Header_1E_SL :is(.searchbar_SearchIconLeft_2Ya83, .searchbar_SearchIconRight_1Ka4T)
 ):not(#zdt) {
@@ -116,7 +124,7 @@ svg:has(path[d^="M17.9999 33.0001C26.2841 33."]),
 svg:has(path[d^="M31.3191 25.8753C27.1777 33."]),
 svg:has(path[d^="M16.48 35.0499V29.3499L16.51"]),
 svg:has(path[d^="M320,32a32,32,0,0,0-64,0v96h"]),
-svg:has(path[d^="M0 11C0 9.89543 0.895431 9 2"]),
+.gamepadpagedsettings_PageListItem_Icon_1F_5Q svg:has(path[d^="M0 11C0 9.89543 0.895431 9 2"]),
 svg:has(path[d^="M33 19.9286H3L7.35714 6H28.6"]),
 svg:has(path[d^="M29.41 11L16.81 2H14V13.68L8"]),
 svg:has(path[d^="M34 6H2V28H10.6L9 34H27L25.4"]),
@@ -142,6 +150,10 @@ svg:has(path[d^="M3.55554 28.422C3.56 28.422"]),
 .gamepadpagedsettings_PageListItem_Icon_1F_5Q svg:has(path[d^="M3 33H10.54"]),
 svg:has(path[d^="M16 34V21H3V16H16V3H21V16H34"]),
 svg:has(path[d^="M14.007 4.16666C14.6626 4.05"]),
+svg:has(path[d^="M2 7H35V11.9846H2V7ZM2 15.47"]),
+svg:has(path[d^="M29.57 11.57L24.82 16.32C24."]),
+svg:has(path[d^="M28.1684 2.16431L23.5793 6.7"]),
+svg:has(path[d^="M9.82998 20L13.41 23.59L10.5"]),
 svg:has(path[d^="M7.5 32.135"]),
 .header_Header_1E_SL :is(.searchbar_SearchIconLeft_2Ya83, .searchbar_SearchIconRight_1Ka4T)
 ) > * {
@@ -200,7 +212,7 @@ svg:has(path[d^="M7.5 32.135"]),
   mask-image: var(--zdt-icon-plug);
 }
 
-:is(svg:has(path[d^="M0 11C0 9.89543 0.895431 9 2"])):not(#zdt) {
+:is(.gamepadpagedsettings_PageListItem_Icon_1F_5Q svg:has(path[d^="M0 11C0 9.89543 0.895431 9 2"])):not(#zdt) {
   mask-image: var(--zdt-icon-cpu);
 }
 
@@ -294,6 +306,22 @@ svg:has(path[d^="M7.5 32.135"]),
 
 :is(svg:has(path[d^="M14.007 4.16666C14.6626 4.05"])):not(#zdt) {
   mask-image: var(--zdt-icon-moon);
+}
+
+:is(svg:has(path[d^="M2 7H35V11.9846H2V7ZM2 15.47"])):not(#zdt) {
+  mask-image: var(--zdt-icon-credit-card);
+}
+
+:is(svg:has(path[d^="M29.57 11.57L24.82 16.32C24."])):not(#zdt) {
+  mask-image: var(--zdt-icon-eye-off);
+}
+
+:is(svg:has(path[d^="M28.1684 2.16431L23.5793 6.7"])):not(#zdt) {
+  mask-image: var(--zdt-icon-user-pen);
+}
+
+:is(svg:has(path[d^="M9.82998 20L13.41 23.59L10.5"])):not(#zdt) {
+  mask-image: var(--zdt-icon-log-out);
 }
 
 :is(svg:has(path[d^="M7.5 32.135"])):not(#zdt) {
