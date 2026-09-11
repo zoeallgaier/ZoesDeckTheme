@@ -39,6 +39,7 @@
 .friendlist.GamepadMode:not(#zdt) .TabPanelHeader:not(#zdt),
 .appactionbutton_ButtonChild_2AzIX:not(#zdt) .appactionbutton_ButtonText_33cnX,
 .gamepaddialog_GamepadDialogContent_InnerWidth_3Xeyd > .DialogHeader,
+.gamepaddialog_GamepadDialogContent_InnerWidth_3Xeyd > .DialogBody .DialogHeader,
 .achievementsheader_Title_3wNyl,
 .sharedappdetailsheader_SVGTitle_2w_Zq,
 .appdetailsplaysection_PlayBarGameName_3rpUk,
@@ -51,9 +52,11 @@
   text-transform: none;
 }
 
-/* Page titles ("Display", "Audio"...) are the DialogHeader at the top of the content column. */
+/* Page titles ("Display", "Audio"...) are the DialogHeader at the top of the content column
+   (further down, inside the body, on some pages like Controller and its Details). */
 .gamepadhomerecentgames_RecentGamesHeaderLabel_1KKWf,
-.gamepaddialog_GamepadDialogContent_InnerWidth_3Xeyd > .DialogHeader {
+.gamepaddialog_GamepadDialogContent_InnerWidth_3Xeyd > .DialogHeader,
+.gamepaddialog_GamepadDialogContent_InnerWidth_3Xeyd > .DialogBody .DialogHeader {
   font-size: 30px;
   line-height: 1.1;
 }

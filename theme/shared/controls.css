@@ -42,6 +42,21 @@ button.gamepaddialog_Button_1kn70.DialogButton:not(#zdt).gpfocus {
   color: var(--zdt-on-accent);
 }
 
+/* Text fields (controller name, Wi-Fi password...): rounded glass. Focused, Steam turns them
+   white with black text; here they keep the glass with an accent ring and caret. */
+.gamepaddialog_BasicTextInput_3GCBi:not(#zdt) {
+  border-radius: var(--zdt-radius-s);
+  background: var(--zdt-glass-fill);
+  transition: box-shadow var(--zdt-duration) var(--zdt-ease), background-color var(--zdt-duration) var(--zdt-ease);
+}
+
+.gamepaddialog_BasicTextInput_3GCBi.gpfocus:not(#zdt) {
+  background: rgba(255, 255, 255, 0.16);
+  color: var(--zdt-label);
+  caret-color: var(--zdt-accent);
+  box-shadow: 0 0 0 2px var(--zdt-accent);
+}
+
 /* Dropdowns read as fields rather than buttons, so they get a rounded rectangle. */
 button.gamepaddropdown_DropDownControlButton_28bny.gamepaddialog_Button_1kn70:not(#zdt) {
   border-radius: var(--zdt-radius-s);
