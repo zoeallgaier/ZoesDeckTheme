@@ -78,8 +78,9 @@
 
 /* Quick Access. Steam sizes and places the QuickAccess window from this placeholder's box, so
    shrinking it to the visible 348px and pulling it off the edges makes the whole menu a floating
-   sheet (Steam's version is 854px wide, pushed 506px off screen). Friends "expanded" mode uses the
-   full width. The placeholder also casts the sheet's shadow, which the menu window can't. */
+   sheet (Steam's version is 854px wide, pushed 506px off screen). Friends "expanded" mode goes up
+   to Steam's 854px, keeping the gap on a screen that narrow. The placeholder also casts the
+   sheet's shadow, which the menu window can't. */
 .quickaccessmenu_ViewPlaceholder_2orc8 {
   top: calc(var(--basicui-header-height) + var(--zdt-gap));
   right: var(--zdt-gap);
@@ -98,5 +99,5 @@
 }
 
 .quickaccessmenu_ViewPlaceholder_2orc8._2zh9IsDz_Expanded {
-  width: 854px;
+  width: min(854px, 100% - 2 * var(--zdt-gap));
 }

@@ -8,8 +8,12 @@
   --zdt-label-tertiary: rgba(235, 235, 245, 0.3);
   --zdt-surface: rgba(18, 18, 22, 0.92);
   --zdt-page: rgb(14, 15, 19);
-  /* Text and glyphs drawn on the accent: near-black on light accents, white on dark ones. */
-  --zdt-on-accent: lch(from var(--zdt-accent, #fff) calc((62 - l) * 100) 0 0 / 0.88);
+  /* Text and glyphs drawn on the accent: near-black on light accents, white on dark ones. The
+     relative colour picks pure black or white; mixing in a little accent softens it while keeping
+     it opaque (toggle knobs sit on a half-filled track, so they can't be see-through). */
+  --zdt-on-accent: color-mix(in srgb, lch(from var(--zdt-accent, #fff) calc((62 - l) * 100) 0 0) 88%, var(--zdt-accent, #fff));
+  /* Solid fill for controls in their off state (toggle tracks) */
+  --zdt-control-off: rgb(62, 62, 68);
 
   /* Type. "Motiva Sans" is Steam's UI family; shared/type.css points it at Oxygen. */
   --zdt-font-sans: "Motiva Sans", "Oxygen", Arial, Helvetica, sans-serif;

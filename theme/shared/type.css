@@ -34,6 +34,7 @@
    from size, and font-synthesis stops Chromium faking a bold. Keep this list short. */
 .gamepadhomerecentgames_RecentGamesHeaderLabel_1KKWf,
 .quickaccessmenu_Title_34nl5,
+.friendlist.GamepadMode:not(#zdt) .TabPanelHeader:not(#zdt),
 .gamepaddialog_GamepadDialogContent_InnerWidth_3Xeyd > .DialogHeader,
 .achievementsheader_Title_3wNyl {
   font-family: var(--zdt-font-serif);
@@ -50,6 +51,7 @@
   line-height: 1.1;
 }
 
-.quickaccessmenu_Title_34nl5 {
+.quickaccessmenu_Title_34nl5,
+.friendlist.GamepadMode:not(#zdt) .TabPanelHeader:not(#zdt) {
   font-size: 24px;
 }

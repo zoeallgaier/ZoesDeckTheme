@@ -44,10 +44,20 @@ button.gamepaddropdown_DropDownControlButton_28bny.gamepaddialog_Button_1kn70:no
   border-radius: var(--zdt-radius-pill);
 }
 
-/* Toggles: accent rail when on, with the knob switching to --zdt-on-accent so it stays visible on
-   a white accent. */
+/* Toggles, iOS style and fully opaque: a solid grey track when off, the whole track in the accent
+   when on (Steam's fill stops under the knob's centre), and the knob switching to --zdt-on-accent
+   so it stays visible on a white accent. The row's highlight shows focus, so the toggle's own
+   focus halo and knob ring go. */
+.gamepaddialog_Toggle_24G4g:not(.gamepaddialog_Disabled_1pmyx, #zdt) .gamepaddialog_ToggleRail_2JtC3 {
+  background: var(--zdt-control-off);
+}
+
 .gamepaddialog_ToggleRail_2JtC3::before {
   background: var(--zdt-accent);
+}
+
+.gamepaddialog_Toggle_24G4g.gamepaddialog_On_3ld7T .gamepaddialog_ToggleRail_2JtC3::before {
+  transform: none;
 }
 
 .gamepaddialog_ToggleSwitch_3__OD {
@@ -58,6 +68,11 @@ button.gamepaddropdown_DropDownControlButton_28bny.gamepaddialog_Button_1kn70:no
   background: var(--zdt-on-accent);
 }
 
+.gamepaddialog_Toggle_24G4g.gpfocus:not(#zdt) .gamepaddialog_ToggleSwitch_3__OD {
+  border: none;
+  margin: 0;
+}
+
 .gamepaddialog_Toggle_24G4g.gpfocus::after {
-  background-color: rgba(255, 255, 255, 0.25);
+  content: none;
 }

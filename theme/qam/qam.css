@@ -23,6 +23,13 @@
   padding-left: 14px;
 }
 
+/* Decky's plugin titles ("CSS Loader"...) stick to the top, and with the title's background gone
+   the list scrolls visibly under them. Steam's own tabs let the title scroll away with the list,
+   so Decky's do the same. Decky sets position in an inline style, hence !important. */
+.quickaccessmenu_Title_34nl5[style*="sticky"] {
+  position: relative !important;
+}
+
 .quickaccessmenu_HeaderAndFooterVisible_2m0zl .quickaccessmenu_Menu_1gJzx::before,
 .quickaccessmenu_HeaderAndFooterVisible_2m0zl .quickaccessmenu_Menu_1gJzx::after {
   background: rgba(255, 255, 255, 0.08);
@@ -37,6 +44,61 @@
 .quickaccesscontrols_PanelSection_2C0g0 .gamepaddialog_HighlightOnFocus_wE4V6 {
   margin-inline: -10px;
   padding-inline: 10px;
+}
+
+/* Friends. Opening this tab widens the sheet to two columns (sp/chrome.css keeps the screen-edge
+   gap). It's Steam's older chat UI, whose class names aren't scrambled. The list column drops its
+   own slate gradient and black edge so it reads as part of the sheet, and its header lines up
+   with the other tabs' titles. Steam's rules here start with #QuickAccess-Menu, so ours carry
+   two :not(#zdt) (see shared/controls.css). */
+.friendlist.GamepadMode:not(#zdt):not(#zdt) {
+  background: transparent;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.friendlist.GamepadMode:not(#zdt) .TabPanelHeader:not(#zdt) {
+  margin-left: 14px;
+}
+
+.friendlist.GamepadMode:not(#zdt) .AddFriendButton:not(#zdt) {
+  border-radius: var(--zdt-radius-pill);
+  background: var(--zdt-glass-fill);
+}
+
+.friendlist.GamepadMode:not(#zdt) .friendGroup:not(#zdt) {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+/* The header block casts a dark glow and an inset edge, which read as a slab on glass. */
+.friendlist.GamepadMode:not(#zdt) .friendListHeaderContainer:not(#zdt),
+.friendlist.GamepadMode:not(#zdt) .FriendsListSteamDeckTopSection:not(#zdt) {
+  box-shadow: none;
+}
+
+/* Group headings and friends: the same rounded highlight as every other row. */
+.friendlist.GamepadMode:not(#zdt) :is(.groupName, .friend):not(#zdt) {
+  margin-inline: 6px;
+  border-radius: var(--zdt-radius-m);
+}
+
+.friendlist.GamepadMode:not(#zdt) :is(.groupName, .friend).gpfocus:not(#zdt) {
+  background: var(--zdt-glass-fill);
+}
+
+.emptyChatDialogs:not(#zdt):not(#zdt) {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Tab rail on the right, next to the screen edge and under the right thumb, with its divider
+   moved to the rail's left side. */
+.quickaccessmenu_Menu_1gJzx {
+  flex-direction: row-reverse;
+}
+
+.quickaccessmenu_Tabs_3Ag1w::after {
+  left: 0;
+  right: auto;
 }
 
 /* Tab rail: rounded tiles with a little air around them instead of full-bleed blocks. */

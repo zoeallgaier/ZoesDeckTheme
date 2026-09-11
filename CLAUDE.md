@@ -25,14 +25,17 @@ should feel so clean it could be an Apple product. Reference: Apple tvOS + Liqui
   titles, behind the "Theme fonts" checkbox). Verified in Gaming Mode: the "Motiva Sans" override works
   (Motiva measures identically to Oxygen at 300/400/700, so Steam's bold survives) and the Home
   "Recent Games" label renders in Instrument Serif.
-- Zoe hasn't picked an accent color; default to tvOS-style white-on-dark unless told otherwise. The
-  Accent color picker (`--zdt-accent`, default `#ffffff`) is already wired up; `--zdt-on-accent` picks
-  near-black or white text for whatever accent is chosen (CSS relative colour, supported here).
-- Step 3 (glass + radii) first pass done and screenshotted: floating glass top/bottom bars, Quick Access
-  and Steam menu as floating glass sheets, shared controls (buttons, toggles, sliders, dropdowns, row
-  focus), and Settings (floating sidebar, rounded rows, serif page title). "Reduce transparency" option
-  added. Not yet checked: modal dialogs, in-game Quick Access (over a running game), Friends expanded
-  mode, the collapsed Steam menu, Library, game pages.
+- Accent: the default stays tvOS white (`--zdt-accent`, `#ffffff`); Zoe has been trying a lime green
+  in the picker. `--zdt-on-accent` picks an opaque near-black or white for whatever accent is chosen
+  (CSS relative colour + color-mix, supported here).
+- Step 3 (glass + radii) done and approved by Zoe ("looking great"): floating glass top/bottom bars,
+  Quick Access and Steam menu as floating glass sheets, shared controls (buttons, fully opaque iOS-style
+  toggles, sliders, dropdowns, row focus), Settings (floating sidebar, rounded rows, serif page title),
+  "Reduce transparency" option. Zoe's requests from review: Quick Access tab rail moved to the **right**
+  (thumb reach), Friends tab cleaned up (gap in expanded mode, no slab header, rounded rows, serif
+  heading), Decky plugin titles scroll away like Steam's instead of sticking. Not yet checked: modal
+  dialogs, in-game Quick Access, collapsed Steam menu, Library, game pages, d-pad left/right across the
+  flipped Quick Access rail (Steam's nav there has no flow-children, so it should be geometric).
 
 ## Environment
 
@@ -134,6 +137,8 @@ theme/
    (that's how Quick Access floats). Variables like `--basicui-header-height` exist only in `SP`, so give
    them a fallback in other windows. Over a running game there's no blur (the game is another layer),
    hence the fairly opaque `--zdt-sheet-fill`. "Reduce transparency" swaps the glass tokens for solids.
+   Inside the Quick Access window, `backdrop-filter` on content in the tab scroller had no visible
+   effect (tried for Decky's sticky title), so don't design around blur there.
 4. **Apple's rule:** Liquid Glass belongs to the controls and navigation layer only, never the content layer.
    tvOS-style focus = a slight size increase, soft shadow and sheen instead of a glowing border.
 5. **Hiding elements:** add the `REQUIRE_NAV_PATCH` flag when using `display: none` on anything focusable,
@@ -147,8 +152,7 @@ theme/
 1. ~~Create `theme/`, symlink it in, confirm CSS Loader loads it.~~ Done.
 2. ~~Font swap.~~ Done and verified. Zoe should eyeball it on the real screen and say whether the serif
    accent titles (Home "Recent Games", Quick Access title, settings title) are the right ones.
-3. ~~Radii + glass tokens → header/footer → QAM → Steam menu → Settings.~~ First pass done. Still to
-   check: modal dialogs, Quick Access over a running game, Friends expanded, collapsed Steam menu. Small
-   nit: in Quick Access, slider rows' separators sit 6px in from the others since the row-bleed change.
-4. Homescreen layout pass, then focus effects and animations (add "Reduce motion").
+3. ~~Radii + glass tokens → header/footer → QAM → Steam menu → Settings.~~ Done. Still to check:
+   modal dialogs, Quick Access over a running game, collapsed Steam menu.
+4. **In progress:** homescreen layout pass, then focus effects and animations (add "Reduce motion").
 5. Screenshot each step with `tools/shot.sh` so Zoe can review from the Mac.
