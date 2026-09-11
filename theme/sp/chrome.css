@@ -187,6 +187,44 @@
   zoom: 0.85;
 }
 
+/* The volume pop-up (volume buttons): a small glass capsule centred at the top of the screen,
+   like the Dynamic Island, instead of a slate box over the status icons. It keeps Steam's slide
+   down and adds a fade; its slider becomes a thick accent bar without a knob. (Steam has two
+   copies of it, audio_ and header_, in different builds.) */
+:is(.audio_VolumePopin_2iUUM, .header_VolumePopin_2WOJ5):not(#zdt) {
+  top: 8px;
+  left: 50%;
+  width: 232px;
+  margin-left: -116px;
+  padding: 6px 0;
+  border-radius: var(--zdt-radius-pill);
+  background: var(--zdt-sheet-fill);
+  backdrop-filter: var(--zdt-glass-blur);
+  box-shadow: var(--zdt-glass-edge), var(--zdt-glass-shadow);
+  transition-property: transform, opacity;
+}
+
+:is(.audio_VolumePopinHidden_1OwmL, .header_VolumePopinHidden_3YKZN):not(#zdt) {
+  opacity: 0;
+}
+
+:is(.audio_VolumePopin_2iUUM, .header_VolumePopin_2WOJ5) :is(.audio_VolumeSliderPosition_1_hv3, .header_VolumeSliderPosition_CTOqO) {
+  padding-inline: 14px 18px;
+}
+
+:is(.audio_VolumePopin_2iUUM, .header_VolumePopin_2WOJ5) .gamepadslider_SliderTrack_Mq25N:not(#zdt) {
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.16);
+}
+
+:is(.audio_VolumePopin_2iUUM, .header_VolumePopin_2WOJ5) .gamepadslider_SliderHandle_2yVKj:not(#zdt) {
+  visibility: hidden;
+}
+
+:is(.audio_VolumePopin_2iUUM, .header_VolumePopin_2WOJ5) .gamepaddialog_FieldIcon_1sC68:not(#zdt) {
+  color: var(--zdt-label);
+}
+
 /* Bottom bar: a floating glass capsule instead of an edge-to-edge strip. The keyboard and
    in-flow variants keep Steam's layout. */
 .footer_BasicFooter_3T1iF:not(.footer_WithKeyboard_1fMXT, .footer_Relative_1u4NT) {
