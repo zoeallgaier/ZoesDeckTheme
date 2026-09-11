@@ -6,12 +6,23 @@
 .header_Header_1E_SL:not(#zdt) {
   justify-content: flex-start;
   padding-inline: 8px;
+  transition: transform 400ms var(--zdt-ease), padding 400ms var(--zdt-ease);
 }
 
+/* On Home the bar floats: it sits lower and further in from the edges, with room to breathe
+   over the art. On any other page, or while a side menu or pop-up is open, it glides up and
+   out to the edges. */
+.gamepadui_MainNavMenuMainSplit_2Y_Mr:has(.gamepadhome_RecentSection_39tNv):not(:has(.backgroundglass_Visible_fSM7w, .ModalOverlayContent.active)) .header_Header_1E_SL:not(#zdt) {
+  transform: translateY(10px);
+  padding-inline: 22px;
+}
+
+/* The clock, lower case in Oxygen Light: "1:46 am". */
 .header_Header_1E_SL .header_Clock_1HhLU:not(#zdt) {
   margin-left: auto;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 300;
+  text-transform: lowercase;
 }
 
 /* Focus (and touch hover) makes an item grow, tvOS style, instead of lighting a slab behind it.
@@ -123,11 +134,13 @@
   background: rgba(255, 255, 255, 0.45);
 }
 
+/* Placed around Steam's fill bar, which draws at 4.6px, 8.3px, 16.5px × 7.3px in this box (the
+   icon's 48×36 viewBox scaled into 31×22): 1.3px of air on every side, then the 1.2px line. */
 .header_BatteryIconVerticalStack_3XySI > div::before {
-  left: 2.25px;
-  top: 6.5px;
-  width: 23px;
-  height: 12.5px;
+  left: 2.1px;
+  top: 5.8px;
+  width: 21.5px;
+  height: 12.4px;
   box-sizing: border-box;
   border: 1.2px solid rgba(255, 255, 255, 0.45);
   border-radius: 4px;
@@ -135,8 +148,8 @@
 }
 
 .header_BatteryIconVerticalStack_3XySI > div::after {
-  left: 26px;
-  top: 10.5px;
+  left: 24.4px;
+  top: 9.75px;
   width: 1.6px;
   height: 4.5px;
   border-radius: 0 1px 1px 0;
@@ -177,6 +190,16 @@
   height: 10px;
   border-radius: 50%;
   box-shadow: 0 0 0 2px var(--zdt-page);
+}
+
+/* Online or in a game, the dot is the accent (Steam's blue and green); away and offline keep
+   Steam's greys. */
+.header_CurrentUserAvatar_2HXdb:is(.online, .ingame, .in-game) .avatarStatus:not(#zdt) {
+  background: var(--zdt-accent);
+}
+
+.header_CurrentUserAvatar_2HXdb {
+  zoom: 0.85;
 }
 
 /* Bottom bar: a floating glass capsule instead of an edge-to-edge strip. The keyboard and
