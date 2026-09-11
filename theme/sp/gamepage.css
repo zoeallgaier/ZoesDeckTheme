@@ -214,38 +214,6 @@
   color: inherit;
 }
 
-/* Icon swap: Steam's solid Play, Install, controller and settings glyphs become rounded outline
-   ones (tokens.css). Each is matched by its own drawing, so other states (Stop, Update, Stream...)
-   keep Steam's icon; the svg's own shapes hide and a mask of the new icon paints in its colour. */
-.appactionbutton_PlayButton_3ydig > svg:is(:has(path[d^="M7.5 32.135"]), :has(path[d^="M29 23V27H7V23H2V32H34V23H29Z"])):not(#zdt),
-.appdetailsplaysection_MenuButton_3qDWQ > svg:is(.SVGIcon_BigPicture, :has(path[d^="M33 20.38"])):not(#zdt) {
-  background: currentColor;
-  mask-position: center;
-  mask-size: contain;
-  mask-repeat: no-repeat;
-}
-
-.appactionbutton_PlayButton_3ydig > svg:has(path[d^="M7.5 32.135"]):not(#zdt) {
-  mask-image: var(--zdt-icon-play);
-}
-
-.appactionbutton_PlayButton_3ydig > svg:has(path[d^="M29 23V27H7V23H2V32H34V23H29Z"]):not(#zdt) {
-  mask-image: var(--zdt-icon-download);
-}
-
-.appdetailsplaysection_MenuButton_3qDWQ > svg.SVGIcon_BigPicture:not(#zdt) {
-  mask-image: var(--zdt-icon-gamepad);
-}
-
-.appdetailsplaysection_MenuButton_3qDWQ > svg:has(path[d^="M33 20.38"]):not(#zdt) {
-  mask-image: var(--zdt-icon-settings);
-}
-
-.appactionbutton_PlayButton_3ydig > svg:is(:has(path[d^="M7.5 32.135"]), :has(path[d^="M29 23V27H7V23H2V32H34V23H29Z"])) > *,
-.appdetailsplaysection_MenuButton_3qDWQ > svg:is(.SVGIcon_BigPicture, :has(path[d^="M33 20.38"])) > * {
-  display: none;
-}
-
 /* "Steam Cloud: up to date" */
 .appdetailsplaysection_CloudStatusRow_QvHky:not(#zdt),
 .appdetailsplaysection_CloudStatusRow_QvHky:not(#zdt) * {

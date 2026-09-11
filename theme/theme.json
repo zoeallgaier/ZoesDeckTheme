@@ -14,6 +14,7 @@
     "shared/tokens.css": ["everywhere"],
     "shared/controls.css": ["everywhere"],
     "shared/gameicons.css": ["everywhere"],
+    "shared/icons.css": ["everywhere"],
     "sp/chrome.css": ["SP"],
     "sp/settings.css": ["SP"],
     "home/home.css": ["SP"],

@@ -88,21 +88,6 @@
   border-radius: var(--zdt-radius-pill);
 }
 
-/* Search and notifications get the theme's rounded outline icons (tokens.css), painted through a
-   mask in the icon's own colour; Steam's shapes inside hide. */
-.header_Header_1E_SL :is(.searchbar_SearchIconLeft_2Ya83, .searchbar_SearchIconRight_1Ka4T, .header_NotificationsIcon_cieWw > svg):not(#zdt) {
-  background: currentColor;
-  mask: var(--zdt-icon-search) center / contain no-repeat;
-}
-
-.header_Header_1E_SL .header_NotificationsIcon_cieWw > svg:not(#zdt) {
-  mask-image: var(--zdt-icon-bell);
-}
-
-.header_Header_1E_SL :is(.searchbar_SearchIconLeft_2Ya83, .searchbar_SearchIconRight_1Ka4T, .header_NotificationsIcon_cieWw > svg) > * {
-  display: none;
-}
-
 /* Wi-Fi: Steam's glyph is four quarter-arcs spreading from the bottom-left corner, with the
    signal level in each arc's fill-opacity. Turned 45° around that corner (and re-centred) it's
    the upward fan iOS uses, still showing the live signal level. */
