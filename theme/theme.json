@@ -13,12 +13,14 @@
   "inject": {
     "shared/tokens.css": ["everywhere"],
     "shared/controls.css": ["everywhere"],
+    "shared/gameicons.css": ["everywhere"],
     "sp/chrome.css": ["SP"],
     "sp/settings.css": ["SP"],
     "home/home.css": ["SP"],
     "sp/gamepage.css": ["SP"],
     "sp/contextmenu.css": ["SP"],
     "sp/dialogs.css": ["SP"],
+    "sp/badges.css": ["SP"],
     "qam/qam.css": ["QuickAccess"],
     "menu/mainmenu.css": ["MainMenu"]
   },

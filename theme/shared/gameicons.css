@@ -1,0 +1,52 @@
+/* Zoe's Deck Theme: small game icons (What's New, recently completed, the Steam menu's running
+   game, the activity feed, performance settings, events, search, soundtracks, chat groups...)
+   get app-icon corners instead of square ones, and lose the grey square behind transparent
+   icons. Adapted from RasitAyaz's Better Game Icons (MIT, see LICENSE-BetterGame.txt). The
+   corner is a share of the icon's size, so every size gets the same shape. */
+
+:is(
+  .gamepadhomewhatsnew_GameIcon_2RrB8,
+  .recentlycompleted_GameIcon_DqP6r,
+  .mainmenu_RunningAppIcon_26pwH,
+  .appactivityday_GameIcon_2B8T_,
+  .achievementsheader_GameIcon_2R_ac,
+  .appdetailsplaysection_PlayBarGameIcon_1iNIp,
+  .appdetailssoundtrack_ParentGameIcon_Pc5ZA,
+  .gamelistentry_GameIcon_ga1hy,
+  .gamelistsearchbar_GameIcon_2uTOQ,
+  .gamepadsearch_GameIcon_1SjNH,
+  .libraryhomenewupdates_GameIcon_3tdft,
+  .spotlight_GameIcon_25LeJ,
+  .jumplist_GameIcon_2P-W-,
+  .overlaydialogs_GameIcon_2CF7N,
+  .systemmanagement_PerfProfileInfo_KWPmf .libraryassetimage_Container_1R9r2,
+  .basicpartnereventspage_GameIconAndName_3R5H5 .libraryassetimage_Container_1R9r2,
+  .groupName .gameGroupContainer .groupIcon,
+  img.GameIcon
+):not(#zdt) {
+  border-radius: 22%;
+  overflow: clip;
+  background-color: transparent;
+}
+
+:is(
+  .gamepadhomewhatsnew_GameIcon_2RrB8,
+  .recentlycompleted_GameIcon_DqP6r,
+  .mainmenu_RunningAppIcon_26pwH,
+  .appactivityday_GameIcon_2B8T_,
+  .achievementsheader_GameIcon_2R_ac,
+  .appdetailsplaysection_PlayBarGameIcon_1iNIp,
+  .appdetailssoundtrack_ParentGameIcon_Pc5ZA,
+  .gamelistentry_GameIcon_ga1hy,
+  .gamepadsearch_GameIcon_1SjNH,
+  .libraryhomenewupdates_GameIcon_3tdft,
+  .systemmanagement_PerfProfileInfo_KWPmf .libraryassetimage_Container_1R9r2,
+  .basicpartnereventspage_GameIconAndName_3R5H5 .libraryassetimage_Container_1R9r2
+) img:not(#zdt) {
+  border-radius: inherit;
+  overflow: clip;
+}
+
+.basicpartnereventspage_GameIconAndName_3R5H5 .libraryassetimage_Container_1R9r2 {
+  width: 32px;
+}

@@ -1,0 +1,77 @@
+/* Zoe's Deck Theme: the little badges on game cards (Deck compatibility, installed, in library).
+   Adapted from RasitAyaz's Better Game Badges (MIT, see LICENSE-BetterGame.txt). They show on the
+   focused card only, as small round glass chips (the compatibility one without the Deck logo,
+   just its verified / playable mark), and fade away after a moment so the art is left clean. */
+
+/* Compatibility: the mark alone, in a round chip. */
+:is(.appportrait_SteamDeckCompatIcon_3kDT9, .gamecapsule_DeckCompat_Tl-6l).shared_svg_library_SteamDeckCompatInfo_2LcFI:not(#zdt) {
+  padding: 3px;
+  border-radius: 50%;
+  background: var(--zdt-glass-dim);
+  backdrop-filter: var(--zdt-glass-blur);
+  box-shadow: var(--zdt-glass-edge);
+}
+
+:is(.appportrait_SteamDeckCompatIcon_3kDT9, .gamecapsule_DeckCompat_Tl-6l) > svg.shared_svg_library_SteamDeckCompatLogo_Tplfb {
+  display: none;
+}
+
+.gamecapsule_GameCapsule_fXdhj .gamecapsule_DeckCompat_Tl-6l {
+  top: 6px;
+  right: 6px;
+  bottom: auto;
+  left: auto;
+}
+
+/* Not installed (a download arrow): the same chip. */
+.appportrait_LibraryItemBox_WYgDg .appportrait_UninstalledIcon_8YrRm:not(#zdt) {
+  border-radius: 50%;
+  background: var(--zdt-glass-dim);
+  backdrop-filter: var(--zdt-glass-blur);
+}
+
+/* In library (store capsules): a round chip with just the tick, at the top left. */
+.BasicUI .gamecapsule_InLibrary_fyHna:not(#zdt) {
+  position: absolute;
+  z-index: 100;
+  top: 6px;
+  right: auto;
+  bottom: auto;
+  left: 6px;
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  box-sizing: border-box;
+  gap: 0;
+  font-size: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--zdt-glass-dim);
+  backdrop-filter: var(--zdt-glass-blur);
+  box-shadow: var(--zdt-glass-edge);
+  opacity: 0;
+}
+
+.gamecapsule_GameCapsule_fXdhj.Focusable:focus .gamecapsule_InLibrary_fyHna:not(#zdt) {
+  opacity: 1;
+}
+
+/* Soundtracks and desktop apps have nothing to say. */
+:is(.librarydesktopapps_DesktopApps_2-gV0, .appportrait_Soundtrack_3Lu_5) .appportrait_LibraryItemBoxSubscript_1LJqx,
+.appportrait_Soundtrack_3Lu_5 .appportrait_SteamDeckCompatIcon_3kDT9 {
+  display: none;
+}
+
+/* Fade out 0.75s after the card takes focus. */
+@keyframes zdt-badge-out {
+  to {
+    opacity: 0;
+  }
+}
+
+.appportrait_LibraryItemBox_WYgDg:is(.Focusable:focus, :hover) :is(.appportrait_SteamDeckCompatIcon_3kDT9, .appportrait_UninstalledIcon_8YrRm),
+.appportrait_LibraryItemBox_WYgDg.Focusable:focus .appportrait_LibraryItemIcons_3BPFq:only-child::before,
+.appportrait_LibraryItemBox_WYgDg:hover .appportrait_LibraryItemIcons_3BPFq:only-child::before,
+.gamecapsule_GameCapsule_fXdhj.Focusable:focus :is(.gamecapsule_DeckCompat_Tl-6l, .gamecapsule_InLibrary_fyHna) {
+  animation: zdt-badge-out 0.3s ease-in-out 0.75s forwards;
+}
