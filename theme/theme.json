@@ -16,6 +16,8 @@
     "sp/chrome.css": ["SP"],
     "sp/settings.css": ["SP"],
     "home/home.css": ["SP"],
+    "sp/gamepage.css": ["SP"],
+    "sp/contextmenu.css": ["SP"],
     "qam/qam.css": ["QuickAccess"],
     "menu/mainmenu.css": ["MainMenu"]
   },

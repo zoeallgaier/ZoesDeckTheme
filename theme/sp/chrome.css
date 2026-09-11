@@ -166,6 +166,12 @@
   backdrop-filter: var(--zdt-backdrop-blur);
 }
 
+/* The backdrop behind pop-ups (Options menus, dialogs): a frosted dim instead of 85% black. */
+.ModalOverlayContent.ModalOverlayBackground {
+  background: var(--zdt-modal-dim);
+  backdrop-filter: var(--zdt-backdrop-blur);
+}
+
 /* Quick Access. Steam sizes and places the QuickAccess window from this placeholder's box, so
    shrinking it to the visible 348px and pulling it off the edges makes the whole menu a floating
    sheet (Steam's version is 854px wide, pushed 506px off screen). Friends "expanded" mode goes up

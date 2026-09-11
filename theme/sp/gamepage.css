@@ -1,0 +1,132 @@
+/* Zoe's Deck Theme: game pages, in the spirit of the Apple TV app's product pages. The banner fades
+   softly into the page, the main action is a capsule, secondary actions are round glass buttons,
+   and labels lose Steam's capitals. The tab row further down is shared with other tabbed pages
+   (Library, Home's What's New), so its styling here applies there too. */
+
+/* Banner: the sharp art fades into Steam's blurred copy of it below, instead of ending on a line. */
+.sharedappdetailsheader_ImgContainer_3VFZB {
+  mask-image: linear-gradient(to bottom, #000 62%, transparent);
+}
+
+/* Main action (Play, Install, Update...): a capsule that turns the accent colour when focused, like
+   the Apple TV app's Play button. Steam's colour-coded sweep on focus goes. */
+.appactionbutton_PlayButtonContainer_1FnJ6:not(#zdt) {
+  border-radius: var(--zdt-radius-pill);
+  overflow: hidden;
+  background: var(--zdt-glass-fill);
+}
+
+.appactionbutton_ButtonChild_2AzIX:not(#zdt) {
+  border-radius: 0;
+  background: transparent;
+  color: var(--zdt-label);
+  transition: background-color var(--zdt-duration) var(--zdt-ease), color var(--zdt-duration) var(--zdt-ease);
+}
+
+.appactionbutton_ButtonChild_2AzIX:not(#zdt) .appactionbutton_ButtonText_33cnX {
+  color: inherit;
+  font-weight: 700;
+}
+
+.appactionbutton_ButtonChild_2AzIX.Focusable:focus:not(#zdt),
+.appactionbutton_ButtonChild_2AzIX.Focusable:focus:not(#zdt) .appactionbutton_ButtonText_33cnX {
+  background: var(--zdt-accent);
+  color: var(--zdt-on-accent);
+}
+
+.appactionbutton_ButtonChild_2AzIX.Focusable:not(#zdt)::after {
+  display: none;
+}
+
+.appactionbutton_Disabled_1Pb6P .appactionbutton_ButtonChild_2AzIX:not(#zdt):not(:focus) {
+  color: var(--zdt-label-tertiary);
+}
+
+/* Secondary actions (controller layout, settings): round glass buttons. */
+.appdetailsplaysection_MenuButton_3qDWQ:not(#zdt) {
+  border: none;
+  border-radius: 50%;
+  background: var(--zdt-glass-fill);
+  color: var(--zdt-label);
+  transition: background-color var(--zdt-duration) var(--zdt-ease), color var(--zdt-duration) var(--zdt-ease);
+}
+
+.appdetailsplaysection_MenuButton_3qDWQ.Focusable:focus:not(#zdt) {
+  background: var(--zdt-accent);
+  color: var(--zdt-on-accent);
+}
+
+.appdetailsplaysection_MenuButton_3qDWQ.Focusable:focus:not(#zdt) svg {
+  color: inherit;
+}
+
+/* "Steam Cloud: up to date" */
+.appdetailsplaysection_CloudStatusRow_QvHky:not(#zdt),
+.appdetailsplaysection_CloudStatusRow_QvHky:not(#zdt) * {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Tabs: sentence case in Oxygen Bold, a glass capsule for the current tab, the accent on focus. */
+.gamepadtabbedpage_Tab_3eEbS {
+  font-size: 15px;
+  letter-spacing: 0;
+  text-transform: none;
+  border-radius: var(--zdt-radius-pill);
+  transition: background-color var(--zdt-duration) var(--zdt-ease), color var(--zdt-duration) var(--zdt-ease);
+}
+
+.gamepadtabbedpage_Tab_3eEbS.gamepadtabbedpage_Selected_3Gp1b:not(#zdt) {
+  background-color: var(--zdt-glass-fill);
+}
+
+.gamepadtabbedpage_Tab_3eEbS.gpfocus:not(#zdt) {
+  background-color: var(--zdt-accent);
+  color: var(--zdt-on-accent);
+}
+
+/* Once the tab row pins under the top bar, Steam draws a solid black band behind both. Glass
+   instead, fading out at its lower edge like the top bar. */
+.gamepadtabbedpage_TabHeaderRowWrapper_2Jobs {
+  background-color: transparent;
+}
+
+.gamepadtabbedpage_GamepadTabbedPage_3IBLc.gamepadtabbedpage_IsUnderHeader_31Zle .gamepadtabbedpage_TabHeaderRowWrapper_2Jobs::before,
+.gamepadtabbedpage_TabHeaderRowWrapper_2Jobs.gamepadtabbedpage_ScrolledDown_1jNhb::before {
+  bottom: -16px;
+  background: rgba(16, 16, 20, 0.55);
+  backdrop-filter: var(--zdt-glass-blur);
+  box-shadow: none;
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 16px), transparent);
+}
+
+/* Section boxes (Friends who played it, achievements...) and their small headings. */
+.appdetailssectionheader_SectionHeader_1Q2q_:not(#zdt),
+.appdetailssectionheader_SectionHeader_1Q2q_:not(#zdt) * {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.appdetailssection_AppDetailsSectionContainer_31ptF:not(#zdt) {
+  border-radius: var(--zdt-radius-m);
+}
+
+/* "Say something about this game..." */
+.posttextentry_PostTextEntry_3x31A,
+.posttextentry_PostTextEntryArea_1JlC2 {
+  border-radius: var(--zdt-radius-m);
+}
+
+/* Activity feed: dates in sentence case, rounded cards. */
+.appactivityday_AppActivityDay_S2Fu9 .appactivityday_AppActivityDate_19LfM {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--zdt-label-secondary);
+}
+
+.appactivityday_Event_UVeN0 {
+  border-radius: var(--zdt-radius-m);
+  overflow: hidden;
+}

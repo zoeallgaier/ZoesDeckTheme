@@ -37,6 +37,8 @@
   --zdt-sheet-fill: rgba(28, 28, 34, 0.66);
   --zdt-backdrop-dim: rgba(0, 0, 0, 0.3);
   --zdt-backdrop-blur: blur(20px) saturate(160%);
+  /* Behind pop-ups (Options menus, dialogs): a little darker than behind the side menus */
+  --zdt-modal-dim: rgba(0, 0, 0, 0.5);
 
   /* Layout: floating glass keeps this much air from the screen edges */
   --zdt-gap: 8px;

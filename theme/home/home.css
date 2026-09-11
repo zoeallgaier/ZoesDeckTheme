@@ -1,5 +1,5 @@
-/* Zoe's Deck Theme: Home. The top of the screen shows the selected game's banner art whole and
-   untouched; under it, the recent games sit in one row of rounded cards in Steam's own shapes
+/* Zoe's Deck Theme: Home. The top of the screen shows the selected game's banner art whole,
+   fading into the page at its foot; under it, the recent games sit in one row of rounded cards in Steam's own shapes
    (the newest one wide, the rest portrait) so no logo is cropped, with the focused game's name
    beneath it, like tvOS. (What's New is hidden by home/hide-whats-new.css.) */
 
@@ -11,8 +11,15 @@
   --zdt-home-row-unzoom: 1.389;
 }
 
-/* Banner art: full brightness, no fade, no slow zoom, and only as tall as the art itself. */
-.gamepadhomerecentgames_RecentGamesBackgroundContainer_QNkOt,
+/* Banner art: full brightness, no slow zoom, and only as tall as the art itself. Its lower part
+   fades into the page so "Recent Games" reads clearly and the art meets the row softly (Steam
+   fades it out in an oval instead). */
+.gamepadhomerecentgames_RecentGamesBackgroundContainer_QNkOt {
+  bottom: auto;
+  height: var(--zdt-home-art-height);
+  mask-image: linear-gradient(to bottom, #000 45%, rgba(0, 0, 0, 0.55) 78%, transparent);
+}
+
 .gamepadhomerecentgames_RecentGamesBackgroundImages_30D-8 {
   bottom: auto;
   height: var(--zdt-home-art-height);

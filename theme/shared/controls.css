@@ -20,6 +20,15 @@
   border-radius: var(--zdt-radius-m);
 }
 
+/* Steam's floating focus ring, drawn around things with no focus style of their own (e.g. the
+   boxes on game pages): a steady rounded ring instead of a square outline that flashes and blinks. */
+.focusring_FocusRing_1IZrQ {
+  border-radius: var(--zdt-radius-m);
+  outline: 2px solid rgba(255, 255, 255, 0.75);
+  outline-offset: 3px;
+  animation: none;
+}
+
 /* Buttons: glass capsules, and the accent on focus. */
 button.gamepaddialog_Button_1kn70.DialogButton:not(#zdt) {
   border-radius: var(--zdt-radius-pill);

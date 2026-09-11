@@ -111,9 +111,11 @@ theme/
   qam/qam.css           Quick Access sheet, tab rail (on the right), Friends, Decky bits (done)
   home/home.css         Home: full banner art on top, Steam's row zoomed to fit below   (done)
   home/hide-whats-new.css  "Show What's New on Home" off (default)                       (done)
+  sp/gamepage.css       game pages: banner fade, Play capsule, round buttons, tabs, feed (first pass)
+  sp/contextmenu.css    Options (≡) menus as an iOS-style glass sheet                   (first pass)
   menu/mainmenu.css     Steam menu sheet and items                                      (done)
   options/reduce-transparency.css                                                       (done)
-  sp/library.css  sp/gamepage.css  sp/dialogs.css  sp/contextmenu.css  options/reduce-motion.css
+  sp/library.css  sp/dialogs.css  options/reduce-motion.css
 ```
 
 ## Rules that matter (details in RESEARCH.md)
@@ -164,7 +166,11 @@ theme/
    She tried square icons and rejected them (logos got cropped), so cards keep Steam's shapes; the
    row is shrunk with CSS `zoom` (not resized) because Steam scrolls it with stock-size maths. Top
    bar: clock on the left, iOS-style Wi-Fi/battery, round avatar with a status dot.
-5. **Next (Zoe's order):** game pages, then the menus that open from the Options (≡) button. Also
-   unstyled so far: modal dialogs (e.g. CSS Loader's theme settings dialog), Library.
+5. ~~Game pages, then the Options (≡) menus.~~ First pass done (2026-09-10), awaiting Zoe's review.
+   Game pages: only the Activity tab has been looked at; check Your stuff / Community / Game Info
+   and a game that isn't installed (Install button). Open an Options menu from a script by calling
+   the focused card's React `onContextMenu` prop (see how it was done in the session: walk
+   `__reactFiber` props from `.gpfocus`). Still unstyled: modal dialogs (CSS Loader's theme
+   settings dialog is a handy test), Library.
 6. Focus effects and animations polish, plus a "Reduce motion" option.
 7. Screenshot each step with `tools/shot.sh` so Zoe can review from the Mac.

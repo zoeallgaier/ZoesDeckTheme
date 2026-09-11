@@ -1,0 +1,80 @@
+/* Zoe's Deck Theme: the menus that open from the Options (≡) button, iOS context-menu style.
+   Steam builds the menu from its rows' backgrounds (each row a slate strip, separators a gap);
+   here the list itself becomes one rounded glass sheet (it's in the main window, so the blur
+   works over the page), rows turn transparent with a rounded highlight, and focus is the accent,
+   like the Steam menu. Steam colour-codes the focused row (green Play, red Cancel); only truly
+   destructive rows keep a colour, in red. */
+
+.gamepadcontextmenu_contextMenuContents_sIgB- {
+  padding: 6px;
+  border-radius: var(--zdt-radius-l);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 30%), var(--zdt-sheet-fill);
+  backdrop-filter: var(--zdt-glass-blur);
+  box-shadow: var(--zdt-glass-edge), var(--zdt-glass-shadow);
+  filter: none;
+}
+
+/* Steam spaces the first and last rows away from the edges for its own scroll padding. */
+.gamepadcontextmenu_contextMenuContents_sIgB- > :first-child:not(#zdt) {
+  margin-top: 0;
+}
+
+.gamepadcontextmenu_contextMenuContents_sIgB- > :last-child:not(#zdt) {
+  margin-bottom: 0;
+}
+
+.gamepadcontextmenu_contextMenuItem_1sdvo:not(#zdt) {
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: var(--zdt-radius-m);
+  background: transparent;
+  color: var(--zdt-label);
+  letter-spacing: 0;
+  text-transform: none;
+  transition: background-color var(--zdt-duration) var(--zdt-ease), color var(--zdt-duration) var(--zdt-ease);
+}
+
+.gamepadcontextmenu_contextMenuItem_1sdvo.gamepadcontextmenu_Focused_X813r:not(#zdt),
+.gamepadcontextmenu_contextMenuItem_1sdvo.gamepadcontextmenu_active_2Pk-x:not(#zdt) {
+  background: var(--zdt-accent);
+  color: var(--zdt-on-accent);
+}
+
+.gamepadcontextmenu_contextMenuItem_1sdvo.gamepadcontextmenu_Selected_1PnET:not(#zdt) {
+  background: var(--zdt-glass-fill);
+}
+
+.gamepadcontextmenu_contextMenuItem_1sdvo:is(.gamepadcontextmenu_Destructive_3aIFv, .Stop):not(#zdt) {
+  color: rgb(255, 105, 97);
+}
+
+.gamepadcontextmenu_contextMenuItem_1sdvo.gamepadcontextmenu_Focused_X813r:is(.gamepadcontextmenu_Destructive_3aIFv, .Stop):not(#zdt) {
+  background: rgb(255, 69, 58);
+  color: #fff;
+}
+
+.gamepadcontextmenu_contextMenuItem_1sdvo.disabled:not(#zdt) {
+  color: var(--zdt-label-tertiary);
+}
+
+.gamepadcontextmenu_contextMenuItem_1sdvo:not(#zdt)::after {
+  display: none;
+}
+
+/* Submenu chevrons and item icons follow the text colour. */
+.gamepadcontextmenu_contextMenuItem_1sdvo.gamepadcontextmenu_SubMenu_1_tPN .SVGIcon_DownArrowContextMenu:not(#zdt) {
+  fill: currentColor;
+  opacity: 0.5;
+}
+
+.gamepadcontextmenu_ContextMenuSeparator_1KL6n:not(#zdt) {
+  height: 1px;
+  min-height: 1px;
+  margin: 5px 14px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.gamepadcontextmenu_BasicContextMenuHeader_2Jp8B {
+  font-weight: 700;
+  color: var(--zdt-label);
+}
