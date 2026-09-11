@@ -7,6 +7,9 @@
   --zdt-label-secondary: rgba(235, 235, 245, 0.6);
   --zdt-label-tertiary: rgba(235, 235, 245, 0.3);
   --zdt-surface: rgba(18, 18, 22, 0.92);
+  --zdt-page: rgb(14, 15, 19);
+  /* Text and glyphs drawn on the accent: near-black on light accents, white on dark ones. */
+  --zdt-on-accent: lch(from var(--zdt-accent, #fff) calc((62 - l) * 100) 0 0 / 0.88);
 
   /* Type. "Motiva Sans" is Steam's UI family; shared/type.css points it at Oxygen. */
   --zdt-font-sans: "Motiva Sans", "Oxygen", Arial, Helvetica, sans-serif;
@@ -25,6 +28,15 @@
   --zdt-glass-blur: blur(24px) saturate(180%);
   --zdt-glass-edge: inset 0 1px 0 rgba(255, 255, 255, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
   --zdt-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+
+  /* Sheets (Quick Access, Steam menu) float over a dimmed, blurred backdrop drawn by the main window */
+  --zdt-sheet-fill: rgba(28, 28, 34, 0.66);
+  --zdt-backdrop-dim: rgba(0, 0, 0, 0.3);
+  --zdt-backdrop-blur: blur(20px) saturate(160%);
+
+  /* Layout: floating glass keeps this much air from the screen edges */
+  --zdt-gap: 8px;
+  --zdt-bar-height: 36px;
 
   /* Motion: animate transform and opacity only */
   --zdt-ease: cubic-bezier(0.2, 0.8, 0.2, 1);

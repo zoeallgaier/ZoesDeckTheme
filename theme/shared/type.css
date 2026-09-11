@@ -34,7 +34,7 @@
    from size, and font-synthesis stops Chromium faking a bold. Keep this list short. */
 .gamepadhomerecentgames_RecentGamesHeaderLabel_1KKWf,
 .quickaccessmenu_Title_34nl5,
-.pagedsettings_PagedSettingsDialog_Title_3qEgQ,
+.gamepaddialog_GamepadDialogContent_InnerWidth_3Xeyd > .DialogHeader,
 .achievementsheader_Title_3wNyl {
   font-family: var(--zdt-font-serif);
   font-weight: 400;
@@ -43,8 +43,9 @@
   text-transform: none;
 }
 
+/* Page titles ("Display", "Audio"...) are the DialogHeader at the top of the content column. */
 .gamepadhomerecentgames_RecentGamesHeaderLabel_1KKWf,
-.pagedsettings_PagedSettingsDialog_Title_3qEgQ {
+.gamepaddialog_GamepadDialogContent_InnerWidth_3Xeyd > .DialogHeader {
   font-size: 30px;
   line-height: 1.1;
 }

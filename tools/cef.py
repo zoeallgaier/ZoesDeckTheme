@@ -13,7 +13,8 @@ Run ON THE DECK (the debugger listens on 127.0.0.1:8080). Gaming Mode tabs
 Tab arguments are regexes matched against the tab title ("SP", "QuickAccess",
 "MainMenu", "Steam"...). Steam ships scrambled class names; `tree`/`find`
 translate them to the readable names CSS Loader understands, using
-~/homebrew/themes/css_translations.json.
+~/homebrew/themes/css_translations.json. A name ending in "!" is an older class
+that CSS Loader won't translate to; select that element by structure instead.
 """
 import base64
 import json
@@ -26,7 +27,7 @@ import urllib.request
 
 PORT = int(os.environ.get("CEF_PORT", "8080"))
 TRANSLATIONS = os.path.expanduser("~/homebrew/themes/css_translations.json")
-READABLE = re.compile(r"^[a-z][a-z0-9]*_[A-Za-z0-9-]+_[A-Za-z0-9]{5}$")
+READABLE = re.compile(r"^[a-z][a-z0-9]*_[A-Za-z0-9_-]+_[A-Za-z0-9_-]{5}$")
 # Same aliases CSS Loader uses: newer Steam titles the main Gaming Mode window
 # "Steam Big Picture Mode" rather than "SP".
 ALIASES = {"SP": r"^(SP|Steam Big Picture Mode)$"}
@@ -129,7 +130,12 @@ class DevTools:
 
 
 def load_translations():
-    """Map scrambled class -> readable name, and readable -> scrambled."""
+    """Map scrambled class -> readable name, and readable -> scrambled.
+
+    Each entry lists a short id ("_22Zq8BkS_Item"), the readable name with its hash
+    ("mainmenu_Item_2w9Tp"), "mainmenu_Item_", "mainmenu_Item", then the scrambled names oldest
+    first. CSS Loader rewrites every listed name to the LAST one, so if a window still uses an
+    older scrambled name, readable names can't reach it. Those classes print with a trailing "!"."""
     to_readable, to_live = {}, {}
     try:
         with open(TRANSLATIONS, encoding="utf-8") as fp:
@@ -138,9 +144,16 @@ def load_translations():
         return to_readable, to_live
     for names in data.values():
         live = names[-1]
-        readable = next((n for n in names if READABLE.match(n)), None)
+        # The readable name is the one whose "<stem>_" sibling exists (hashes can contain "_"
+        # too, so cut the 5-character hash off by length).
+        known = set(names)
+        readable = next((n for n in names if READABLE.match(n) and n[:-5] in known), None)
         if readable:
             to_readable[live] = readable
+            base = readable[:-6]
+            first_scrambled = names.index(base if base in known else readable) + 1
+            for n in names[first_scrambled:-1]:
+                to_readable[n] = readable + "!"
             for n in names[:-1]:
                 to_live[n] = live
     return to_readable, to_live

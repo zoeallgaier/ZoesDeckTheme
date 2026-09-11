@@ -1,0 +1,102 @@
+/* Zoe's Deck Theme: main window chrome. The top bar, the bottom bar, and the glass drawn behind
+   the Quick Access menu and Steam menu (those menus are separate windows, see qam/ and menu/). */
+
+/* Top bar: status items become capsules, and focus is a white capsule (tvOS) instead of a
+   full-height slab. */
+.header_HeaderItem_2HnVd {
+  height: 32px;
+  align-self: center;
+  border-radius: var(--zdt-radius-pill);
+  transition: background-color var(--zdt-duration) var(--zdt-ease), color var(--zdt-duration) var(--zdt-ease);
+}
+
+.header_HeaderItem_2HnVd.gpfocus,
+.header_HeaderItem_2HnVd.gpfocuswithin {
+  background: var(--zdt-accent);
+  color: var(--zdt-on-accent);
+  box-shadow: var(--zdt-glass-shadow);
+}
+
+/* The top bar's backdrop, which Steam fades in once you scroll or open a menu: a soft
+   scroll-edge fade (iOS 26 style) instead of a hard black band. */
+.header_Header_1E_SL::before,
+.header_Header_1E_SL.header_OverrideHeaderBackground_MS2nB.gpfocuswithin::before {
+  height: calc(100% + 24px);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  backdrop-filter: blur(16px);
+  mask-image: linear-gradient(to bottom, #000 40%, transparent);
+}
+
+.searchbar_SearchFieldBackground_3F4YR {
+  top: 4px;
+  bottom: 4px;
+  height: auto;
+  border-radius: var(--zdt-radius-pill);
+}
+
+/* Bottom bar: a floating glass capsule instead of an edge-to-edge strip. The keyboard and
+   in-flow variants keep Steam's layout. */
+.footer_BasicFooter_3T1iF:not(.footer_WithKeyboard_1fMXT, .footer_Relative_1u4NT) {
+  left: var(--zdt-gap);
+  right: var(--zdt-gap);
+  bottom: var(--zdt-gap);
+  min-height: var(--zdt-bar-height);
+  padding: 0 6px;
+  border: none;
+  border-image: none;
+  border-radius: var(--zdt-radius-pill);
+  background-color: var(--zdt-glass-dim);
+  backdrop-filter: var(--zdt-glass-blur);
+  box-shadow: var(--zdt-glass-edge), var(--zdt-glass-shadow);
+}
+
+.footer_BasicFooter_3T1iF.footer_Opaque_2PZqi {
+  background-color: var(--zdt-surface);
+}
+
+.footer_BasicFooter_3T1iF .footer_FooterLegend_2JJDH {
+  padding: 2px 0;
+}
+
+.actionbuttonlegenditem_ActionButtonLegend_Mbyhb {
+  border-radius: var(--zdt-radius-pill);
+}
+
+.actionbuttonlegenditem_ActionButtonLegend_Mbyhb .actionbuttonlegenditem_ActionButtonLabel_31Jnn {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* The backdrop behind the side menus: lighter and softer than Steam's 70% black. */
+.backgroundglass_BackgroundGlass_3rsrz.backgroundglass_DrawBackground_2NQoF {
+  background: var(--zdt-backdrop-dim);
+}
+
+.backgroundglass_BackgroundGlass_3rsrz.backgroundglass_Blur_N9sQL {
+  backdrop-filter: var(--zdt-backdrop-blur);
+}
+
+/* Quick Access. Steam sizes and places the QuickAccess window from this placeholder's box, so
+   shrinking it to the visible 348px and pulling it off the edges makes the whole menu a floating
+   sheet (Steam's version is 854px wide, pushed 506px off screen). Friends "expanded" mode uses the
+   full width. The placeholder also casts the sheet's shadow, which the menu window can't. */
+.quickaccessmenu_ViewPlaceholder_2orc8 {
+  top: calc(var(--basicui-header-height) + var(--zdt-gap));
+  right: var(--zdt-gap);
+  width: 348px;
+  transform: none;
+  border-radius: var(--zdt-radius-l);
+  box-shadow: var(--zdt-glass-shadow);
+}
+
+.quickaccessmenu_ViewPlaceholder_2orc8:not(.quickaccessmenu_FullHeight_3ud27) {
+  bottom: calc(var(--zdt-bar-height) + 2 * var(--zdt-gap));
+}
+
+.quickaccessmenu_ViewPlaceholder_2orc8.quickaccessmenu_FullHeight_3ud27 {
+  bottom: var(--zdt-gap);
+}
+
+.quickaccessmenu_ViewPlaceholder_2orc8._2zh9IsDz_Expanded {
+  width: 854px;
+}

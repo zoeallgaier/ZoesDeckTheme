@@ -1,0 +1,61 @@
+/* Zoe's Deck Theme: the Steam menu window (Home, Library, Store...).
+
+   The window is 240px wide and full height, and transparent outside the menu, so the menu floats
+   as a sheet inside it over the backdrop sp/chrome.css blurs. Steam's collapsed (44px, icons only)
+   and VR variants keep their own sizing. */
+
+.mainmenu_Menu_23IDi {
+  width: calc(240px - 2 * var(--zdt-gap));
+  height: auto;
+  /* --basicui-header-height only exists in the main window; 40px is its value there. */
+  margin: calc(var(--basicui-header-height, 40px) + var(--zdt-gap)) 0 calc(var(--zdt-bar-height) + 2 * var(--zdt-gap)) var(--zdt-gap);
+  border-radius: var(--zdt-radius-l);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 30%), var(--zdt-sheet-fill);
+  box-shadow: var(--zdt-glass-edge);
+}
+
+/* Menu items have no readable class names: each is .mainmenu_Menu_23IDi > div > div, with an icon
+   div and a label div inside. The current page's item also holds an empty div, Steam's blue bar.
+   Steam styles the current page with up to five classes plus :focus, so these rules carry
+   :not(#zdt), which matches everything but counts as an ID and outranks any class-only rule. */
+.mainmenu_Menu_23IDi > div {
+  width: 100%;
+  overflow: visible;
+}
+
+.mainmenu_Menu_23IDi:not(#zdt) > div > div {
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 0;
+  height: 44px;
+  min-height: 44px;
+  max-height: 44px;
+  margin: 1px 8px;
+  padding: 0 14px;
+  border-radius: var(--zdt-radius-m);
+  transform: none;
+  transform-origin: center;
+  animation: none;
+  transition: transform var(--zdt-duration) var(--zdt-ease), background-color var(--zdt-duration) var(--zdt-ease);
+}
+
+/* Current page: a quiet glass pill instead of the blue bar. */
+.mainmenu_Menu_23IDi:not(#zdt) > div > div:has(> div:empty) {
+  background-color: var(--zdt-glass-fill);
+}
+
+.mainmenu_Menu_23IDi > div > div > div:empty {
+  display: none;
+}
+
+/* Focus: tvOS white capsule with dark content and a slight lift. The doubled .gpfocus keeps it
+   above the current-page rule, whose :has() adds specificity. */
+.mainmenu_Menu_23IDi:not(#zdt) > div > div.gpfocus.gpfocus {
+  background-color: var(--zdt-accent);
+  transform: scale(1.04);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+.mainmenu_Menu_23IDi:not(#zdt) > div > div.gpfocus > div {
+  color: var(--zdt-on-accent);
+}

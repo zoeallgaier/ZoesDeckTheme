@@ -1,0 +1,64 @@
+/* Zoe's Deck Theme: the Quick Access menu window.
+
+   sp/chrome.css shrinks this window to exactly the visible sheet and blurs what's behind it, so
+   here the panel just needs to fill the window, round its corners and turn translucent. */
+
+.quickaccessmenu_Container_3DHXr {
+  width: 100%;
+}
+
+/* The panel */
+.quickaccessmenu_QuickAccessMenu_V0cr- {
+  border-radius: var(--zdt-radius-l);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 30%), var(--zdt-sheet-fill);
+  box-shadow: var(--zdt-glass-edge);
+  overflow: hidden;
+}
+
+/* Steam paints the sticky title solid (background plus a matching box-shadow) to cover content
+   scrolling under it, which shows as a dark band on glass. */
+.quickaccessmenu_Title_34nl5 {
+  background: transparent;
+  box-shadow: none;
+  padding-left: 14px;
+}
+
+.quickaccessmenu_HeaderAndFooterVisible_2m0zl .quickaccessmenu_Menu_1gJzx::before,
+.quickaccessmenu_HeaderAndFooterVisible_2m0zl .quickaccessmenu_Menu_1gJzx::after {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.quickaccessmenu_Tabs_3Ag1w::after {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Rows bleed 16px past the content on each side so their focus highlight reaches the sheet's edges.
+   Bleed 10px instead: the text stays put and the rounded highlight gets some air. */
+.quickaccesscontrols_PanelSection_2C0g0 .gamepaddialog_HighlightOnFocus_wE4V6 {
+  margin-inline: -10px;
+  padding-inline: 10px;
+}
+
+/* Tab rail: rounded tiles with a little air around them instead of full-bleed blocks. */
+.quickaccessmenu_Tab_1S76C {
+  --tab-height: 52px;
+  width: 38px;
+  min-height: 40px;
+  margin: 2px 5px;
+  border-radius: var(--zdt-radius-m);
+  color: var(--zdt-label-secondary);
+  transition: background-color var(--zdt-duration) var(--zdt-ease), color var(--zdt-duration) var(--zdt-ease);
+}
+
+.quickaccessmenu_Tab_1S76C.quickaccessmenu_Selected_2QHMu {
+  background-color: var(--zdt-glass-fill);
+  color: var(--zdt-label);
+}
+
+.gpfocus .quickaccessmenu_Tab_1S76C,
+.quickaccessmenu_Tab_1S76C.gpfocus,
+.gpfocus .quickaccessmenu_Tab_1S76C.quickaccessmenu_Selected_2QHMu,
+.quickaccessmenu_Tab_1S76C.quickaccessmenu_Selected_2QHMu.gpfocus {
+  background: var(--zdt-accent);
+  color: var(--zdt-on-accent);
+}

@@ -1,0 +1,56 @@
+/* Zoe's Deck Theme: Settings and the other paged settings screens. An iPadOS-style floating
+   sidebar, tvOS-style rounded rows, one calm background instead of three shades of slate. */
+
+.gamepadpagedsettings_PagedSettingsDialog_2P_CG {
+  background: var(--zdt-page);
+}
+
+.gamepadpagedsettings_PagedSettingDialog_ContentColumn_3JPle {
+  background: transparent;
+}
+
+/* Sidebar: a glass sheet floating between the top and bottom bars, like the Steam menu. */
+.gamepadpagedsettings_PagedSettingsDialog_PageListColumn_2EZ3o {
+  margin: calc(var(--basicui-header-height, 40px) + var(--zdt-gap)) 0 calc(var(--zdt-bar-height) + 2 * var(--zdt-gap)) var(--zdt-gap);
+  padding-bottom: 0;
+  border-radius: var(--zdt-radius-l);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 30%), var(--zdt-sheet-fill);
+  box-shadow: var(--zdt-glass-edge);
+  overflow: hidden;
+}
+
+.gamepadpagedsettings_PagedSettingsDialog_PageList_3c_Jp {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.gamepadpagedsettings_PagedSettingsDialog_PageListItem_1ix7r {
+  margin: 1px 8px;
+  padding-inline: 12px;
+  border-left: none;
+  border-radius: var(--zdt-radius-m);
+  transition: transform var(--zdt-duration) var(--zdt-ease), background-color var(--zdt-duration) var(--zdt-ease);
+}
+
+/* Steam scales the current and focused items' contents to 1.1. Keep them still; focus lifts the
+   whole pill instead. (:not(#zdt) outranks Steam's three-class rule; see shared/controls.css.) */
+.gamepadpagedsettings_PagedSettingsDialog_PageListItem_1ix7r:not(#zdt) ._4hESt2MY_ScaledChildren {
+  transform: none;
+}
+
+.gamepadpagedsettings_PagedSettingsDialog_PageListItem_1ix7r.gamepadpagedsettings_Active_22LLB {
+  background: var(--zdt-glass-fill);
+}
+
+.gamepadpagedsettings_PagedSettingsDialog_PageListItem_1ix7r:focus {
+  border-left: none;
+  background: var(--zdt-accent);
+  color: var(--zdt-on-accent);
+  transform: scale(1.03);
+}
+
+/* Rows: Steam's boxed rows become rounded glass tiles. */
+.gamepadpagedsettings_PagedSettingDialog_ContentColumn_3JPle .gamepaddialog_Field_S-_La._EifR99lo_Background {
+  background: var(--zdt-glass-fill-clear);
+  border-radius: var(--zdt-radius-m);
+}

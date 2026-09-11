@@ -1,0 +1,11 @@
+/* Zoe's Deck Theme option: Reduce Transparency. Swaps every glass token for a solid surface, like
+   the iOS accessibility setting. :root:root outranks the defaults in shared/tokens.css. */
+
+:root:root {
+  --zdt-glass-fill: rgba(255, 255, 255, 0.14);
+  --zdt-glass-dim: rgb(24, 24, 28);
+  --zdt-glass-blur: none;
+  --zdt-sheet-fill: rgb(28, 28, 34);
+  --zdt-backdrop-dim: rgba(0, 0, 0, 0.6);
+  --zdt-backdrop-blur: none;
+}
