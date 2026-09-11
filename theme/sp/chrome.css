@@ -71,6 +71,14 @@
   padding: 0;
 }
 
+/* Some pages (a game's controller settings...) put their title in the top bar instead of search:
+   a small bold title, like an iOS navigation bar's (the page's own heading is the big one). */
+.searchbar_SearchAndTitleContainer_17M8g.searchbar_ShowingTitle_P5_Rq > div:not(#zdt) {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--zdt-label);
+}
+
 /* The top bar's backdrop, which Steam fades in once you scroll or open a menu: a soft
    scroll-edge fade (iOS 26 style) instead of a hard black band. */
 .header_Header_1E_SL::before,

@@ -1,0 +1,47 @@
+/* Zoe's Deck Theme: a game's controller settings (the controller button on its page). Steam's
+   two slate bands go, so the page sits on the usual background; the layout's title is in the
+   serif, the current layout is a rounded tile rather than a pill, "Quick settings" is a quiet
+   heading, and the rows are rounded glass like Settings. */
+
+.controllerconfigurator_ControllerConfiguratorMain_APY6j:not(#zdt) {
+  background: var(--zdt-page);
+}
+
+.controllerconfigurator_ControllerConfiguratorMain_APY6j :is(.controllerconfigurator_TopSection_20sN9, .controllerconfigurator_BottomSection_3RsRf):not(#zdt) {
+  background: transparent;
+}
+
+.controllerconfigurator_TopSectionHeader_1a_D6 h3:not(#zdt) {
+  font-family: var(--zdt-font-serif);
+  font-style: italic;
+  font-weight: 700;
+  font-synthesis: weight;
+  font-size: 26px;
+  letter-spacing: 0.01em;
+}
+
+button.controllerconfigurator_CurrentConfigurationButton_3lO3w.DialogButton:not(#zdt) {
+  border-radius: var(--zdt-radius-l);
+}
+
+.controllerconfigurator_QuickSettingsHeader_3gVR5:not(#zdt) {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--zdt-label-secondary);
+}
+
+.controllerconfigurator_BottomSection_3RsRf .gamepaddialog_Field_S-_La:not(#zdt) {
+  margin: 0 0 8px;
+  border-radius: var(--zdt-radius-m);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.controllerconfigurator_BottomSection_3RsRf .gamepaddialog_Field_S-_La:not(#zdt)::after {
+  display: none;
+}
+
+.controllerconfigurator_QuickSettingsGripGridContainer_1S9Ti:not(#zdt) {
+  column-gap: 8px;
+}
