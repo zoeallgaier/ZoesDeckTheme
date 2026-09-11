@@ -18,10 +18,15 @@ should feel so clean it could be an Apple product. Reference: Apple tvOS + Liqui
 
 ## Status (2026-09-10)
 
-- Research done (see `docs/RESEARCH.md`). No theme code written yet.
+- Research done (see `docs/RESEARCH.md`).
 - Zoe has **turned off all other installed themes** for a clean start, so nothing else is styling the UI.
-- Theme folder not created yet. Zoe hasn't picked an accent color; default to tvOS-style white-on-dark
-  unless told otherwise.
+- `theme/` exists, is symlinked in and **active** (`theme/config_USER.json`, gitignored). It has
+  `theme.json`, `shared/tokens.css` (all `--zdt-*` tokens) and `shared/type.css` (font swap + serif accent
+  titles, behind the "Theme fonts" checkbox). Verified in Gaming Mode: the "Motiva Sans" override works
+  (Motiva measures identically to Oxygen at 300/400/700, so Steam's bold survives) and the Home
+  "Recent Games" label renders in Instrument Serif.
+- Zoe hasn't picked an accent color; default to tvOS-style white-on-dark unless told otherwise. The
+  Accent color picker (`--zdt-accent`, default `#ffffff`) is already wired up.
 
 ## Environment
 
@@ -32,11 +37,16 @@ should feel so clean it could be an Apple product. Reference: Apple tvOS + Liqui
 - Git pushes over SSH with a repo-only deploy key, `~/.ssh/zoesdecktheme_github` (set via
   `git config core.sshCommand` in this repo). There's no `gh` CLI on the Deck.
 - The VS Code on the Deck is a Flatpak sandbox (no `systemctl`, no `sudo`); SSH sessions get the real host.
-- CSS Loader live reload is on (`watch:1` in `~/homebrew/themes/STORE`), so saved CSS applies within seconds.
+- CSS Loader live reload is on (`watch:1` in `~/homebrew/themes/STORE`), **but its watcher doesn't follow
+  the `ZoesDeckTheme` symlink**, so saving files in `theme/` does nothing on its own. Run
+  `tools/reload.sh` after edits (or leave `tools/reload.sh --watch` running); it writes a ping file in
+  `~/homebrew/themes/` that triggers the reload.
 - **Gaming Mode must be running** to see or inspect the theme. Zoe works from a Mac over SSH while the Deck
   sits in Gaming Mode.
 - The Steam UI debugger listens on `127.0.0.1:8080` on the Deck. In Desktop Mode only desktop Steam
-  windows show up; the Gaming Mode tabs (`SP`, `QuickAccess_*`, `MainMenu_*`) appear only in Gaming Mode.
+  windows show up; the Gaming Mode tabs (`Steam Big Picture Mode` a.k.a. `SP`, `QuickAccess_*`,
+  `MainMenu_*`) appear only in Gaming Mode. CSS Loader's log is the newest file in
+  `~/homebrew/logs/SDH-CssLoader/`.
 
 ## Tools
 
@@ -50,34 +60,33 @@ python3 tools/cef.py eval SP 'document.fonts.check("16px Oxygen")'
 python3 tools/cef.py shot SP /tmp/home.png              # then Read the PNG to see it
 ```
 
-Tested in Desktop Mode: `tabs`, `tree`, `find` and `eval` work. `shot` needs a visible window, so it
-hasn't been tested against Gaming Mode yet. Hidden windows can't be captured and the script says so.
+All commands, `shot` included, work in Gaming Mode. `SP` is an alias for the `Steam Big Picture Mode`
+window, matching CSS Loader. Hidden windows can't be captured and the script says so. Screenshots come
+out at the display's resolution (3442×1442 when docked), not 1280×800.
 
-## Planned repo layout
+`tools/reload.sh [--watch]` triggers CSS Loader's reload (see Environment).
 
-The theme itself goes in `theme/`, symlinked into CSS Loader's themes folder so edits here go live:
+## Repo layout
+
+The theme lives in `theme/`, symlinked into CSS Loader's themes folder (already done on this Deck):
 
 ```sh
 ln -s "$HOME/Documents/Zoe's Deck Theme/theme" ~/homebrew/themes/ZoesDeckTheme
 ```
 
-CSS Loader discovers themes with `listdir` + `isdir`, which follow symlinks, and `/themes_custom/` is already a
-symlink to `~/homebrew/themes`, so bundled fonts should resolve. **Not verified yet**; if fonts 404, copy
-instead of symlinking.
+Verified: CSS Loader finds the theme through the symlink, and Steam serves the bundled fonts from
+`/themes_custom/ZoesDeckTheme/fonts/` (HTTP 200). File layout, planned parts not written yet:
 
 ```
 theme/
   theme.json            manifest_version 9; options as patches
-  fonts/                Oxygen 300/400/700, Instrument Serif Regular/Italic, OFL.txt
-  shared/tokens.css     --zdt-* colors, radii, glass recipe, @font-face (all windows)
-  shared/type.css
+  fonts/                Oxygen 300/400/700, Instrument Serif Regular/Italic, OFL-*.txt   (done)
+  shared/tokens.css     --zdt-* colors, radii, glass recipe, motion (all windows)       (done)
+  shared/type.css       Motiva Sans -> Oxygen @font-face, serif accent titles           (done)
   sp/home.css  sp/chrome.css  sp/library.css  sp/gamepage.css  sp/dialogs.css
   qam/qam.css  menu/mainmenu.css
   options/*.css         reduce transparency, reduce motion, etc.
 ```
-
-Font files are already on the Deck at `~/homebrew/themes/Fonts/fonts/` (Oxygen-Light/Regular/Bold,
-InstrumentSerif-Regular/Italic). Copy them into `theme/fonts/` with the OFL licence.
 
 ## Rules that matter (details in RESEARCH.md)
 
@@ -88,8 +97,9 @@ InstrumentSerif-Regular/Italic). Copy them into `theme/fonts/` with the OFL lice
 2. **Fonts:** all Steam text uses `"Motiva Sans"`. Plan: redefine that family's `@font-face` to the Oxygen
    files so every weight maps through and Steam's own bold survives. Avoid `* { font-family … !important }`
    and never force one weight globally (Zoe's old preset forced 300, which killed all bold).
-   Instrument Serif has no bold, so serif titles get hierarchy from size. **Verify the Motiva override works
-   in Gaming Mode before building on it.**
+   Instrument Serif has no bold, so serif titles get hierarchy from size. **Verified working in Gaming
+   Mode (2026-09-10).** Each override mirrors one of Steam's own `@font-face` descriptors exactly so ours
+   wins the tie; keep it that way if Steam adds weights.
 3. **Glass:** `backdrop-filter` only blurs content in the *same window*. It works over art in `SP`. The Quick
    Access and Steam menus are separate windows, so there it will look tinted rather than frosted. Steam has
    its own `backgroundglass_*` component that may give real blur there. Investigate, don't assume.
@@ -104,10 +114,9 @@ InstrumentSerif-Regular/Italic). Copy them into `theme/fonts/` with the OFL lice
 
 ## Suggested next steps
 
-1. Create `theme/` with `theme.json` + `shared/tokens.css`, symlink it in, and confirm it shows up in CSS
-   Loader's list.
-2. Font swap first (smallest, most visible win). Verify with `cef.py eval SP` that Oxygen loaded and
-   bold weights still render.
+1. ~~Create `theme/`, symlink it in, confirm CSS Loader loads it.~~ Done.
+2. ~~Font swap.~~ Done and verified. Zoe should eyeball it on the real screen and say whether the serif
+   accent titles (Home "Recent Games", Quick Access title, settings title) are the right ones.
 3. Radii + glass tokens → header/footer → QAM → Steam menu → dialogs.
 4. Homescreen layout pass, then focus effects and animations.
 5. Screenshot each step with `cef.py shot SP` so Zoe can review from the Mac.

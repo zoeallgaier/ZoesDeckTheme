@@ -1,0 +1,54 @@
+/* Zoe's Deck Theme: typography.
+
+   Every piece of Steam UI text uses the "Motiva Sans" family, so instead of forcing a font on `*`
+   we redefine that family's faces to point at Oxygen. Each rule mirrors one of Steam's own
+   @font-face descriptors exactly (steamui/css/chunk~*.css), so ours, injected later, wins the tie
+   and Steam's bold text stays bold.
+
+   Oxygen only has Light / Regular / Bold and no italics:
+     100, 300   -> Light
+     400, 500   -> Regular   (Steam's Medium collapses to Regular)
+     700 - 900  -> Bold      (Oxygen Bold carries the hierarchy)
+     italics    -> the upright face at the same weight */
+
+@font-face { font-family: "Motiva Sans"; font-weight: 100; src: url("/themes_custom/ZoesDeckTheme/fonts/Oxygen-Light.ttf") format("truetype"); }
+@font-face { font-family: "Motiva Sans"; font-weight: 300; src: url("/themes_custom/ZoesDeckTheme/fonts/Oxygen-Light.ttf") format("truetype"); }
+@font-face { font-family: "Motiva Sans"; font-weight: 300; font-style: italic; src: url("/themes_custom/ZoesDeckTheme/fonts/Oxygen-Light.ttf") format("truetype"); }
+@font-face { font-family: "Motiva Sans"; font-weight: 400; src: url("/themes_custom/ZoesDeckTheme/fonts/Oxygen-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Motiva Sans"; font-weight: 400; font-style: italic; src: url("/themes_custom/ZoesDeckTheme/fonts/Oxygen-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Motiva Sans"; font-weight: 500; src: url("/themes_custom/ZoesDeckTheme/fonts/Oxygen-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Motiva Sans"; font-weight: 700; src: url("/themes_custom/ZoesDeckTheme/fonts/Oxygen-Bold.ttf") format("truetype"); }
+@font-face { font-family: "Motiva Sans"; font-weight: 700; font-style: italic; src: url("/themes_custom/ZoesDeckTheme/fonts/Oxygen-Bold.ttf") format("truetype"); }
+@font-face { font-family: "Motiva Sans"; font-weight: 800; src: url("/themes_custom/ZoesDeckTheme/fonts/Oxygen-Bold.ttf") format("truetype"); }
+@font-face { font-family: "Motiva Sans"; font-weight: 900; src: url("/themes_custom/ZoesDeckTheme/fonts/Oxygen-Bold.ttf") format("truetype"); }
+
+/* Plain "Oxygen" too, for anything that names it directly (e.g. --zdt-font-sans fallback). */
+@font-face { font-family: "Oxygen"; font-weight: 300; src: url("/themes_custom/ZoesDeckTheme/fonts/Oxygen-Light.ttf") format("truetype"); }
+@font-face { font-family: "Oxygen"; font-weight: 400; src: url("/themes_custom/ZoesDeckTheme/fonts/Oxygen-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Oxygen"; font-weight: 700; src: url("/themes_custom/ZoesDeckTheme/fonts/Oxygen-Bold.ttf") format("truetype"); }
+
+@font-face { font-family: "Instrument Serif"; font-weight: 400; src: url("/themes_custom/ZoesDeckTheme/fonts/InstrumentSerif-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Instrument Serif"; font-weight: 400; font-style: italic; src: url("/themes_custom/ZoesDeckTheme/fonts/InstrumentSerif-Italic.ttf") format("truetype"); }
+
+/* Accent titles in Instrument Serif. Instrument Serif has no bold, so these get their hierarchy
+   from size, and font-synthesis stops Chromium faking a bold. Keep this list short. */
+.gamepadhomerecentgames_RecentGamesHeaderLabel_1KKWf,
+.quickaccessmenu_Title_34nl5,
+.pagedsettings_PagedSettingsDialog_Title_3qEgQ,
+.achievementsheader_Title_3wNyl {
+  font-family: var(--zdt-font-serif);
+  font-weight: 400;
+  font-synthesis: none;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+
+.gamepadhomerecentgames_RecentGamesHeaderLabel_1KKWf,
+.pagedsettings_PagedSettingsDialog_Title_3qEgQ {
+  font-size: 30px;
+  line-height: 1.1;
+}
+
+.quickaccessmenu_Title_34nl5 {
+  font-size: 24px;
+}

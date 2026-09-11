@@ -1,0 +1,40 @@
+{
+  "name": "ZoesDeckTheme",
+  "display_name": "Zoe's Deck Theme",
+  "author": "zoeallgaier",
+  "version": "v0.1",
+  "description": "Apple-clean Gaming Mode: Instrument Serif accent titles, Oxygen everywhere else, rounded corners and liquid glass on the UI layer.",
+  "target": "System-Wide",
+  "manifest_version": 9,
+  "tabs": {
+    "everywhere": ["SP", "QuickAccess", "MainMenu"]
+  },
+  "inject": {
+    "shared/tokens.css": ["everywhere"]
+  },
+  "patches": {
+    "Theme fonts": {
+      "type": "checkbox",
+      "default": "Yes",
+      "values": {
+        "Yes": { "shared/type.css": ["everywhere"] },
+        "No": {}
+      }
+    },
+    "Accent": {
+      "type": "none",
+      "default": "Custom",
+      "values": { "Custom": {} },
+      "components": [
+        {
+          "name": "Accent color",
+          "type": "color-picker",
+          "on": "Custom",
+          "default": "#ffffff",
+          "css_variable": "zdt-accent",
+          "tabs": ["everywhere"]
+        }
+      ]
+    }
+  }
+}

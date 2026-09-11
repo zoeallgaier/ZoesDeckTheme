@@ -1,0 +1,33 @@
+/* Zoe's Deck Theme: design tokens, injected into every Gaming Mode window.
+   --zdt-accent (and its _r/_g/_b/_rgb parts) comes from the Accent color picker in theme.json. */
+
+:root {
+  /* Colour: tvOS-style white on dark */
+  --zdt-label: rgba(255, 255, 255, 0.96);
+  --zdt-label-secondary: rgba(235, 235, 245, 0.6);
+  --zdt-label-tertiary: rgba(235, 235, 245, 0.3);
+  --zdt-surface: rgba(18, 18, 22, 0.92);
+
+  /* Type. "Motiva Sans" is Steam's UI family; shared/type.css points it at Oxygen. */
+  --zdt-font-sans: "Motiva Sans", "Oxygen", Arial, Helvetica, sans-serif;
+  --zdt-font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+
+  /* Corners. Concentric rule: inner radius = outer radius - padding between them. */
+  --zdt-radius-s: 8px;
+  --zdt-radius-m: 14px;
+  --zdt-radius-l: 22px;
+  --zdt-radius-pill: 999px;
+
+  /* Liquid glass, for the controls/navigation layer only, never game art. */
+  --zdt-glass-fill: rgba(255, 255, 255, 0.1);
+  --zdt-glass-fill-clear: rgba(255, 255, 255, 0.04);
+  --zdt-glass-dim: rgba(0, 0, 0, 0.35);
+  --zdt-glass-blur: blur(24px) saturate(180%);
+  --zdt-glass-edge: inset 0 1px 0 rgba(255, 255, 255, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --zdt-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+
+  /* Motion: animate transform and opacity only */
+  --zdt-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --zdt-duration: 250ms;
+  --zdt-focus-scale: 1.06;
+}

@@ -2,3 +2,4 @@
 __pycache__/
 shots/
 .claude/settings.local.json
+theme/config_USER.json

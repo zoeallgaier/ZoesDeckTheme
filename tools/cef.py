@@ -27,6 +27,9 @@ import urllib.request
 PORT = int(os.environ.get("CEF_PORT", "8080"))
 TRANSLATIONS = os.path.expanduser("~/homebrew/themes/css_translations.json")
 READABLE = re.compile(r"^[a-z][a-z0-9]*_[A-Za-z0-9-]+_[A-Za-z0-9]{5}$")
+# Same aliases CSS Loader uses: newer Steam titles the main Gaming Mode window
+# "Steam Big Picture Mode" rather than "SP".
+ALIASES = {"SP": r"^(SP|Steam Big Picture Mode)$"}
 
 
 def list_tabs():
@@ -37,6 +40,7 @@ def list_tabs():
 def pick_tab(pattern):
     tabs = [t for t in list_tabs() if t.get("webSocketDebuggerUrl")]
     exact = [t for t in tabs if t["title"] == pattern]
+    pattern = ALIASES.get(pattern, pattern)
     matches = exact or [t for t in tabs if re.search(pattern, t["title"])]
     if not matches:
         sys.exit(f"No tab matches {pattern!r}. Is Gaming Mode running? Try: cef.py tabs")
