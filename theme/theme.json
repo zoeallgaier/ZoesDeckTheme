@@ -38,6 +38,14 @@
         "No": { "home/hide-whats-new.css": ["SP"] }
       }
     },
+    "Home background": {
+      "type": "dropdown",
+      "default": "Game art",
+      "values": {
+        "Game art": {},
+        "Dot grid": { "home/home-dotgrid.css": ["SP"] }
+      }
+    },
     "Reduce transparency": {
       "type": "checkbox",
       "default": "No",

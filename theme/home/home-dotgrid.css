@@ -1,0 +1,246 @@
+/* Zoe's Deck Theme: Home, "Dot grid" background (the "Home background" option in CSS Loader;
+   the default "Game art" look is home/home.css alone). This is zoeallgaier.com's backdrop
+   brought to the Deck: the page ground with two soft pools of colour over it and the dot grid
+   on top, and the game's name set like the site's hero.
+
+   The colour is the selected game's, with no per-game setup and no list of palettes to keep:
+   Steam's banner art is still the source, softened until it reads as light rather than picture
+   and masked into the site's two top-anchored pools. Move along the row and the colour crosses
+   to the next game's, because underneath it Steam is still just swapping that one <img>.
+
+   Loaded after home/home.css, whose banner art, mirror image and frosted overlay it turns off. */
+
+:root {
+  /* The dot grid's spacing, as on the site. */
+  --zdt-home-dot-gap: 24px;
+  /* The pinned name. Sized and placed off the window, not off the row, so it lands the same
+     whether or not What's New is on Home. */
+  --zdt-home-name-size: clamp(34px, 6.4vw, 68px);
+  --zdt-home-name-top: 27vh;
+}
+
+/* ── The layer ──
+   The art's container already spans the viewport (home.css) and is contain: strict, so it makes
+   a clean stage: the ground goes here, the pools on the art itself, the dots on the spare child
+   div Steam leaves at the end. */
+.gamepadhomerecentgames_RecentGamesBackgroundContainer_QNkOt:not(#zdt) {
+  background-color: var(--zdt-page);
+}
+
+/* home.css's frosted pane over the mirror image: there's no mirror here. */
+.gamepadhomerecentgames_RecentGamesBackgroundContainer_QNkOt::after {
+  content: none;
+}
+
+/* ── The colour pools ──
+   Two ellipses anchored off the top-right corner, at the site's own geometry (its "home"
+   palette: 109%x138% at 95% 0, and 109%x86% at 70% 0, each out to 70%). Each lands on a
+   different part of the art, so they read as two related colours rather than one flat wash,
+   the way the site's orange and rose do, and the corner away from them falls to the ground
+   colour instead of being filled edge to edge. */
+.gamepadhomerecentgames_RecentGamesBackgroundImages_30D-8:not(#zdt) {
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  /* home.css mirrors the art below itself; this look has no mirror. */
+  -webkit-box-reflect: unset;
+  -webkit-mask-image:
+    radial-gradient(109% 138% at 95% 0%, #000 0%, transparent 70%),
+    radial-gradient(109% 86% at 70% 0%, #000 0%, transparent 70%);
+  mask-image:
+    radial-gradient(109% 138% at 95% 0%, #000 0%, transparent 70%),
+    radial-gradient(109% 86% at 70% 0%, #000 0%, transparent 70%);
+  -webkit-mask-composite: source-over;
+  mask-composite: add;
+  opacity: 0.95;
+}
+
+.gamepadhomerecentgames_RecentGamesBackground_1SRox:not(#zdt) {
+  width: 100%;
+  height: 100%;
+}
+
+/* Softened, not erased: enough blur to turn the art into colour and shape, not so much that you
+   can't tell what you're looking at. Saturation comes back up because blurring greys colour out,
+   the same correction --zdt-reflect-filter makes for the mirror image on the other look.
+
+   Sized, deliberately, with no transform of our own. Steam cross-fades between two copies of
+   this element on every move along the row and drives that with an animation ON THE IMAGE that
+   animates `transform` — a static transform here loses to it, and the art collapses to a corner
+   of the screen for the length of each move. Leaving transform alone keeps Steam's cross-fade,
+   which is what carries one game's colour smoothly into the next. */
+.gamepadhomerecentgames_RecentGamesBackgroundImage_3Mp8R:not(#zdt) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(14px) saturate(165%) brightness(1.06);
+}
+
+/* ── The dot grid ──
+   Steam leaves an empty div at the end of the background container; it becomes the grid. The
+   dots are a mask, not a background, so the wave underneath them can move while they stay put:
+   the element is masked to the dot pattern and its ::before, a pair of soft blobs, drifts
+   across behind it. That's the site's canvas in CSS — there the dots' alpha is two slow sines
+   summed; here two travelling pools do the same job, easing there and back (`alternate`) so
+   the loop never jumps. Only a transform animates, so it stays on the compositor. */
+.gamepadhomerecentgames_RecentGamesBackgroundContainer_QNkOt > div:last-child {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  /* The grid itself, and a fade so the dots thin out behind the row and the name. */
+  -webkit-mask-image:
+    radial-gradient(circle at 50% 50%, #000 0 0.9px, transparent 1.35px),
+    linear-gradient(to bottom, #000 38%, rgba(0, 0, 0, 0.4) 68%, transparent 92%);
+  mask-image:
+    radial-gradient(circle at 50% 50%, #000 0 0.9px, transparent 1.35px),
+    linear-gradient(to bottom, #000 38%, rgba(0, 0, 0, 0.4) 68%, transparent 92%);
+  -webkit-mask-size: var(--zdt-home-dot-gap) var(--zdt-home-dot-gap), 100% 100%;
+  mask-size: var(--zdt-home-dot-gap) var(--zdt-home-dot-gap), 100% 100%;
+  -webkit-mask-repeat: repeat, no-repeat;
+  mask-repeat: repeat, no-repeat;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+.gamepadhomerecentgames_RecentGamesBackgroundContainer_QNkOt > div:last-child::before {
+  content: "";
+  position: absolute;
+  /* Oversized, so the blobs can travel without their edges ever coming into frame. */
+  inset: -45% -60%;
+  background:
+    radial-gradient(58% 68% at 22% 32%, rgba(255, 255, 255, 0.55), transparent 62%),
+    radial-gradient(52% 62% at 72% 68%, rgba(255, 255, 255, 0.42), transparent 62%),
+    rgba(255, 255, 255, 0.11);
+  animation: zdt-home-dotwave 46s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+
+@keyframes zdt-home-dotwave {
+  from { transform: translate3d(-11%, -5%, 0) scale(1); }
+  to   { transform: translate3d(13%, 7%, 0) scale(1.18); }
+}
+
+/* ── The game's name, set like the site's hero ──
+   Instrument Serif, big, and pinned: it sits in one place at the left margin instead of riding
+   above whichever card has focus, so only the words change as you move along the row.
+
+   Pinning takes some doing. Every card carries its own copy of the name and Steam shows only
+   the focused one, so the element that holds the visible name is inside the row's horizontal
+   scroller — position: fixed included, because the carousel's `will-change: transform` makes it
+   the containing block for fixed descendants, which then scroll with the content. Handing that
+   element `will-change: scroll-position` instead keeps the scroller's compositing hint but
+   stops it capturing fixed, so the name anchors to the window and holds still. (Measured: the
+   name stays at the same pixel across the whole row.)
+
+   The entrance re-runs on every game for the same reason it can be pinned at all — the name
+   that just became visible is a different element, and Steam marks its card with gpfocuswithin,
+   so the selector matches something new and the animation starts from the top.
+
+   The !important below is one of the few in the theme and has to be: react-virtualized writes
+   will-change: transform inline on the scroller, and an inline style outranks any selector.
+   scroll-position is the honest hint for a box that scrolls, and unlike transform it doesn't
+   make the element a containing block, which is the whole point here. */
+.gamepadhome_RecentSection_39tNv .basicgamecarousel_BasicGameCarousel_3MdH5 {
+  will-change: scroll-position !important;
+}
+
+.gamepadhome_RecentSection_39tNv .basicgamecarousel_CarouselGameLabelWrapper_ZkD6W:not(#zdt) {
+  position: fixed;
+  /* The carousel's own side padding, so the name starts on the cards' left edge. */
+  left: 2.8vw;
+  top: var(--zdt-home-name-top);
+  right: auto;
+  bottom: auto;
+  margin: 0;
+  display: block;
+  text-align: left;
+  /* Steam stretches this label from the first card to the focused one and writes the result
+     inline, so the line the name gets is as wide as that reach — a few hundred pixels for a
+     card near the start, which sent long titles scrolling through a narrow slot. min-width
+     clamps the used width whatever the inline width says, so the hero always gets the full
+     measure, and only a genuinely long title marquees. */
+  min-width: calc(100vw - 5.6vw);
+}
+
+/* Steam clips the label to one 52px line (it was sized for 30px type). */
+.gamepadhome_RecentSection_39tNv .basicgamecarousel_CarouselGameLabel_3CKji:not(#zdt),
+.gamepadhome_RecentSection_39tNv .basicgamecarousel_CarouselGameLabel_3CKji
+.appportrait_PortraitMessage_3gwMk:not(#zdt) {
+  height: auto;
+  overflow: visible;
+  display: block;
+  text-align: left;
+}
+
+.gamepadhome_RecentSection_39tNv
+.basicgamecarousel_CarouselGameLabel_3CKji
+.appportrait_PortraitMessage_3gwMk.appportrait_Message_3CRLA:not(#zdt) {
+  font-size: var(--zdt-home-name-size);
+  /* Upright, not the italic the theme's other accent titles use (shared/type.css): at this size
+     the roman face is steadier to read across the top of the screen. Instrument Serif ships
+     Regular and Italic and no bold, so this asks for the real Regular and turns off the weight
+     synthesis home.css leans on for the small italic label — a faked bold on an upright serif
+     this large reads as smudged rather than strong. */
+  font-style: normal;
+  font-weight: 400;
+  font-synthesis: none;
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  overflow: visible;
+  /* Room for the descenders and for the blur, which WebKit otherwise clips to the box. */
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+  text-shadow: 0 2px 22px rgba(0, 0, 0, 0.45);
+}
+
+/* The name rises into place, as the site's letters do out of their masks. Steam already clips
+   this box (it scrolls long titles through it sideways), which is the mask the move needs.
+
+   The clipping is also what kept cropping the type. Steam sized these boxes for a 30px sans
+   label: at 68px Instrument Serif the ink is taller than the line box even on a title with no
+   descenders ("Once Human" overflowed by 12px), and the inner track clips its own overflow-y on
+   top of that. So the track is let out of its clip and the mask above it is given a band of
+   padding below the baseline, cancelled again by a negative margin so nothing below moves. The
+   rise starts below that band, so the letters are still hidden when they set off. */
+.gamepadhome_RecentSection_39tNv
+.appportrait_Message_3CRLA .marquee_Container_26RbF:not(#zdt) {
+  justify-content: flex-start;
+  padding-bottom: 0.3em;
+  margin-bottom: -0.3em;
+}
+
+.gamepadhome_RecentSection_39tNv
+.appportrait_Message_3CRLA .marquee_Content_2ADpT:not(#zdt) {
+  overflow: visible;
+}
+
+.basicgamecarousel_BasicGameCarouselItemMediaContainer_1HIFN.gpfocuswithin
+.appportrait_Message_3CRLA .marquee_Content_2ADpT:not(#zdt) {
+  animation: zdt-home-name-in 1s cubic-bezier(0.15, 1, 0.3, 1) both;
+}
+
+@keyframes zdt-home-name-in {
+  from { opacity: 0; transform: translateY(85%); filter: blur(8px); }
+  to   { opacity: 1; transform: translateY(0);   filter: blur(0); }
+}
+
+/* The line under it lands last, like the site's tagline under the hero. */
+.basicgamecarousel_BasicGameCarouselItemMediaContainer_1HIFN.gpfocuswithin
+.appportrait_PortraitMessage_3gwMk.appportrait_SubMessage_3DR9f:not(#zdt) {
+  animation: zdt-home-sub-in 0.9s cubic-bezier(0.25, 0.8, 0.25, 1) 0.34s both;
+}
+
+@keyframes zdt-home-sub-in {
+  from { opacity: 0; transform: translateY(10px); filter: blur(5px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+
+/* ── Reduced motion ──
+   The grid settles and the name simply arrives. (base.css already flattens durations, but the
+   drifting wave is ambient rather than a response, so it stops outright.) */
+@media (prefers-reduced-motion: reduce) {
+  .gamepadhomerecentgames_RecentGamesBackgroundContainer_QNkOt > div:last-child::before {
+    animation: none;
+    transform: translate3d(0, 0, 0) scale(1.08);
+  }
+}
