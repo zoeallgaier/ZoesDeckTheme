@@ -4,59 +4,29 @@
    owns the focused text field, and Quick Access has its own keyboard manager (so a Wi-Fi
    password is typed on a keyboard inside the Quick Access window, not in SP).
 
-   Steam's keyboard is a full-width slab of near-black keys sitting on #23262E, with a blue
-   touch state and a glow around the focused key. It themes itself through a block of CSS
-   variables on the Keyboard element (one set per built-in skin: DefaultTheme, Pumpkin,
-   Grape...), so most of the work here is redefining those for the DefaultTheme Zoe uses:
-   glass keys, the accent on focus, no blue.
+   Colour only. Steam sizes the keys and their touch targets to the pixel -- the key is
+   `pointer-events: none` and the hit area around it is what the finger actually presses, and
+   both are pinned to a 44px row -- so padding, margin or transform on any of them pushes a key
+   out of the box that catches the touch and the wrong letter (or no letter) is typed. An
+   earlier version of this file did exactly that and broke typing. Nothing here changes a box:
+   no padding, no margin, no transform, no border, no display, no animation. That also keeps
+   Steam's d-pad navigation intact, which it derives from computed layout (rule 5).
 
-   The rest is structure. The keyboard already draws a backgroundglass layer sized exactly to
-   its own box (not the whole screen), so rounding and insetting that layer turns it into the
-   same floating glass sheet as Quick Access and the Steam menu -- and because it lives in the
-   main window, its backdrop-filter really does blur the page behind it (rule 3).
+   Steam themes the keyboard through a block of CSS variables on the Keyboard element, one set
+   per built-in skin (DefaultTheme, Pumpkin, Grape...), so redefining the DefaultTheme set
+   recolours nearly all of it in one place. */
 
-   Nothing here changes display, flex-direction or flex-wrap on a focusable panel: the rows and
-   hit areas keep Steam's layout, so the d-pad still walks the keys (rule 5). */
-
-/* The sheet. The wrapper holding the backdrop and the keyboard has no readable class of its
-   own, so it's reached through the keyboard container it contains. */
-div:has(> .virtualkeyboardcontainer_VirtualKeyboardContainer_Oel3O) > .backgroundglass_BackgroundGlass_3rsrz:not(#zdt) {
-  inset: 0 var(--zdt-gap) var(--zdt-gap);
-  border-radius: var(--zdt-radius-l);
-  background:
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0) 40%),
-    var(--zdt-sheet-fill);
-  box-shadow: var(--zdt-glass-edge), var(--zdt-glass-shadow);
-}
-
-/* Over a running game nothing can blur the game behind the sheet, so it turns near-opaque,
-   the same as the Quick Access and Steam menu sheets. Each window has its own in-game signal:
-   SP turns its page transparent, Quick Access shows its own header and footer. */
-.gamepadui_MainNavMenuMainSplit_2Y_Mr:has(> .gamepadui_BasicHome_3LYP1.gamepadui_TransparentBackground_3vBmc) div:has(> .virtualkeyboardcontainer_VirtualKeyboardContainer_Oel3O) > .backgroundglass_BackgroundGlass_3rsrz:not(#zdt),
-.quickaccessmenu_HeaderAndFooterVisible_2m0zl div:has(> .virtualkeyboardcontainer_VirtualKeyboardContainer_Oel3O) > .backgroundglass_BackgroundGlass_3rsrz:not(#zdt) {
-  background: var(--zdt-sheet-fill-ingame);
-}
-
-/* The keys sit inside the sheet, so the container carries the same inset plus a little air. */
-.virtualkeyboardcontainer_VirtualKeyboardContainer_Oel3O:not(#zdt) {
-  padding: 6px calc(var(--zdt-gap) + 6px) calc(var(--zdt-gap) + 6px);
-}
-
-/* The keyboard's own slab is now the sheet's job, so it stops painting a background. */
-.virtualkeyboard_Keyboard_45rH7:not(#zdt) {
-  padding: 0;
-  font-family: var(--zdt-font-sans);
-}
-
-/* The DefaultTheme palette, restated in the theme's own colours. Steam reads every one of
-   these from the Keyboard element, so this is the whole keyboard recoloured in one place. */
-.virtualkeyboard_Keyboard_45rH7.DefaultTheme:not(#zdt) {
-  --background-color: transparent;
+/* The DefaultTheme palette, restated in the theme's colours. Both the keyboard and the
+   container it sits in paint `background: var(--background-color)`, so the slab becomes the
+   theme's glass over the blurred backdrop the keyboard already draws for itself. */
+.virtualkeyboard_Keyboard_45rH7.DefaultTheme:not(#zdt),
+.virtualkeyboardcontainer_VirtualKeyboardContainer_Oel3O.DefaultTheme:not(#zdt) {
+  --background-color: var(--zdt-sheet-fill);
   --foreground-color: var(--zdt-label);
 
-  /* Letters and digits: glass on the sheet. The generic --zdt-glass-fill sits on brighter
-     surfaces than this one, so the keyboard keeps its own, stronger pair of fills: enough
-     contrast against the sheet for a key edge to read at arm's length. */
+  /* Letters and digits: glass. The generic --zdt-glass-fill sits on brighter surfaces than
+     this one, so the keyboard keeps its own, stronger pair of fills -- enough contrast against
+     the slab for a key edge to read at arm's length. */
   --zdt-key-fill: rgba(255, 255, 255, 0.16);
   --zdt-key-fill-quiet: rgba(255, 255, 255, 0.07);
   --key-background-color: var(--zdt-key-fill);
@@ -91,8 +61,8 @@ div:has(> .virtualkeyboardcontainer_VirtualKeyboardContainer_Oel3O) > .backgroun
   --key-action-button-glyph-color: var(--zdt-label-tertiary);
 
   /* Held or tapped. DefaultTheme ignores these two and hardcodes Steam blue instead, so the
-     rule further down is what actually recolours a pressed key; these are set anyway, for the
-     day Steam wires them up like every other skin's. */
+     rule at the bottom of this file is what actually recolours a pressed key; they're set
+     anyway, for the day Steam wires them up like every other skin's. */
   --key-touched-background-color: var(--zdt-accent);
   --key-touched-color: var(--zdt-on-accent);
 
@@ -123,77 +93,25 @@ div:has(> .virtualkeyboardcontainer_VirtualKeyboardContainer_Oel3O) > .backgroun
   --key-emoji-category-highlight-background-color: var(--zdt-key-fill);
 }
 
-/* Key shape. Steam draws square keys with a hairline border; these are rounded glass tiles
-   with a soft top edge, and the hit area's padding becomes the gap between them. */
-.virtualkeyboard_KeyboardKey_2KhPX:not(#zdt) {
-  border: none;
+/* Key shape. border-radius and box-shadow don't change a box, so the touch target stays where
+   Steam put it; the hairline is drawn inset rather than as a border for the same reason. */
+.virtualkeyboard_KeyboardKey_2KhPX:not(#zdt),
+.virtualkeyboard_KeyboardEmojiKey_1whNs:not(#zdt),
+.virtualkeyboard_KeyboardEmojiCategory_1nCXo:not(#zdt) {
   border-radius: var(--zdt-radius-s);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
   font-family: var(--zdt-font-sans);
-  font-size: 17px;
   transition:
-    transform var(--zdt-duration) var(--zdt-ease),
     background-color var(--zdt-duration) var(--zdt-ease),
-    color var(--zdt-duration) var(--zdt-ease),
-    box-shadow var(--zdt-duration) var(--zdt-ease);
+    color var(--zdt-duration) var(--zdt-ease);
 }
 
-/* Word keys (Tab, Caps, Shift, Enter, Backspace, Paste) read as labels, not as letters. */
-.virtualkeyboard_KeyboardKey_2KhPX:is(
-  .virtualkeyboard_KeyboardTabKey_3Gfcs,
-  .virtualkeyboard_KeyboardCapsKey_NGv5F,
-  .virtualkeyboard_KeyboardLeftShift_2ye7Y,
-  .virtualkeyboard_KeyboardRightShift_iMZ3T,
-  .virtualkeyboard_KeyboardEnter_IunX6,
-  .virtualkeyboard_KeyboardBackspace_3LsB3,
-  .virtualkeyboard_KeyboardMetaKey_1WbIj
-):not(#zdt) {
-  font-size: 14px;
-  font-weight: 700;
-}
-
-/* The hit areas set the spacing between keys; Steam's is 1-2px, which leaves the rounded
-   tiles touching. */
-.virtualkeyboard_KeyboardKeyHitArea_1YqjV:not(#zdt) {
-  padding: 3px;
-}
-
-/* Focus, tvOS style: the key lifts and grows a little, with a soft shadow, instead of Steam's
-   glowing border. It rises above its neighbours so the growth isn't clipped by them. */
-.virtualkeyboard_KeyboardKey_2KhPX.virtualkeyboard_Focused_21EoN:not(#zdt) {
-  transform: scale(var(--zdt-focus-scale));
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
-  z-index: 4;
-}
-
-/* Steam's focus glow and touch ripple are pseudo-elements on the key; the lift replaces both. */
-.virtualkeyboard_KeyboardKey_2KhPX.virtualkeyboard_Focused_21EoN:not(#zdt)::before,
-.virtualkeyboard_KeyboardKey_2KhPX.virtualkeyboard_Touched_3UFQq:not(#zdt)::after {
-  display: none;
-}
-
-/* A pressed key presses in rather than flashing. DefaultTheme is the one skin that hardcodes
-   its pressed colour (Steam blue) instead of reading --key-touched-background-color, so the
-   accent has to be set here as well as in the block above; :not(#zdt) outranks Steam's rule
-   without !important (rule 1). */
+/* A pressed key. DefaultTheme is the one skin that hardcodes its pressed colour (Steam blue)
+   instead of reading --key-touched-background-color, so the accent has to be set here too;
+   :not(#zdt) outranks Steam's rule without !important (rule 1). */
 .virtualkeyboard_KeyboardKey_2KhPX.virtualkeyboard_Touched_3UFQq:not(#zdt) {
-  transform: scale(0.96);
-  box-shadow: none;
   background-color: var(--zdt-accent);
   color: var(--zdt-on-accent);
-}
-
-/* The small shifted glyph in the corner of a key ("!" over "1") sits quieter than the main one. */
-.virtualkeyboard_ShiftedLabel_3FZuk:not(#zdt) {
-  font-size: 11px;
-  opacity: 0.75;
-}
-
-/* The spacer between the key blocks is a seam in Steam's slab; with no slab it's just a gap. */
-.virtualkeyboard_KeyboardSpacer_2LxGP:not(#zdt) {
-  border: none;
-  box-shadow: none;
-  background: transparent;
 }
 
 /* The controller-glyph hints printed on the action keys (X on Backspace, R2 on Search). */
@@ -201,26 +119,6 @@ div:has(> .virtualkeyboardcontainer_VirtualKeyboardContainer_Oel3O) > .backgroun
   opacity: 0.65;
 }
 
-/* Emoji tab: rounded category strip and keys, matching the letter keys. */
-.virtualkeyboard_KeyboardEmojiKey_1whNs:not(#zdt),
-.virtualkeyboard_KeyboardEmojiCategory_1nCXo:not(#zdt) {
-  border-radius: var(--zdt-radius-s);
-}
-
 .virtualkeyboard_KeyboardEmojiCategoryDivider_TAiFA:not(#zdt) {
   background: rgba(255, 255, 255, 0.1);
-}
-
-/* The keyboard slides up from the bottom edge when it opens: the keys and the sheet they sit
-   on move together. */
-.virtualkeyboardcontainer_VirtualKeyboardContainer_Oel3O:not(#zdt),
-div:has(> .virtualkeyboardcontainer_VirtualKeyboardContainer_Oel3O) > .backgroundglass_BackgroundGlass_3rsrz:not(#zdt) {
-  animation: zdt-keyboard-in var(--zdt-duration) var(--zdt-ease);
-}
-
-@keyframes zdt-keyboard-in {
-  from {
-    transform: translateY(12px);
-    opacity: 0;
-  }
 }
