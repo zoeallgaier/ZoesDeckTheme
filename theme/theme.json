@@ -15,6 +15,7 @@
     "shared/controls.css": ["everywhere"],
     "shared/gameicons.css": ["everywhere"],
     "shared/icons.css": ["everywhere"],
+    "shared/keyboard.css": ["everywhere"],
     "sp/chrome.css": ["SP", "QuickAccess"],
     "sp/settings.css": ["SP"],
     "home/home.css": ["SP"],
