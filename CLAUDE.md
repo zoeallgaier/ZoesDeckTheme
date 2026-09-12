@@ -73,6 +73,13 @@ All commands, `shot` included, work in Gaming Mode. `SP` is an alias for the `St
 window, matching CSS Loader. Hidden windows can't be captured and the script says so. Screenshots come
 out at the display's resolution (3442×1442 when docked), not 1280×800.
 
+`tree`/`find` translate class names for you, but **`eval` does not**: inside `eval` you must use the
+class the live DOM actually carries, which on this build is the fully scrambled form
+(`QNkOtW3xS-yj6LviWHvnd`), not the readable name you write in CSS. Look it up in
+`~/homebrew/themes/css_translations.json` — each readable name maps to a list of aliases, and the one in
+the DOM is the last, wordless entry. Querying a readable name from `eval` silently returns nothing, which
+looks exactly like being on the wrong page.
+
 `tools/reload.sh [--watch]` triggers CSS Loader's reload (see Environment).
 
 `tools/icons.py <lucide-static>/icons` regenerates `theme/shared/icons.css`, the outline icon swap
