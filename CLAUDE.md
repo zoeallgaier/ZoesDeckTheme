@@ -223,7 +223,10 @@ theme/
    dims more. In-game signals: Quick Access `HeaderAndFooterVisible`, the Steam menu's
    `RunnningAppSeparator`, SP's `BasicHome.TransparentBackground`. In-game, Quick Access draws its
    own top bar, so `sp/chrome.css` also loads in the QuickAccess window; the Steam menu's
-   running-game panel is styled by structure in `menu/mainmenu.css`. `gamescopectl screenshot`
+   running-game panel is styled by structure in `menu/mainmenu.css`: Steam fixes its height at
+   100% minus the header and footer, so it needs `height: auto` to respect the floating margins,
+   and its controller layout column is hidden until Controller settings is chosen, which is when
+   Steam adds `.FocusedColumn` to it. `gamescopectl screenshot`
    only captures the game while one runs: shoot the menu windows with `cef.py shot` and composite.
    Ask Zoe to open a game rather than launching one on her Deck.
 7. Focus effects and animations polish, plus a "Reduce motion" option.

@@ -70,9 +70,13 @@
    its controller layout). Its classes aren't in CSS Loader's map, so it's reached by structure:
    the container's other child, the one holding the game's capsule. It floats like the menu
    sheet, on the same nearly opaque glass, with rounded rows that take the accent on focus.
-   (Steam makes it wider than the screen; the layout summary runs off the right edge.) */
+   (Opened, Steam makes it wider than the screen; the layout runs a little off the right edge.) */
 .mainmenu_Container_3vzvO > div:not(.mainmenu_Menu_23IDi):has(.libraryassetimage_Container_1R9r2) {
   margin: calc(var(--basicui-header-height, 40px) + var(--zdt-gap)) 0 calc(var(--zdt-bar-height) + 2 * var(--zdt-gap)) var(--zdt-gap);
+  /* Steam fixes its height at 100% minus the header and footer, which knows nothing about these
+     margins, so the panel hung 20px past the bottom of the screen, over the button hints. Auto
+     lets the container stretch it to the space the margins leave, like the menu sheet. */
+  height: auto;
   overflow: hidden;
   border-radius: var(--zdt-radius-l) 0 0 var(--zdt-radius-l);
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 30%), var(--zdt-sheet-fill-ingame);
@@ -87,15 +91,44 @@
   box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.08);
 }
 
-.mainmenu_Container_3vzvO > div:not(.mainmenu_Menu_23IDi):has(.libraryassetimage_Container_1R9r2) .libraryassetimage_Container_1R9r2:not(#zdt) {
-  margin-top: 12px;
+/* The controller layout preview is the panel's second column, and beside a list of eight rows
+   it's just clutter. Steam gives that column .FocusedColumn and blows it up over the whole panel
+   the moment Controller settings is chosen, so until then the column is hidden, the panel shrinks
+   to the list (and rounds all four corners, as it no longer runs off the right edge), and the
+   blue pip that says "this row opens a column" goes with it. */
+.mainmenu_Container_3vzvO > div:not(.mainmenu_Menu_23IDi):has(.libraryassetimage_Container_1R9r2):not(:has(.FocusedColumn)) {
+  flex: 0 0 auto;
+  width: auto;
+  border-radius: var(--zdt-radius-l);
 }
 
+.mainmenu_Container_3vzvO > div:not(.mainmenu_Menu_23IDi):has(.libraryassetimage_Container_1R9r2):not(:has(.FocusedColumn)) > .Panel > .Panel:last-child:not(#zdt) {
+  display: none;
+}
+
+.mainmenu_Container_3vzvO > div:not(.mainmenu_Menu_23IDi):has(.libraryassetimage_Container_1R9r2):not(:has(.FocusedColumn)) > .Panel > .Panel:first-child > .Panel > .Panel > div:only-child {
+  display: none;
+}
+
+/* The column centres the capsule and the rows, so equal margins above and below leave equal air
+   inside the rounded corners. */
+.mainmenu_Container_3vzvO > div:not(.mainmenu_Menu_23IDi):has(.libraryassetimage_Container_1R9r2) .libraryassetimage_Container_1R9r2:not(#zdt) {
+  margin-top: 8px;
+}
+
+.mainmenu_Container_3vzvO > div:not(.mainmenu_Menu_23IDi) > .Panel > .Panel:first-child > .Panel:not(#zdt) {
+  margin-bottom: 8px;
+}
+
+/* Rows. Steam zooms and brightens the one whose column is current (Controller settings), which
+   means nothing now that the column only appears when it's opened, so every row reads the same. */
 .mainmenu_Container_3vzvO > div:not(.mainmenu_Menu_23IDi) > .Panel > .Panel:first-child > .Panel > .Panel:not(#zdt) {
   width: auto;
   margin: 0 12px 0 8px;
   border-radius: var(--zdt-radius-m);
+  transform: none;
   background: transparent;
+  color: var(--zdt-label);
   transition: background-color var(--zdt-duration) var(--zdt-ease), color var(--zdt-duration) var(--zdt-ease);
 }
 
