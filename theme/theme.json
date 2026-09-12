@@ -54,6 +54,14 @@
         "No": {}
       }
     },
+    "Title font": {
+      "type": "dropdown",
+      "default": "Instrument Serif",
+      "values": {
+        "Instrument Serif": {},
+        "Oxygen": { "options/oxygen-titles.css": ["everywhere"] }
+      }
+    },
     "Theme fonts": {
       "type": "checkbox",
       "default": "Yes",

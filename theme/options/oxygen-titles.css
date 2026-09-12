@@ -1,0 +1,11 @@
+/* Zoe's Deck Theme option: Title font "Oxygen". Every accent title reads the serif through
+   --zdt-font-serif, so pointing that token at the UI family puts Oxygen everywhere without
+   touching a single title rule. :root:root outranks the default in shared/tokens.css.
+
+   The titles keep asking for italic 700. shared/type.css maps Motiva Sans's italic faces to the
+   upright Oxygen files, so they come out upright Oxygen Bold (real bold, no synthesis); the Home
+   dot grid's big name asks for 400 and gets Oxygen Regular. */
+
+:root:root {
+  --zdt-font-serif: var(--zdt-font-sans, "Motiva Sans", "Oxygen", Arial, Helvetica, sans-serif);
+}

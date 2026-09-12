@@ -134,6 +134,7 @@ theme/
   sp/contextmenu.css    Options (≡) menus as an iOS-style glass sheet                   (done)
   menu/mainmenu.css     Steam menu sheet and items                                      (done)
   options/reduce-transparency.css                                                       (done)
+  options/oxygen-titles.css  "Title font: Oxygen" — points --zdt-font-serif at Oxygen   (done)
   sp/library.css  sp/dialogs.css  options/reduce-motion.css
 ```
 
