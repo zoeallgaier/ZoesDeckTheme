@@ -30,46 +30,6 @@
     "menu/mainmenu.css": ["MainMenu"]
   },
   "patches": {
-    "Show What's New on Home": {
-      "type": "checkbox",
-      "default": "No",
-      "values": {
-        "Yes": {},
-        "No": { "home/hide-whats-new.css": ["SP"] }
-      }
-    },
-    "Home background": {
-      "type": "dropdown",
-      "default": "Game art",
-      "values": {
-        "Game art": {},
-        "Dot grid": { "home/home-dotgrid.css": ["SP"] }
-      }
-    },
-    "Reduce transparency": {
-      "type": "checkbox",
-      "default": "No",
-      "values": {
-        "Yes": { "options/reduce-transparency.css": ["everywhere"] },
-        "No": {}
-      }
-    },
-    "Title font": {
-      "type": "dropdown",
-      "default": "Instrument Serif",
-      "values": {
-        "Instrument Serif": {},
-        "Oxygen": { "options/oxygen-titles.css": ["everywhere"] }
-      }
-    },
-    "Theme fonts": {
-      "type": "checkbox",
-      "default": "Yes",
-      "values": {
-        "Yes": { "shared/type.css": ["everywhere"] },
-        "No": {}
-      }
-    },
     "Accent": {
       "type": "none",
       "default": "Custom",
@@ -84,6 +44,46 @@
           "tabs": ["everywhere"]
         }
       ]
+    },
+    "Home background": {
+      "type": "dropdown",
+      "default": "Game art",
+      "values": {
+        "Game art": {},
+        "Dot grid": { "home/home-dotgrid.css": ["SP"] }
+      }
+    },
+    "Title font": {
+      "type": "dropdown",
+      "default": "Instrument Serif",
+      "values": {
+        "Instrument Serif": {},
+        "Oxygen": { "options/oxygen-titles.css": ["everywhere"] }
+      }
+    },
+    "Show What's New on Home": {
+      "type": "checkbox",
+      "default": "No",
+      "values": {
+        "Yes": {},
+        "No": { "home/hide-whats-new.css": ["SP"] }
+      }
+    },
+    "Reduce transparency": {
+      "type": "checkbox",
+      "default": "No",
+      "values": {
+        "Yes": { "options/reduce-transparency.css": ["everywhere"] },
+        "No": {}
+      }
+    },
+    "Theme fonts": {
+      "type": "checkbox",
+      "default": "Yes",
+      "values": {
+        "Yes": { "shared/type.css": ["everywhere"] },
+        "No": {}
+      }
     }
   }
 }
